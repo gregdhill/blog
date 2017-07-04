@@ -54,19 +54,21 @@
 </body>
 
 <script>
+
+var under = ["idsevasion", "xssfuzzing"];
+
+for (var i = 0; i < under.length; i++) {
+	$(".bottom").append("<a id='" + under[i] + "' class='under' href='pdf/" + under[i] + ".pdf'><i class='grow fa fa-pencil-square-o fa-5x' aria-hidden='true'></i></a>");
+}
+
+if (screen.height > 750) { 
+
 $(document).ready(function(){
 
 	$('#path').typist({
 		speed: 12,
 		text: '/home/greg/research'
 	});
-
-
-	var under = ["idsevasion", "xssfuzzing"];
-
-	for (var i = 0; i < under.length; i++) {
-		$(".bottom").append("<a id='" + under[i] + "' class='under' href='pdf/" + under[i] + ".pdf'><i class='grow fa fa-pencil-square-o fa-5x' aria-hidden='true'></i></a>");
-	}
 
 	$(".top").click(function(){
 		$("#directory").html("<i class='fa fa-folder-open-o fa-5x' aria-hidden='true'></i>");
@@ -114,6 +116,25 @@ $(document).ready(function(){
 	});
 
 });
+} else {
+
+	$('#path').typist({
+		speed: 12,
+		text: '/home/greg/research'
+	});
+
+	$(".top").hide();
+	$(".bottom").show();
+	$(".under").show();
+
+	$(".bottom a").hover(function(){
+		$("#info").show();
+		$("#info").text("/" + this.id);
+	}, function(){  
+		$("#info").hide();
+	});
+
+}
 </script>
 
 </html>
