@@ -26,19 +26,44 @@ body {
 	left: 50%;
 	transform: translateX(-50%) translateY(-50%);
 	text-align:center;
+	width: 100%;
+	padding: 10px;
 }
 
 #tree {
 	font-family: "STELLAR";
 	color: #FFFFFF;
-	height: 200px;
+	left:25%;
+	width:50%;
+	height:50%;
+	top:25%;
+	position:absolute;
+	text-align:center;
+}
+
+#info {
+	font-family: "STELLAR";
+	color: #FFFFFF;
+	margin-top: 40px;
+	text-align: left;
 	width: 400px;
-	text-align: center;
-	position: fixed;
-	top: 30%;
-	left: 50%;
-	margin-top: -100px;
-	margin-left: -200px;
+	display: none;
+	position: absolute;
+	left:25%;
+	bottom: 0;
+	height: 400px;
+	width:50%;
+	overflow:hidden;
+}
+
+@media (max-height: 750px) {
+	#tree {
+		left: 0;
+	}
+	#info {
+		float: right;
+		left: 45%;
+	}
 }
 
 #location {
@@ -98,13 +123,6 @@ body {
 	color: white;
 }
 
-#info {
-	font-family: "STELLAR";
-	margin-top: 40px;
-	text-align: left;
-	display: none;
-}
-
 #info p {
 	font-size: 20px;
 }
@@ -119,12 +137,12 @@ body {
 }
 
 #home a {
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-  color: #FFFFFF;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	color: #FFFFFF;
 }
 
 #tree a {
-  color: #FFFFFF;
+	color: #FFFFFF;
 }
