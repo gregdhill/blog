@@ -1,0 +1,2 @@
+<h2>IDS Evasion</h2>
+<p>The main focus of this study was to identify and analyse problems with common IDS packages. The fundamental levels on which they operate were also investigated by evaluating several different evasion techniques.</p>

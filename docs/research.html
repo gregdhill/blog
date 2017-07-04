@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html class="full" lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Greg Hill</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="../img/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="../img/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="../img/manifest.json">
+    <link rel="mask-icon" href="../img/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="msapplication-config" content="../img/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+</head>
+
+<body>
+
+    <div id="header">
+	<!--<a id="back" href="../index.html"><i class="grow fa fa-backward fa-3x" aria-hidden="true"></i></a>-->
+	<p id="path"></p>
+    </div>
+
+    <div id="tree">
+	<div class="top">
+		<a id="directory"><i class="grow fa fa-folder-o fa-5x" aria-hidden="true"></i></a>
+	</div>
+	<div class="middle">
+		<a id="undergraduate"><i class="grow fa fa-folder-o fa-5x" aria-hidden="true"></i></a>
+		<a id="postgraduate"><i class="grow fa fa-folder-o fa-5x" aria-hidden="true"></i></a>
+	</div>
+	<div class="bottom">
+	</div>
+        <div id="info">
+	</div>
+    </div>
+
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.typist.js"></script>
+
+</body>
+
+<script>
+$(document).ready(function(){
+
+	$('#path').typist({
+		speed: 12,
+		text: '/home/greg/research'
+	});
+
+
+	var under = ["idsevasion", "xssfuzzing"];
+
+	for (var i = 0; i < under.length; i++) {
+		$(".bottom").append("<a id='" + under[i] + "' class='under' href='pdf/" + under[i] + ".pdf'><i class='grow fa fa-pencil-square-o fa-5x' aria-hidden='true'></i></a>");
+	}
+
+	$(".top").click(function(){
+		$("#directory").html("<i class='fa fa-folder-open-o fa-5x' aria-hidden='true'></i>");
+		$(".middle").show();
+	});
+
+
+	$("#undergraduate").click(function(){
+		$("#undergraduate").html("<i class='grow fa fa-folder-open-o fa-5x' aria-hidden='true'></i>");
+		$("#postgraduate").html("<i class='grow fa fa-folder-o fa-5x' aria-hidden='true'></i>");
+		$(".bottom").hide();
+		$(".bottom").show();
+		$(".under").show();
+		$(".post").hide();
+		$("#info").hide();
+		$("#path").text("/home/greg/research");
+		$('#path').typist({
+			speed: 12,
+			text: '/undergrad'
+		});
+	});
+
+
+	$("#postgraduate").click(function(){
+		$("#postgraduate").html("<i class='grow fa fa-folder-open-o fa-5x' aria-hidden='true'></i>");
+		$("#undergraduate").html("<i class='grow fa fa-folder-o fa-5x' aria-hidden='true'></i>");
+		$(".bottom").hide();
+		$(".bottom").show();
+		$(".post").show();
+		$(".under").hide();
+		$("#info").hide();
+		$("#path").text("/home/greg/research");
+		$('#path').typist({
+			speed: 12,
+			text: '/postgrad'
+		});
+	});
+
+
+	$(".bottom a").hover(function(){
+		$("#info").show();
+		$("#info").load("about/" + this.id + ".txt");
+	}, function(){  
+		$("#info").hide();
+	});
+
+});
+</script>
+
+</html>

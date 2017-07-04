@@ -1,0 +1,2 @@
+<h2>XSS Fuzzing</h2>
+<p>Five different automated XSS tools were analysed and evaluated to show advanced tactics for web exploitation. Appropriate countermeasures were also highlighted.</p>
