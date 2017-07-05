@@ -125,6 +125,7 @@ body {
 	color: white;
 	padding-left: 25px;
 	padding-right: 25px;
+	word-break: break-all;
 }
 
 #info p {
@@ -149,4 +150,5 @@ body {
 
 #tree a {
 	color: #FFFFFF;
+	display: inline-block;
 }
