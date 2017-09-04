@@ -10,9 +10,9 @@ body {
 }
 
 .full {
-	background: #34e89e;
-	background: -webkit-linear-gradient(to right, #0f3443, #34e89e);
-	background: linear-gradient(to right, #0f3443, #34e89e);
+	background: #000000;
+	background: -webkit-linear-gradient(to right, #000000, #53346D);
+	background: linear-gradient(to right, #000000, #53346D);
 }
 
 .grow { transition: all .2s ease-in-out; }
