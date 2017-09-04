@@ -28,23 +28,25 @@
 <body>
 
     <div id="header">
-	<!--<a id="back" href="../index.html"><i class="grow fa fa-backward fa-3x" aria-hidden="true"></i></a>-->
 	<p id="path"></p>
     </div>
 
     <div id="tree">
-	<div class="top">
-		<a id="directory"><i class="grow fa fa-folder-o fa-5x" aria-hidden="true"></i></a>
+
+	<div class="section" id="undergraduate">
+		<a class="subpath"></a>
+		<div class="documents"></div>
+		<div class="info"></div>
 	</div>
-	<div class="middle">
-		<a id="undergraduate"><i class="grow fa fa-folder-o fa-5x" aria-hidden="true"></i></a>
-		<a id="postgraduate"><i class="grow fa fa-folder-o fa-5x" aria-hidden="true"></i></a>
+
+	<div class="section" id="postgraduate">
+		<a class="subpath"></a>
+		<div class="documents"></div>
+		<div class="info"></div>
 	</div>
-	<div class="bottom">
-	</div>
+
     </div>
-    <div id="info">
-    </div>
+
 
 
     <script src="../js/jquery.js"></script>
@@ -55,81 +57,53 @@
 
 <script>
 
-var under = ["idsevasion", "xssfuzzing"];
+$(document).ready(function() {
 
-for (var i = 0; i < under.length; i++) {
-	$(".bottom").append("<a id='" + under[i] + "' class='under' href='pdf/" + under[i] + ".pdf'><i class='grow fa fa-pencil-square-o fa-5x' aria-hidden='true'></i></a>");
-}
+var json;
 
 
-$('#path').typist({
-	speed: 12,
-	text: '/home/greg/research'
+$('#path')
+	.on('start_type.typist', function() {})
+	.on('end_type.typist', function() {
+		$('#undergraduate .subpath').html("/undergraduate <span class='caret'></span>");
+		$('#postgraduate .subpath').html("/postgraduate <span class='caret'></span>");
+	})
+	.typist({
+		cursor: false,
+		speed: 12,
+		text: '/home/greg/research'
+	});
+
+$.getJSON('undergrad.json', function(data) {     
+	json = data;    
+	for (var i in data) {
+		$("#undergraduate .documents").append("<div class='document'><a id='" + i + "'><i class='grow fa fa-file fa-5x' aria-hidden='true'></i><p></a>" + data[i]["Title"] + "</p></div>");
+	}
+});
+
+$('body').on('click', '.document a', function () {
+	$(this).parent().parent().parent().find(".info").show();
+	$(this).parent().parent().parent().find(".info").text(json[this.id]["Description"]);
+	$(this).parent().parent().parent().find(".info").append("<br><a href='" + json[this.id]["PDF"] + "'>View</a>");
+});
+
+$(".section").click(function(){
+	$(this).find(".document").show();
+	$(this).find(".document").css('display', 'inline-block');
+});
+
+$("#postgraduate").click(function(){
+	$(this).find(".documents").html("<p id='review'>Under Review</p>");
 });
 
 
-if (screen.height > 750) { 
-
-	$(".top").click(function(){
-		$("#directory").html("<i class='fa fa-folder-open-o fa-5x' aria-hidden='true'></i>");
-		$(".middle").show();
-	});
 
 
-	$("#undergraduate").click(function(){
-		$("#undergraduate").html("<i class='grow fa fa-folder-open-o fa-5x' aria-hidden='true'></i>");
-		$("#postgraduate").html("<i class='grow fa fa-folder-o fa-5x' aria-hidden='true'></i>");
-		$(".bottom").hide();
-		$(".bottom").show();
-		$(".under").show();
-		$(".post").hide();
-		$("#info").hide();
-		$("#path").text("/home/greg/research");
-		$('#path').typist({
-			speed: 12,
-			text: '/undergrad'
-		});
-	});
+});
 
 
-	$("#postgraduate").click(function(){
-		$("#postgraduate").html("<i class='grow fa fa-folder-open-o fa-5x' aria-hidden='true'></i>");
-		$("#undergraduate").html("<i class='grow fa fa-folder-o fa-5x' aria-hidden='true'></i>");
-		$(".bottom").hide();
-		$(".bottom").show();
-		$(".post").show();
-		$(".under").hide();
-		$("#info").hide();
-		$("#path").text("/home/greg/research");
-		$('#path').typist({
-			speed: 12,
-			text: '/postgrad'
-		});
-	});
 
 
-	$(".bottom a").hover(function(){
-		$("#info").show();
-		$("#info").load("about/" + this.id + ".txt");
-	}, function(){  
-		$("#info").hide();
-	});
-
-} else {
-
-	$(".top").hide();
-	$(".bottom").show();
-	$(".under").show();
-	$(".post").show();
-
-	$(".bottom a").hover(function(){
-		$("#info").show();
-		$("#info").text("/" + this.id);
-	}, function(){  
-		$("#info").hide();
-	});
-
-}
 </script>
 
 </html>
