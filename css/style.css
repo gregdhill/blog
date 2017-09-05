@@ -102,12 +102,6 @@ body {
 	margin-bottom: 20px;
 }
 
-@media (max-width: 800px) {
-	.info {
-		width: 100%;
-	}
-}
-
 #location {
 	position: absolute; 
 	margin-left: auto;
@@ -168,4 +162,16 @@ body {
 	color: #FFFFFF;
 }
 
+
+@media (max-width: 800px) {
+	.info {
+		width: 100%;
+	}
+}
+
+@media (max-width: 350px) {
+	#home a {
+		display: block;
+	}
+}
 
