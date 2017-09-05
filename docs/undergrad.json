@@ -1,7 +1,0 @@
-{
-
-	"idsevasion": { "Title": "IDS Evasion", "Description": "The main focus of this study was to identify and analyse problems with common IDS packages. The fundamental levels on which they operate were also investigated by evaluating several different evasion techniques.", "PDF": "idsevasion.pdf" },
-
-	"xssfuzzing": { "Title": "XSS Fuzzing", "Description": "Five different automated XSS tools were analysed and evaluated to show advanced tactics for web exploitation. Appropriate countermeasures were also highlighted.", "PDF": "xssfuzzing.pdf" }
-
-}

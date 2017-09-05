@@ -30,6 +30,21 @@ body {
 	padding: 10px;
 }
 
+#profile {
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 100px;
+}
+
+#profile img{
+	margin-top: -90px;
+	margin-left: 0px;
+	width: 100%;
+}
+
 #tree {
 	font-family: "STELLAR";
 	color: #FFFFFF;
@@ -41,21 +56,22 @@ body {
 }
 
 #tree a {
-	color: #FFFFFF;
+
 }
 
 .document {
-	margin-left: 10px;
-	margin-right: 10px;
+	margin-left: 20px;
+	margin-right: 20px;
 	display: none;
 }
 
 .document a {
 	text-decoration: none !important;
+	color: #FFFFFF;
 }
 
 .document p {
-	margin-top: 10px;
+	margin-top: 15px;
 	font-size: 20px;
 }
 
@@ -113,6 +129,7 @@ body {
 	text-align: center;
 	cursor: pointer;
 	display: block;
+	color: #FFFFFF;
 }
 
 #header {

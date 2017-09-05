@@ -28,22 +28,11 @@
 <body>
 
     <div id="header">
-	<p id="path"></p>
+	<p id="path">/home/greg/research</p>
     </div>
 
     <div id="tree">
 
-	<div class="section" id="undergraduate">
-		<a class="subpath"></a>
-		<div class="documents"></div>
-		<div class="info"></div>
-	</div>
-
-	<div class="section" id="postgraduate">
-		<a class="subpath"></a>
-		<div class="documents"></div>
-		<div class="info"></div>
-	</div>
 
     </div>
 
@@ -61,33 +50,38 @@ $(document).ready(function() {
 
 var json;
 
-
-$('#path')
-	.on('start_type.typist', function() {})
-	.on('end_type.typist', function() {
-		$('#undergraduate .subpath').html("/undergraduate <span class='caret'></span>");
-		$('#postgraduate .subpath').html("/postgraduate <span class='caret'></span>");
-	})
-	.typist({
-		cursor: false,
-		speed: 12,
-		text: '/home/greg/research'
-	});
-
-$.getJSON('undergrad.json', function(data) {     
-	json = data;    
+$.getJSON('about.json', function(data) {     
+	json = data;
 	for (var i in data) {
-		$("#undergraduate .documents").append("<div class='document'><a id='" + i + "'><i class='grow fa fa-file fa-5x' aria-hidden='true'></i><p></a>" + data[i]["Title"] + "</p></div>");
+		$("#tree").append("<div class='section' id='" + i + "'><a class='subpath'></a><div class='documents'></div><div class='info'></div></div>");
+
+		$('#' + i + " .subpath")
+		.on('start_type.typist', function() {})
+		.on('end_type.typist', function() {		
+			$(this).append(" <span class='caret'></span>");
+		})
+		.typist({
+			cursor: false,
+			speed: 12,
+			text: "/" + i
+		});
+
+		for (var j in data[i]) {
+			$("#" + i + " .documents").append("<div class='document'><a id='" + j + "'><i class='grow fa fa-file fa-5x' aria-hidden='true'></i><p></a>" + data[i][j]["Title"] + "</p></div>");
+		}
 	}
 });
 
 $('body').on('click', '.document a', function () {
+	var category = $(this).parent().parent().parent().attr('id');
+	var id = this.id;
+	
 	$(this).parent().parent().parent().find(".info").show();
-	$(this).parent().parent().parent().find(".info").text(json[this.id]["Description"]);
-	$(this).parent().parent().parent().find(".info").append("<br><a href='" + json[this.id]["PDF"] + "'>View</a>");
+	$(this).parent().parent().parent().find(".info").text(json[category][id]["Description"]);
+	$(this).parent().parent().parent().find(".info").append("<br><a class='viewbtn' href='" + json[category][id]["link"] + "'>View</a>");
 });
 
-$(".section").click(function(){
+$('body').on('click', '.section', function () {
 	$(this).find(".document").show();
 	$(this).find(".document").css('display', 'inline-block');
 });
