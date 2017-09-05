@@ -31,8 +31,8 @@
 	<h1>Greg Hill</h1>
 	<a id="github" href="https://github.com/gregdhill"><i class="grow fa fa-github fa-4x" aria-hidden="true"></i></a>
 	<a id="twitter" href="https://twitter.com/gregorydhill"><i class="grow fa fa-twitter fa-4x" aria-hidden="true"></i></a>
-	<a id="research" href="docs/research.html"><i class="grow fa fa-pencil-square-o fa-4x" aria-hidden="true"></i></a>
 	<a id="scholar" href="https://scholar.google.co.uk/citations?user=OoKiidsAAAAJ&hl=en"><i class="grow fa fa-graduation-cap fa-4x" aria-hidden="true"></i></a>
+	<a id="research" href="docs/research.html"><i class="grow fa fa-pencil-square-o fa-4x" aria-hidden="true"></i></a>
 	<p id="location"></p>
     </div>
 
@@ -55,14 +55,14 @@ $(document).ready(function(){
 	}, function(){  
 		$("#location").hide();
 	});
-	$("#research").hover(function(){
-		$("#location").text("Research");
+	$("#scholar").hover(function(){
+		$("#location").text("Google Scholar");
 		$("#location").show();
 	}, function(){  
 		$("#location").hide();
 	});
-	$("#scholar").hover(function(){
-		$("#location").text("Google Scholar");
+	$("#research").hover(function(){
+		$("#location").text("Research");
 		$("#location").show();
 	}, function(){  
 		$("#location").hide();
