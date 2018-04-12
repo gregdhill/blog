@@ -71,7 +71,7 @@ section::after {
 
 #links {
     position: absolute;
-    top: 66%;
+    top: 70%;
     left: 50%;
     z-index: 2;
     -webkit-transform: translate(-50%, -50%);
@@ -364,5 +364,8 @@ li {padding-top: 33px;}
 @media (max-width: 360px) {
     #tree {
         padding: 25px;
+    }
+    ul li:nth-child(n+3) {
+        display: block;
     }
 }
