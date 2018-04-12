@@ -4,7 +4,7 @@
         "type": "paper",
         "title": "Deep Learning Based Cryptographic Primitive Classification", 
         "link": "https://arxiv.org/abs/1709.08385",
-        "description": "My honours research constructed and implemented an advanced methodology for identifying cryptographic algorithms in compiled binary samples using machine learning. The developed framework supported malware analysis by efficiently classifying primitives deployed in ransomware samples based on the pre-training of synthesised samples drawn using dynamic binary instrumentation, fed through a unique dynamic convolutional neural network. I am currently in the process of publishing the results, but my work was awarded the Honorary Fellows Prize for Innovation by Abertay University in 2017."
+        "description": "My honours research constructed and implemented an advanced methodology for identifying cryptographic algorithms in compiled binary samples using machine learning. Features were built using dynamic binary instrumentation, then fed through a unique Dynamic Convolutional Neural Network (DCNN). The results are currently in pre-print and my work was awarded the Honorary Fellows Prize for Innovation by Abertay University in 2017."
     },
 
     "rivest-study": { 
@@ -16,14 +16,14 @@
 
     "idsevasion": { 
         "type": "paper",
-        "title": "IDS Evasion", 
+        "title": "Intrusion Detection System (IDS) Evasion", 
         "link": "docs/idsevasion.pdf",
         "description": "The main focus of this study was to identify and analyse problems with common IDS packages. The fundamental levels on which they operate were also investigated by evaluating several different evasion techniques."
     },
 
     "xssfuzzing": { 
         "type": "paper",
-        "title": "XSS Fuzzing",
+        "title": "Cross-Site Scripting (XSS) Fuzzing",
         "link": "docs/xssfuzzing.pdf",
         "description": "Five different automated XSS tools were analysed and evaluated to show advanced tactics for web exploitation. Appropriate countermeasures were also highlighted."
     },
