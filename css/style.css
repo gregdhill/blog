@@ -76,7 +76,9 @@ section::after {
     z-index: 2;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    color: #fff;
+    color: #fff;    
+    width: 100%;
+    text-align: center;
 }
 
 #links a {
@@ -101,12 +103,6 @@ section::after {
 
 :focus {outline:none;}
 ::-moz-focus-inner {border:0;}
-
-@media (max-width: 350px) {
-	#home a {
-		display: block;
-	}
-}
 
 #scroll {
 	position: absolute;
@@ -362,5 +358,11 @@ li {padding-top: 33px;}
         width: 100%;
         float: none;
         display: inline-block;
+    }
+}
+
+@media (max-width: 360px) {
+    #tree {
+        padding: 25px;
     }
 }
