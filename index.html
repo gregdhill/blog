@@ -24,26 +24,56 @@
 
 <body>
 
-    <div id="home">
-	<div id="profile">
-	<img class="img-responsive" src="img/profile.jpg"/>
-	</div>
+    <section id="home">
 	<h1>Greg Hill</h1>
-	<a id="github" href="https://github.com/gregdhill"><i class="grow fa fa-github fa-4x" aria-hidden="true"></i></a>
-	<a id="twitter" href="https://twitter.com/gregorydhill"><i class="grow fa fa-twitter fa-4x" aria-hidden="true"></i></a>
-	<a id="scholar" href="https://scholar.google.co.uk/citations?user=OoKiidsAAAAJ&hl=en"><i class="grow fa fa-graduation-cap fa-4x" aria-hidden="true"></i></a>
-	<a id="research" href="docs/research.html"><i class="grow fa fa-pencil-square-o fa-4x" aria-hidden="true"></i></a>
-	<p id="location"></p>
+	<div id="profile">
+        <span>
+	        <img class="img-responsive" src="img/profile.jpg"/>
+	    </span>
     </div>
+    <div id="links">
+	<a id="github" href="https://github.com/gregdhill"><i class="grow fa fa-github fa-4x" aria-hidden="true"></i></a>
+	<a id="scholar" href="https://scholar.google.co.uk/citations?user=OoKiidsAAAAJ&hl=en"><i class="grow fa fa-graduation-cap fa-4x" aria-hidden="true"></i></a>
+	<a id="twitter" href="https://twitter.com/gregorydhill"><i class="grow fa fa-twitter fa-4x" aria-hidden="true"></i></a>
+    <p id="location"></p>
+    </div>
+    <a href="#projects" id="scroll"><span></span>Scroll</a>
+    </section>
+
+    <section id="projects" class="cv">
+    <div id="title"><h1>Projects</h1></div>
+    <div id="tree"><ul id="datalist"></ul></div>
+    <a id="viewMoreRight"><span></span></a>
+    <a id="viewMoreLeft" style="display: none;"><span></span></a>
+    </section>
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
 
 </body>
 
 <script>
+
+var json;
+var start = 0;
+var jump = 2;
+
+$.getJSON('about.json', function(data) {     
+	json = data;
+	for (var i in data) {
+        var string = "<li><div class='document'><div class='left'><a id='" + i + "' href='" + data[i]["link"] + "'><i class='grow fa "; 
+        if (data[i]["type"] == "book") string += "fa-book";
+        else string += "fa-file";
+        string += " fa-5x' aria-hidden='true'></i></a></div><div class='right'><p class='pname'>" + data[i]["title"] + "</p><p>" 
+            + data[i]["description"] + "</p></div></div></li>";
+        $("#tree ul").append(string);
+	}
+});
+
+
 $(document).ready(function(){
-	$("#github").hover(function(){
+	/*$("#github").hover(function(){
 		$("#location").text("GitHub");
 	}, function(){  
 		$("#location").text("");
@@ -54,16 +84,54 @@ $(document).ready(function(){
 		$("#location").text("");
 	});
 	$("#scholar").hover(function(){
-		$("#location").text("Google Scholar");
+		$("#location").text("Scholar");
 	}, function(){  
 		$("#location").text("");
-	});
-	$("#research").hover(function(){
-		$("#location").text("Research");
-	}, function(){  
-		$("#location").text("");
-	});
+	});*/
+
+    $(function() {
+      $('#scroll').on('click', function(e) {
+        e.preventDefault();
+        $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top}, 500, 'linear');
+      });
+    });
+
+    $(function () {
+        $('#viewMoreRight').click(function () {
+
+            var dlen = $('#datalist li').length;
+            $('#datalist li').hide();
+            $('#datalist li').slice(start+jump, start+(jump*2)).show();
+            start += jump;
+
+            if (start >= dlen || start+jump >= dlen) {
+                $('#viewMoreRight').hide();
+            } else if (start > 0) {
+                $('#viewMoreLeft').show();
+            }
+        });
+    });
+
+    $(function () {
+        $('#viewMoreLeft').click(function () {
+
+            var dlen = $('#datalist li').length;
+            $('#datalist li').hide();
+            $('#datalist li').slice(start-jump, start).show();
+            start -= jump;
+
+            if (start <= 0) {
+                $('#viewMoreRight').show();
+                $('#viewMoreLeft').hide();
+                start=0;
+            } else if (start < dlen) {
+                $('#viewMoreRight').show();
+            }
+        });
+    });
 });
+
+
 </script>
 
 </html>

@@ -1,0 +1,38 @@
+{
+
+    "cryptoclass": { 
+        "type": "paper",
+        "title": "Deep Learning Based Cryptographic Primitive Classification", 
+        "link": "https://arxiv.org/abs/1709.08385",
+        "description": "My honours research constructed and implemented an advanced methodology for identifying cryptographic algorithms in compiled binary samples using machine learning. The developed framework supported malware analysis by efficiently classifying primitives deployed in ransomware samples based on the pre-training of synthesised samples drawn using dynamic binary instrumentation, fed through a unique dynamic convolutional neural network. I am currently in the process of publishing the results, but my work was awarded the Honorary Fellows Prize for Innovation by Abertay University in 2017."
+    },
+
+    "rivest-study": { 
+        "type": "paper",
+        "title": "The Modern Relationship Between Cryptography And Machine Learning", 
+        "link": "docs/irr.pdf",
+        "description": "This literature review was composed as part of a module at the <a href='http://www.inf.ed.ac.uk/teaching/courses/irr/'>University of Edinburgh</a>. Based on an older study by <a href='http://people.csail.mit.edu/rivest/pubs/Riv91.pdf'>Rivest</a>, the aim was to survey contemporary research areas linked to the intersection between these two fundamental areas of study."
+    },
+
+    "idsevasion": { 
+        "type": "paper",
+        "title": "IDS Evasion", 
+        "link": "docs/idsevasion.pdf",
+        "description": "The main focus of this study was to identify and analyse problems with common IDS packages. The fundamental levels on which they operate were also investigated by evaluating several different evasion techniques."
+    },
+
+    "xssfuzzing": { 
+        "type": "paper",
+        "title": "XSS Fuzzing",
+        "link": "docs/xssfuzzing.pdf",
+        "description": "Five different automated XSS tools were analysed and evaluated to show advanced tactics for web exploitation. Appropriate countermeasures were also highlighted."
+    },
+
+    "webpenbook": {
+        "type": "book",
+        "title": "Kali Linux Web Penetration Testing Cookbook", 
+        "link": "https://books.google.co.uk/books?id=iGRLDAAAQBAJ&pg=PP6&lpg=PP6&dq=Greg+Hill&source=bl&ots=pNp9rSoYN3&sig=RlthaecEN2cdvhPcESQsRvz3Y5c&hl=en&sa=X&ved=0ahUKEwikg8yknozWAhUhLMAKHUlJDHEQ6AEIOjAF#v=onepage&q=Greg%20Hill&f=false",
+        "description": "I was approached to review the 'Kali Linux Web Penetration Testing Cookbook' by Packt Publishing in 2015. After thoroughly testing all content, and investigating advanced improvements, I was acknowledged as a reviewer in this step by step recipe book for web application analysis and exploitation which was published in early 2016." 
+    }
+
+}
