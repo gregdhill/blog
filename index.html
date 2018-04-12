@@ -40,7 +40,7 @@
     <a href="#projects" id="scroll"><span></span>Scroll</a>
     </section>
 
-    <section id="projects">
+    <section id="projects" class="cv">
     <div id="title"><h1>Projects</h1></div>
     <div id="tree"><ul id="datalist"></ul></div>
     <a id="viewMoreRight"><span></span></a>
@@ -96,66 +96,39 @@ $(document).ready(function(){
       });
     });
 
-    function right() {
-
-        var dlen = $('#datalist li').length;
-        if (start+jump >= dlen) return;
-
-        $('#datalist li').hide();
-        $('#datalist li').slice(start+jump, start+(jump*2)).show();
-        start += jump;
-
-        if (start >= dlen || start+jump >= dlen) {
-            $('#viewMoreRight').hide();
-        } else if (start > 0) {
-            $('#viewMoreLeft').show();
-        }
-    }
-
-    function left() {
-
-        var dlen = $('#datalist li').length;
-        $('#datalist li').hide();
-        $('#datalist li').slice(start-jump, start).show();
-        start -= jump;
-
-        if (start <= 0) {
-            $('#viewMoreRight').show();
-            $('#viewMoreLeft').hide();
-            start=0;
-        } else if (start < dlen) {
-            $('#viewMoreRight').show();
-        }
-    }
-
     $(function () {
         $('#viewMoreRight').click(function () {
-            right();            
+
+            var dlen = $('#datalist li').length;
+            $('#datalist li').hide();
+            $('#datalist li').slice(start+jump, start+(jump*2)).show();
+            start += jump;
+
+            if (start >= dlen || start+jump >= dlen) {
+                $('#viewMoreRight').hide();
+            } else if (start > 0) {
+                $('#viewMoreLeft').show();
+            }
         });
     });
 
     $(function () {
         $('#viewMoreLeft').click(function () {
-            left();
+
+            var dlen = $('#datalist li').length;
+            $('#datalist li').hide();
+            $('#datalist li').slice(start-jump, start).show();
+            start -= jump;
+
+            if (start <= 0) {
+                $('#viewMoreRight').show();
+                $('#viewMoreLeft').hide();
+                start=0;
+            } else if (start < dlen) {
+                $('#viewMoreRight').show();
+            }
         });
     });
-
-    $(function(){
-      $("#projects").on("swipeleft", swipeleftHandler);
-     
-      function swipeleftHandler(event){
-        right(); 
-      }
-    });
-
-    $(function(){
-      $("#projects").on("swiperight", swiperightHandler);
-     
-      function swiperightHandler(event){
-        left(); 
-      }
-    });
-
 });
 
 
