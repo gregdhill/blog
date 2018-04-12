@@ -25,7 +25,7 @@ section::after {
     background-image: linear-gradient(to bottom, #000000, #3b3b3b, #777777, #b9b9b9, #ffffff);
 }
 
-section h1 {
+#home h1 {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -206,33 +206,7 @@ section h1 {
   border-bottom: 1px solid #000;
   -webkit-transform: rotate(-135deg);
   transform: rotate(-135deg);
-  -webkit-animation: rightArrow 2s infinite;
-  animation: rightArrow 2s infinite;
   box-sizing: border-box;
-}
-
-@-webkit-keyframes rightArrow {
-  0% {
-    -webkit-transform: rotate(-135deg) translate(0, 0);
-  }
-  20% {
-    -webkit-transform: rotate(-135deg) translate(-10px, 10px);
-  }
-  40% {
-    -webkit-transform: rotate(-135deg) translate(0, 0);
-  }
-}
-
-@keyframes rightArrow {
-  0% {
-    transform: rotate(-135deg) translate(0, 0);
-  }
-  20% {
-    transform: rotate(-135deg) translate(-10px, 10px);
-  }
-  40% {
-    transform: rotate(-135deg) translate(0, 0);
-  }
 }
 
 #viewMoreLeft {
@@ -269,46 +243,21 @@ section h1 {
   border-bottom: 1px solid #000;
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
-  -webkit-animation: leftArrow 2s infinite;
-  animation: leftArrow 2s infinite;
   box-sizing: border-box;
 }
 
-@-webkit-keyframes leftArrow {
-  0% {
-    -webkit-transform: rotate(45deg) translate(0, 0);
-  }
-  20% {
-    -webkit-transform: rotate(45deg) translate(-10px, 10px);
-  }
-  40% {
-    -webkit-transform: rotate(45deg) translate(0, 0);
-  }
-}
-
-@keyframes leftArrow {
-  0% {
-    transform: rotate(45deg) translate(0, 0);
-  }
-  20% {
-    transform: rotate(45deg) translate(-10px, 10px);
-  }
-  40% {
-    transform: rotate(45deg) translate(0, 0);
-  }
-}
 
 #title {
     width: 100%;
-    height: 150px;
+    height: 30%;
     text-align: center;
     display: inline-block;
-    margin-bottom: 50px;
 }
 
 #tree {
     width: 100%;
     padding: 100px;
+    padding-top: 0;
     margin-right: auto;
     margin-left: auto;
 }
@@ -338,7 +287,10 @@ section h1 {
     font : normal 300 64px/1 'Josefin Sans', sans-serif;
     text-align: center;
     white-space: nowrap;
-    top: 50px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
 }
 
 #projects p {
