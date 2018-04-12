@@ -75,7 +75,7 @@ $.getJSON('about.json', function(data) {
 
 $(document).ready(function(){
 
-    if ($('#datalist li:hidden').length == 0) $('#viewMoreRight').hide();
+    if ($('#datalist li:visible').length > 2) $('#viewMoreRight').hide();
 
 	/*$("#github").hover(function(){
 		$("#location").text("GitHub");
