@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="description" content="Gregory is an Ethical Hacking Undergraduate from Abertay University. He now studies at the University of Edinburgh, focusing on Machine Learning and its interplay with Security.">
+	<meta name="description" content="Gregory Hill is studying at the University of Edinburgh. He has interests in Machine Learning and Cryptography.">
 	<meta name="keywords" content="computer, security, student, abertay, edinburgh, ethical, hacking, deep, machine, learning, mathematics, cryptography, researcher, inventor, linux, programming, scotland, dundee, edinburgh, masters, gregory, greg, douglas, hill, ethical, hacker">
 	<meta name="author" content="Gregory Hill">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,22 +26,33 @@
 <body>
 
     <section id="home">
-	<h1>Greg Hill</h1>
-	<div id="profile">
-        <span>
-	        <img class="img-responsive" src="img/profile.jpg"/>
-	    </span>
-    </div>
-    <div id="links">
-	<a id="github" href="https://github.com/gregdhill"><i class="grow fa fa-github fa-4x" aria-hidden="true"></i></a>
-	<a id="scholar" href="https://scholar.google.co.uk/citations?user=OoKiidsAAAAJ&hl=en"><i class="grow fa fa-graduation-cap fa-4x" aria-hidden="true"></i></a>
-	<a id="twitter" href="https://twitter.com/gregorydhill"><i class="grow fa fa-twitter fa-4x" aria-hidden="true"></i></a>
-    <p id="location"></p>
-    </div>
+
+		<div id="links">
+			<div class="link">
+				<a id="github" href="https://github.com/gregdhill">
+					<i class="grow fa fa-github fa-4x" aria-hidden="true"></i></a>
+			</div>
+			<div class="link">
+				<a id="scholar" href="https://scholar.google.co.uk/citations?user=OoKiidsAAAAJ&hl=en">
+					<i class="grow fa fa-graduation-cap fa-4x" aria-hidden="true"></i></a>
+			</div>
+			<div class="link">
+				<a id="twitter" href="https://twitter.com/gregorydhill">
+					<i class="grow fa fa-twitter fa-4x" aria-hidden="true"></i></a>
+			</div>
+			<p id="location"></p>
+		</div>
+		
+		<h1>Gregory<br/>Hill</h1>
+		<div id="profile">
+			<span><img class="img-responsive" src="img/profile.jpg"/></span>
+		</div>
+
     <a href="#projects" id="scroll"><span></span>Scroll</a>
+
     </section>
 
-    <section id="projects" class="cv">
+    <section id="projects">
     <div id="title"><h1>Projects</h1></div>
     <div id="tree"><ul id="datalist"></ul></div>
     <a id="viewMoreRight"><span></span></a>
@@ -55,7 +66,6 @@
 </body>
 
 <script>
-
 var json;
 var start = 0;
 var jump = 2;
@@ -63,19 +73,16 @@ var jump = 2;
 $.getJSON('about.json', function(data) {     
 	json = data;
 	for (var i in data) {
-        var string = "<li><div class='document'><div class='left'><a id='" + i + "' href='" + data[i]["link"] + "'><i class='grow fa "; 
-        if (data[i]["type"] == "book") string += "fa-book";
-        else string += "fa-file";
-        string += " fa-5x' aria-hidden='true'></i></a></div><div class='right'><p class='pname'>" + data[i]["title"] + "</p><p>" 
-            + data[i]["description"] + "</p></div></div></li>";
+        var string = "<li><div class='document'><a id='" + i + "' href='" + data[i]["link"] + "'>"; 
+        string += "<p class='pname'>" + data[i]["title"] + "</p></a><p>" ;
+        string += data[i]["description"] + "</p></div></li>";
         $("#tree ul").append(string);
 	}
 });
 
-
 $(document).ready(function(){
 
-    if ($('#datalist li:visible').length > 2) $('#viewMoreRight').hide();
+    if ($('#datalist li:hidden').length == 0) $('#viewMoreRight').hide();
 
 	/*$("#github").hover(function(){
 		$("#location").text("GitHub");

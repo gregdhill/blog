@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
 }
+
 html, body {
     height: 100%;
 }
@@ -10,9 +11,9 @@ html, body {
 .grow:hover { transform: scale(1.1); }
 
 section {
-      position: relative;
-      width: 100%;
-      height: 100%;
+	position: relative;
+	width: 100%;
+	height: 100%;
 }
 
 section::after {
@@ -28,7 +29,7 @@ section::after {
 #home h1 {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 55%;
     z-index: 2;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -39,22 +40,22 @@ section::after {
 }
 
 #profile {
-    width: 150px;
-    height: 150px;
-    top: 33%;
-    left: 50%;
-    z-index: 2;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    overflow: hidden;
-    position: relative;
+	width: 300px;
+	height: 300px;
+	z-index: 1;
+	overflow: hidden;
+	position: absolute;
+	top: 50%;
+	left: 55%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
 }
 
 #profile span {
-    -webkit-clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
-    clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
-    max-width: 100%;
-    max-height: 100%;
+	-webkit-clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
+	clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
+	max-width: 100%;
+	max-height: 100%;
     overflow: hidden;
     height: 100%;
     width: 100%;
@@ -64,28 +65,30 @@ section::after {
 }
 
 #profile img{
-	margin-top: -70px;
+	margin-top: -160px;
 	margin-left: 0px;
 	width: 100%;
+	filter: brightness(70%);
 }
 
 #links {
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    z-index: 2;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    color: #fff;    
-    width: 100%;
-    text-align: center;
+	z-index: 2;
+	color: #fff;
+	position: absolute;
+	top: 50%;
+	left: 40%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.link {
+	margin: 10px;
+	display: inline-block;
+	width: 100%;
 }
 
 #links a {
-    color: #fff;
-	margin-top: 10px;
-	margin-left: 10px;
-	margin-right: 10px;
 	color: #FFFFFF;
 }
 
@@ -124,7 +127,7 @@ section::after {
   opacity: .5;
 }
 
-#home a {
+#scroll {
   padding-top: 60px;
 }
 
@@ -187,10 +190,6 @@ section::after {
   opacity: .5;
 }
 
-#viewMoreRight {
-  padding-top: 60px;
-}
-
 #viewMoreRight span {
   position: absolute;
   top: 0;
@@ -224,10 +223,6 @@ section::after {
   opacity: .5;
 }
 
-#viewMoreLeft {
-  padding-top: 60px;
-}
-
 #viewMoreLeft span {
   position: absolute;
   top: 0;
@@ -245,9 +240,10 @@ section::after {
 
 #title {
     width: 100%;
-    height: 30%;
     text-align: center;
     display: inline-block;
+	margin-top: 40px;
+	margin-bottom: 40px;
 }
 
 #tree {
@@ -256,18 +252,6 @@ section::after {
     padding-top: 0;
     margin-right: auto;
     margin-left: auto;
-}
-
-#tree .left {
-    width: 20%;
-    height: 100%;
-    float: left;
-}
-
-#tree .right {
-    width: 80%;
-    height: 100%;
-    float: right;
 }
 
 #projects {
@@ -281,12 +265,6 @@ section::after {
 #projects h1 {
     color: #333;
     font : normal 300 64px/1 'Josefin Sans', sans-serif;
-    text-align: center;
-    white-space: nowrap;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: 0;
 }
 
 #projects p {
@@ -295,7 +273,7 @@ section::after {
 }
 
 #projects p a {
-    color: #333;
+    color: #337ab7;
     text-decoration: none;
     transition: color .3s;
 }
@@ -335,7 +313,17 @@ span {
 
 li {padding-top: 33px;}
 
-
+@media (max-width: 1500px) {
+	#links {
+		left: 30%;
+	}
+	#profile {
+		left: 60%;
+	}
+	#home h1 {
+		left: 60%;
+	}
+}
 @media (min-width: 1500px) {
 	#tree {
         width: 80%;
@@ -343,32 +331,38 @@ li {padding-top: 33px;}
 }
 
 @media (max-width: 800px) {
+	.link {
+		width: auto;
+	}
+	#links {
+		top: 15%;
+		left: 50%;
+		width: 100%;
+	}
+	#profile {
+		left: 50%;
+	}
+	#home h1 {
+		left: 50%;
+	}
 	#tree {
         width: 100%;
     }
-    #tree .left {
-        width: 100%;
-        float: none;
-        display: inline-block;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
     #tree .right {
         width: 100%;
         float: none;
         display: inline-block;
-    }
-}
-
-@media (max-width: 360px) {
-    #tree {
-        padding: 25px;
     }
     ul li:nth-child(n+3) {
         display: block;
     }
     #scroll {
         bottom: 0px;
+    }
+}
+
+@media (max-width: 360px) {
+    #tree {
+        padding: 25px;
     }
 }
