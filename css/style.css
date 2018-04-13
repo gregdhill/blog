@@ -182,8 +182,11 @@ section::after {
 	letter-spacing: .1em;
 	text-decoration: none;
 	transition: opacity .3s;
-    right: 50px;
-	bottom: 50%;
+	right: 0;
+	width: 10%;
+	height: 100%;
+	cursor: pointer;
+	top: 50%;
 }
 
 #viewMoreRight:hover {
@@ -191,17 +194,17 @@ section::after {
 }
 
 #viewMoreRight span {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 24px;
-  height: 24px;
-  margin-left: -12px;
-  border-left: 1px solid #000;
-  border-bottom: 1px solid #000;
-  -webkit-transform: rotate(-135deg);
-  transform: rotate(-135deg);
-  box-sizing: border-box;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 24px;
+	height: 24px;
+	margin-left: -12px;
+	border-left: 1px solid #000;
+	border-bottom: 1px solid #000;
+	-webkit-transform: rotate(-135deg);
+	transform: rotate(-135deg);
+	box-sizing: border-box;
 }
 
 #viewMoreLeft {
@@ -215,8 +218,11 @@ section::after {
 	letter-spacing: .1em;
 	text-decoration: none;
 	transition: opacity .3s;
-    left: 50px;
-	bottom: 50%;
+	left: 0;
+	width: 10%;
+	height: 100%;
+	cursor: pointer;
+	top: 50%;
 }
 
 #viewMoreLeft:hover {
@@ -225,7 +231,7 @@ section::after {
 
 #viewMoreLeft span {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 50%;
   width: 24px;
   height: 24px;
@@ -236,7 +242,6 @@ section::after {
   transform: rotate(45deg);
   box-sizing: border-box;
 }
-
 
 #title {
     width: 100%;
