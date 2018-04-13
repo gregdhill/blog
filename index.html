@@ -82,7 +82,7 @@ $.getJSON('about.json', function(data) {
 
 $(document).ready(function(){
 
-    if ($('#datalist li:hidden').length == 0) $('#viewMoreRight').hide();
+    if ($( window ).width() <= 800) $('#viewMoreRight').hide();
 
 	/*$("#github").hover(function(){
 		$("#location").text("GitHub");
