@@ -40,7 +40,6 @@
 				<a id="twitter" href="https://twitter.com/gregorydhill">
 					<i class="grow fa fa-twitter fa-4x" aria-hidden="true"></i></a>
 			</div>
-			<p id="location"></p>
 		</div>
 		
 		<h1>Gregory<br/>Hill</h1>
@@ -83,22 +82,6 @@ $.getJSON('about.json', function(data) {
 $(document).ready(function(){
 
     if ($( window ).width() <= 800) $('#viewMoreRight').hide();
-
-	/*$("#github").hover(function(){
-		$("#location").text("GitHub");
-	}, function(){  
-		$("#location").text("");
-	});
-	$("#twitter").hover(function(){
-		$("#location").text("Twitter");
-	}, function(){  
-		$("#location").text("");
-	});
-	$("#scholar").hover(function(){
-		$("#location").text("Scholar");
-	}, function(){  
-		$("#location").text("");
-	});*/
 
     $(function() {
       $('#scroll').on('click', function(e) {

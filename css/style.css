@@ -277,6 +277,10 @@ section::after {
     font : normal 400 20px/1 'Josefin Sans', sans-serif;
 }
 
+#projects p:nth-child(2) {
+	line-height: 22px;
+}
+
 #projects p a {
     color: #337ab7;
     text-decoration: none;
@@ -352,6 +356,7 @@ li {padding-top: 33px;}
 	}
 	#tree {
         width: 100%;
+		padding: 50px;
     }
     #tree .right {
         width: 100%;
@@ -364,10 +369,37 @@ li {padding-top: 33px;}
     #scroll {
         bottom: 0px;
     }
+    #title {
+        margin-bottom: 0px;
+    }
 }
 
 @media (max-width: 360px) {
     #tree {
         padding: 25px;
     }
+}
+
+@media (max-height: 550px) {
+	#scroll {
+		line-height: 0; 
+		font-size: 0;
+		color: transparent; 
+	}
+	#profile {
+		width: 200px;
+		height: 200px;
+	}
+	#profile img {
+		margin-top: -100px;
+	}
+	#home h1 {
+		font-size: 40px;
+	}
+}
+
+@media (max-height: 400px) {
+	#scroll {
+		padding-top: 40px;
+	}
 }
