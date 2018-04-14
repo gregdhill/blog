@@ -32,14 +32,14 @@
         "type": "paper",
         "title": "Intrusion Detection System (IDS) Evasion", 
         "link": "docs/idsevasion.pdf",
-        "description": "Administrators employ many different IDS packages to protect their network from adversaries and even Advanced Persistent Threats (APTs). As part of a third year networking module at Abertay University I evaluated common setups by comparing their ability to prevent several evasion techniques."
+        "description": "As part of a third year module at Abertay University I evaluated common packages that aim to combat network incursion and detect advanced persistent threats. By comparing their ability to prevent several evasion techniques, the results concluded that these setups occasionally faltered due to outdated rulesets and insider connections."
     },
 
     "xssfuzzing": { 
         "type": "paper",
         "title": "Cross-Site Scripting (XSS) Fuzzing",
         "link": "docs/xssfuzzing.pdf",
-        "description": "During the web application testing module at Abertay I studied five different automated XSS tools. The aim was to illustrate advanced tactics for web exploitation that simplified vulnerability location. The latter stage of the report proposed comprehensive countermeasures based on the <a href='https://www.owasp.org/'>OWASP</a> guidelines."
+        "description": "The attack surface of a typical web application is often quite large, hence it can prove challenging for a security professional to locate and exploit certain vulnerabilities. I studied five different automated XSS tools to illustrate advanced tactics for web exploitation that simplified vulnerability location. The latter stage of the report proposed countermeasures based on the <a href='https://www.owasp.org/'>OWASP</a> guidelines."
     },
 
     "ddosattacks": { 
@@ -54,7 +54,7 @@
         "type": "paper",
         "title": "Exploit Development", 
         "link": "docs/exploit.pdf",
-        "description": "Each student was randomly assigned a media application for Windows XP, to track inherent security vulnerabilites and build a custom payload. It was shown in this report that GSPlayer suffered from a buffer overflow that was exploitable with Data Execution Prevention (DEP) both enabled and disabled."
+        "description": "Each student was randomly assigned a vulnerable media application to track inherent security flaws and construct a custom payload. It was shown in this report that GSPlayer suffered from a buffer overflow vulnerability that was exploitable in environments with and without Data Execution Prevention (DEP)."
     }
 
 }
