@@ -32,7 +32,7 @@
         "type": "paper",
         "title": "Intrusion Detection System (IDS) Evasion", 
         "link": "docs/idsevasion.pdf",
-        "description": "As part of a third year module at Abertay University I evaluated common packages that aim to combat network incursion and detect advanced persistent threats. By comparing their ability to prevent several evasion techniques, the results concluded that these setups occasionally faltered due to outdated rulesets and insider connections."
+        "description": "As part of a third year module at Abertay University I evaluated common packages that aim to combat network incursion and detect advanced persistent threats. By comparing their ability to prevent several evasion techniques, the results concluded that these setups occasionally faltered due to outdated rulesets."
     },
 
     "xssfuzzing": { 
