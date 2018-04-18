@@ -46,7 +46,7 @@
         "type": "paper",
         "title": "Denial of Service (DoS) Attack Methodologies", 
         "link": "docs/ddos.pdf",
-        "description": "This paper outlined volume based, protocol and application layer attacks utilised by infamous hacktivists. Through the implementation of these techniques, the aim of the project was to aid in the design of more resilient systems. The project was presented at SecuriTay 5 and <a href='https://berlinsides.org/?page_id=1911'>BerlinSides</a> in 2016."
+        "description": "This paper outlined volume based, protocol and application layer attacks utilised by infamous hacktivists. The aim of the project was to demonstrate the ease of scripting and aid in the design of more resilient systems. It concluded that targeted HTTP flooding was by far the most effective technique. The project was presented at SecuriTay 5 and <a href='https://berlinsides.org/?page_id=1911'>BerlinSides</a> in 2016."
     },
 
 
@@ -54,7 +54,7 @@
         "type": "paper",
         "title": "Exploit Development", 
         "link": "docs/exploit.pdf",
-        "description": "Each student was randomly assigned a vulnerable media application to track inherent security flaws and construct a custom payload. It was shown in this report that GSPlayer suffered from a buffer overflow vulnerability that was exploitable in environments with and without Data Execution Prevention (DEP)."
+        "description": "Each student was randomly assigned a vulnerable media application to track inherent security flaws and construct custom payloads. It was shown that GSPlayer (Windows XP) suffered from a buffer overflow vulnerability that was exploitable despite enabling Data Execution Prevention (DEP). The project utilised WinDbg, OllyDbg and Immunity Debugger to disassemble and analyse the subject binary."
     }
 
 }
