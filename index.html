@@ -63,21 +63,27 @@
 </body>
 
 <script>
-var json;
 var start = 0;
 var jump = 2;
 
-$.getJSON('about.json', function(data) {     
-	json = data;
-	for (var i in data) {
-        var string = "<li><div class='document'><a id='" + i + "' href='" + data[i]["link"] + "'>"; 
-        string += "<p class='pname'>" + data[i]["title"] + "</p></a><p>" ;
-        string += data[i]["description"] + "</p></div></li>";
-        $("#tree ul").append(string);
-	}
-});
 
 $(document).ready(function(){
+
+	$.ajax({
+        url: 'about.json',
+        type: "GET",
+        mimeType: 'application/json;',
+        success: function (data) {
+			for (var i in data) {
+				var string = "<li><div class='document'><a id='" + i + "' href='" + data[i]["link"] + "'>"; 
+				string += "<p class='pname'>" + data[i]["title"] + "</p></a><p>" ;
+				string += data[i]["description"] + "</p></div></li>";
+				$("#tree ul").append(string);
+			}
+        }
+    });
+
+
 
     if ($( window ).width() <= 800) $('#viewMoreRight').hide();
 
