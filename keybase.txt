@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/gregdhill
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://greghill.io
+  * I am gregdhill (https://keybase.io/gregdhill) on keybase.
+  * I have a public key ASAHrMRF7KSlX2ItCUv8T6iTVcuHD4CsV5WlGI8TNiefawo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "012007acc445eca4a55f622d094bfc4fa89355cb870f80ac5795a5188f1336279f6b0a",
+      "host": "keybase.io",
+      "kid": "012007acc445eca4a55f622d094bfc4fa89355cb870f80ac5795a5188f1336279f6b0a",
+      "uid": "4933e4a09ffd4d98c864abe998a3a019",
+      "username": "gregdhill"
+    },
+    "merkle_root": {
+      "ctime": 1535906986,
+      "hash": "ffcd160bc2b75ee66b0a4583c43dc8796670a6e2e0d5fbdc5981f24adde3464de82d142c4fdfca524c9cc08801b906e53648e663e50d838f8d0a1aed0995d8da",
+      "hash_meta": "1616b0f29d68922c8cfaa2242a2a288de46a158f2df0926f22dd43fe693ac4fa",
+      "seqno": 3552310
+    },
+    "service": {
+      "entropy": "cmrVKeFrOOxnH8nBF9Pjf301",
+      "hostname": "greghill.io",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "2.6.0"
+  },
+  "ctime": 1535907013,
+  "expire_in": 504576000,
+  "prev": "fed60fe32f9108b602e25255f743a46199f7436a431f6eb6ab325ad934f5fceb",
+  "seqno": 18,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgB6zEReykpV9iLQlL/E+ok1XLhw+ArFeVpRiPEzYnn2sKp3BheWxvYWTESpcCEsQg/tYP4y+RCLYC4lJV90OkYZn3Q2pDH262qzJa2TT1/OvEINzcHid0AGNwRvPxYPcUd414CN0IkcN59Xamr0V8gYz9AgHCo3NpZ8RA6tH/b9HwafkIGKi5nAy5INmGCT+/2BY7bWY1ZEKJkMNYTevTFL3Q1r97chDgwXQl+jiMdOQLIXJc7tjf7oQKC6hzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIA0BVz8Si15tZ9uZ76fHfxj/kHSB9t6tSohJ/+U3NVIQo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/gregdhill
+
+==================================================================
