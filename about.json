@@ -2,9 +2,9 @@
 
     "cryptoclass": { 
         "type": "paper",
-        "title": "Deep Learning Based Cryptographic Primitive Classification", 
-        "link": "https://arxiv.org/abs/1709.08385",
-        "description": "My honours research constructed and implemented an advanced methodology for identifying cryptographic algorithms in compiled binary samples using machine learning. Features were built using dynamic binary instrumentation, then fed through a unique Dynamic Convolutional Neural Network (DCNN). The results are currently in pre-print, but my work was awarded the <a href='https://www.abertay.ac.uk/news/2017/prizewinners-honoured-for-stellar-achievements'>Honorary Fellows Prize for Innovation</a> by Abertay University in 2017."
+        "title": "CryptoKnight: Generating and Modelling Compiled Cryptographic Primitives", 
+        "link": "http://www.mdpi.com/2078-2489/9/9/231",
+        "description": "CryptoKnight is a tool I developed during my undergraduate at Abertay University. It is designed to aid in the analysis of crypto-ransomware; programs that lock down your computer by encrypting files and preventing access until a ransom has been paid. You might remember the attack on the NHS last year which used a particular instance known as WannaCry. My methodology (as previously introduced in <a href='https://arxiv.org/abs/1709.08385'>preprint</a>) leverages deep learning to process the application and evaluate the particular algorithms within it in a smarter and faster way. It was awarded the <a href='https://www.abertay.ac.uk/news/2017/prizewinners-honoured-for-stellar-achievements'>Honorary Fellows Prize for Innovation</a> by Abertay University in 2017 and the code has since been <a href='https://github.com/AbertayMachineLearningGroup/CryptoKnight'>open-sourced</a> as of publication by MDPI."
     },
 
     "webpenbook": {
