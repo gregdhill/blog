@@ -26,4 +26,4 @@ git add --all .
 msg="rebuilding site `date`"
 git commit -m "$msg"
 git push origin master
-git checkout origin develop
+git checkout develop
