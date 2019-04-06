@@ -2,7 +2,6 @@
 title = "Evolving Infrastructure"
 date = "2019-04-06"
 author = "Greg"
-description = "Upgrading the stack..."
 +++
 
 We’ve undergone a lot of infrastructure changes over the last few years at Monax. We actually submitted the very first [DLT framework](https://github.com/helm/charts/tree/master/stable/burrow) into Helm’s [stable charts](https://github.com/helm/charts) over a year ago. This allows anyone with a Kubernetes cluster to deploy a custom blockchain courtesy of [Burrow](https://github.com/hyperledger/burrow) (our contribution to the [Hyperledger Greenhouse](https://www.hyperledger.org/wp-content/uploads/2018/11/Hyperledger_DataSheet_11.18_Digital.pdf) ). We’re a great believer in cloud first and open source technologies so not only is Kubernetes a great fit for what we do, but Helm extraordinarily simplifies the whole deployment process through [Go templating](https://golang.org/pkg/text/template/).
@@ -13,7 +12,7 @@ Last year, as we began extending the size of our stack we realized a problem. Ma
 
 Terraform is a fantastic toolkit with the right amount of configurability to state management. It enables the definition of a global blueprint which can be managed by separate workspaces and modularized resources. When we first started experimenting with new configurations we discovered an [official Terraform Helm provider](https://github.com/terraform-providers/terraform-provider-helm) which enabled us to reuse our existing charts and inject operational specific knowledge into each chart at deploy time. We could then quickly spin up new stacks in [GKE](https://cloud.google.com/kubernetes-engine/) with implicit dependencies between individual resources and closer reliance on upstream changes — all through better code reuse. This new deployment setup worked great at first but we soon discovered a problem.
 
-**King of State**
+## King of State
 
 Helm uses a thing called Tiller to manage what is deployed in your cluster.
 
@@ -23,13 +22,9 @@ Note the final point in that description. Every time we communicate a change to 
 
 Additionally, in its typical stance on lifecycle management, we also found that Terraform would non-deterministically delete resources before re-installation, instead of upgrading. This is less than ideal, especially when we’ve taken the effort to define rolling upgrade strategies in our Helm templates to ensure minimal downtime. It’s possible to plan these executions in advance but this requires significant overhead from operators and is simply not doable in automated CD setups.
 
-**New Direction**
+## New Direction
 
-We essentially required a simple pipelining tool for Helm where we could define an agnostic but configurable buildflow for multiple environments. The lightbulb moment came a few weeks ago after playing around with a tool called [bashful](https://github.com/wagoodman/bashful) which provides a way to stitch together shell commands by way of a readable YAML specification:
-
-
-
-Much like Terraform, we could define separable tasks and resources with room for parallelization. However this alone would have reintroduced significant overhead for multi-environment installations, especially as we run around ten broadly similar stacks in our cloud infrastructure. A typical distinction for many could be staging vs production, where each setup may track different release streams.
+We essentially required a simple pipelining tool for Helm where we could define an agnostic but configurable buildflow for multiple environments. The lightbulb moment came a few weeks ago after playing around with a tool called [bashful](https://github.com/wagoodman/bashful) which provides a way to stitch together shell commands by way of a readable YAML specification. Much like Terraform, we could define separable tasks and resources with room for parallelization. However this alone would have reintroduced significant overhead for multi-environment installations, especially as we run around ten broadly similar stacks in our cloud infrastructure. A typical distinction for many could be staging vs production, where each setup may track different release streams.
 
 
 [Compass](https://github.com/gregdhill/compass) allows a Helm based infrastructure deployment to be modularized by different charts with an extra layer of templating on top. Each set of templated values are initially rendered based on a selection of environment specific variables then used in the typical sense by Helm to define application specific logic which form the Kubernetes release objects. Go routines enable concurrent deployments based on listed dependencies, optional charts can be triggered based on the environment specific inputs and each definition allows pre and post-deployment shell jobs.
