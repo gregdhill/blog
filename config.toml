@@ -1,0 +1,14 @@
+baseurl = "/"
+languageCode = "en-us"
+theme = "nonagon"
+
+[Params]
+    firstname = "Gregory"
+    lastname = "Hill"
+    github = "https://github.com/gregdhill"
+    twitter = "https://twitter.com/gregorydhill"
+    scholar = "https://scholar.google.co.uk/citations?user=OoKiidsAAAAJ&hl=en"
+    image = "profile.jpg"
+
+[Author]
+    name = "Greg"

@@ -1,0 +1,3 @@
+[submodule "themes/nonagon"]
+	path = themes/nonagon
+	url = https://github.com/gregdhill/nonagon.git
