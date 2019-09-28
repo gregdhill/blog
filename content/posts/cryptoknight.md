@@ -1,7 +1,7 @@
 +++
 title = "Generating & Modelling Cryptography"
 date = "2018-10-08"
-author = "Greg"
+author = "Gregory Hill"
 +++
 
 CryptoKnight is a framework I recently released which follows the methodology described in my publication for synthesizing a scalable dataset of cryptographic primitives to feed a unique Convolutional Neural Network. In effect, this allows us to generate and model a substantial amount of data to quickly identify cryptographic algorithms (such as AES, RSA, RC4, or MD5) in reference binary executables. By safely learning this statistical representation, malware analysts can efficiently compare it against crypto-ransomware samples in a controlled environment.

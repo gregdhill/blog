@@ -1,7 +1,7 @@
 +++
 title = "Let's Go Kubernetes"
 date = "2019-04-27"
-author = "Greg"
+author = "Gregory Hill"
 +++
 
 Welcome to the first post from what will hopefully become a series on my adventures with Go! I'm really lucky to be able to experiment with some super awesome 
