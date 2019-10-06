@@ -9,21 +9,7 @@ fi
 
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
-public=$(mktemp -d)
-function finish {
-  rm -rf "$public"
-}
-trap finish EXIT
-
 hugo
-mv public/* $public
-git checkout master
-git pull origin master
-rm -rf ./*
-mv $public/* .
-git add --all .
-
-msg="rebuilding site `date`"
-git commit -m "$msg"
-git push origin master --force
-git checkout develop
+cd public
+git add --all
+git commit -m "`date`"
