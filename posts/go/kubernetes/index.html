@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
+	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
+	<meta name="author" content="Gregory Hill">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gregory Hill</title>
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/img/manifest.json">
+	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/img/favicon.ico">
+	<meta name="msapplication-config" content="/img/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+</head>
+    <body>
+        <div class="post">
+            <article>
+                <header>
+                    <h1>
+                        Let&#39;s Go Kubernetes
+                    </h1>
+                    <h2 class="headline">
+                    Apr 27, 2019
+                    · 779 words
+                    · 4 minute read
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    
+
+<p>Welcome to the first post from what will hopefully become a series on my adventures with Go! I&rsquo;m really lucky to be able to experiment with some super awesome
+technologies which I will endeavour to write about more, so if you find this post helpful please let me know on <a href="https://twitter.com/gregorydhill">twitter</a>!</p>
+
+<p><img src="/img/kubernetes.png" alt="Kubernetes Logo" /></p>
+
+<p>If you&rsquo;re new to Go, follow the <a href="https://golang.org/doc/install">getting started docs</a>. You&rsquo;ll also need to configure access to a Kubernetes cluster,
+or install <a href="https://kubernetes.io/docs/setup/minikube/">Minikube</a> - a single local node. In the process of setting this up you will likely install
+<code>kubectl</code>, though not strictly necessary for this introduction, I would first recommend you explore what it can do. Well known developer, Kelsey Hightower -
+co-author of &ldquo;<a href="http://shop.oreilly.com/product/0636920043874.do">Kubernetes: Up and Running</a>&rdquo; - famously coined this particular tool as the <a href="https://twitter.com/kelseyhightower/status/1070413458045202433">new SSH</a>.
+It is the main gateway into the world of container orchestration, and before continuing with this post I highly recommend exploring what it can do as it
+underpins a lot of what we are going to talk about. I also encourage you to learn the distinctions between common Kubernetes object types, as some of the
+terminology that follows may prove unfamiliar.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>There are a number of well-maintained libraries provided for us so let&rsquo;s get stuck in. If you&rsquo;re using <a href="https://github.com/golang/go/wiki/Modules">Go modules</a>
+this step shouldn&rsquo;t be necessary, though you may have to initialize the project directory first: <code>go mod init</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">go get -u k8s.io/client-go/...
+go get -u k8s.io/apimachinery/...</code></pre></div>
+<p>Let&rsquo;s create our starting file, <code>main.go</code> and copy in the following text:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;log&#34;</span>
+	<span style="color:#e6db74">&#34;os&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;path/filepath&#34;</span>
+
+	<span style="color:#a6e22e">metav1</span> <span style="color:#e6db74">&#34;k8s.io/apimachinery/pkg/apis/meta/v1&#34;</span>
+	<span style="color:#e6db74">&#34;k8s.io/client-go/kubernetes&#34;</span>
+	<span style="color:#e6db74">&#34;k8s.io/client-go/tools/clientcmd&#34;</span>
+
+	<span style="color:#75715e">// import all auth plugins
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">_</span> <span style="color:#e6db74">&#34;k8s.io/client-go/plugin/pkg/client/auth&#34;</span>
+)
+
+<span style="color:#75715e">// this is the entry point for our program
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#75715e">// find the location of our config
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">home</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">filepath</span>.<span style="color:#a6e22e">Join</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;HOME&#34;</span>), <span style="color:#e6db74">&#34;.kube&#34;</span>, <span style="color:#e6db74">&#34;config&#34;</span>)
+	<span style="color:#75715e">// note: if home is empty, the following helper function
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// will try to fetch the default in-cluster setup
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">config</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">clientcmd</span>.<span style="color:#a6e22e">BuildConfigFromFlags</span>(<span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#a6e22e">home</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+
+	<span style="color:#a6e22e">clientset</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">kubernetes</span>.<span style="color:#a6e22e">NewForConfig</span>(<span style="color:#a6e22e">config</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+
+	<span style="color:#75715e">// get a list of all namespaces and iterate the names
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">ns</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">clientset</span>.<span style="color:#a6e22e">Core</span>().<span style="color:#a6e22e">Namespaces</span>().<span style="color:#a6e22e">List</span>(<span style="color:#a6e22e">metav1</span>.<span style="color:#a6e22e">ListOptions</span>{})
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">ns</span>.<span style="color:#a6e22e">Items</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">Name</span>)
+	}
+}</code></pre></div>
+<p>Save this file, then to compile and run it in one step (assuming you&rsquo;re in the same directory):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">go run .</code></pre></div>
+<p>In the (unlikely) event that everything worked first time you should see a list of namespaces in your cluster. However,
+if you&rsquo;ve only just provisioned your cluster, you will not see anything - don&rsquo;t panic! Let&rsquo;s go ahead ask our app to
+create a namespace. Adapt the above code with the following; add a new import, then call the function <code>createNamespace</code>
+to perform a new query against the Kubernetes API. Please note that for the sake of brevity these snippets will not handle
+all errors gracefully, so please ensure to add the appropriate checks before deploying to production!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">import</span> (
+	<span style="color:#f92672">...</span>
+	<span style="color:#a6e22e">corev1</span> <span style="color:#e6db74">&#34;k8s.io/api/core/v1&#34;</span>
+	<span style="color:#f92672">...</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">createNamespace</span>(<span style="color:#a6e22e">clientset</span> <span style="color:#a6e22e">kubernetes</span>.<span style="color:#a6e22e">Interface</span>, <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">error</span> {
+	<span style="color:#a6e22e">ns</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">corev1</span>.<span style="color:#a6e22e">Namespace</span>{<span style="color:#a6e22e">ObjectMeta</span>: <span style="color:#a6e22e">metav1</span>.<span style="color:#a6e22e">ObjectMeta</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#a6e22e">name</span>}}
+	<span style="color:#75715e">// we only care if it errors
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">clientset</span>.<span style="color:#a6e22e">Core</span>().<span style="color:#a6e22e">Namespaces</span>().<span style="color:#a6e22e">Create</span>(<span style="color:#a6e22e">ns</span>)
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#f92672">...</span>
+
+	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">createNamespace</span>(<span style="color:#a6e22e">clientset</span>, <span style="color:#e6db74">&#34;test-namespace&#34;</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+
+	<span style="color:#a6e22e">ns</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">clientset</span>.<span style="color:#a6e22e">Core</span>().<span style="color:#a6e22e">Namespaces</span>().<span style="color:#a6e22e">List</span>(<span style="color:#a6e22e">metav1</span>.<span style="color:#a6e22e">ListOptions</span>{})
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">ns</span>.<span style="color:#a6e22e">Items</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">Name</span>)
+	}
+}</code></pre></div>
+<p>You should now see <code>test-namespace</code> in your output. To verify this object has been successfully created in your cluster:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get namespaces</code></pre></div>
+<p><img src="/img/pokemon.png" alt="Gotta catch 'em all" /></p>
+
+<h2 id="testing">Testing</h2>
+
+<p>Note the first argument in the new function <code>createNamespace</code> above, of type <code>kubernetes.Interface</code> - defined in <code>k8s.io/client-go/kubernetes</code>. The helper
+function <code>kubernetes.NewForConfig(config)</code> previously gave us a <code>client</code> that satisfied this interface, meaning it implemented all required methods of the type.
+In this case, as part of the <code>Core</code> API, we retrieved a <code>Namespaces</code> interface which itself contained the methods <code>Create</code> and <code>List</code>. Using the pre-configured
+REST client, the library handles requests to your remote cluster&rsquo;s API formed from the given parameters.</p>
+
+<p>What if you were to satisfy the interface another way? Perhaps you could match all method signatures without actually sending those requests and altering the state
+of your cluster. That is exactly what has been implemented in <code>k8s.io/client-go/kubernetes/fake</code>, using a simple object tracker that reports the state of it&rsquo;s in-memory
+cluster representation. This enables us to easily unit test our code with far less overhead:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;testing&#34;</span>
+	<span style="color:#e6db74">&#34;k8s.io/client-go/kubernetes/fake&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestCreateNamespace</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
+	<span style="color:#a6e22e">client</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fake</span>.<span style="color:#a6e22e">NewSimpleClientset</span>()
+	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">createNamespace</span>(<span style="color:#a6e22e">client</span>, <span style="color:#e6db74">&#34;test&#34;</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+	}
+}</code></pre></div>
+<p>Save this as <code>main_test.go</code> in the same directory as before and run the test:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">go test .</code></pre></div>
+<h2 id="next">Next</h2>
+
+<p>I&rsquo;m afraid that&rsquo;s all for now, but I will be adding to this post again soon. Possible topics include:</p>
+
+<ul>
+<li>Proxies</li>
+<li>Typed vs Dynamic</li>
+<li>CustomResourceDefinitions</li>
+</ul>
+
+<p><img src="/img/mining_gopher.jpeg" alt="Mining Gopher - Under Construction" /></p>
+
+                </section>
+            </article>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
+	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
+	<meta name="author" content="Gregory Hill">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gregory Hill</title>
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/img/manifest.json">
+	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/img/favicon.ico">
+	<meta name="msapplication-config" content="/img/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+</head>
+    <body>
+        <div class="post">
+            <article>
+                <header>
+                    <h1>
+                        Recursive Linear Prefix (RLP) Encoding
+                    </h1>
+                    <h2 class="headline">
+                    Sep 15, 2019
+                    · 564 words
+                    · 3 minute read
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    
+
+<p>I was recently tasked with developing a new encoding library for <a href="https://github.com/hyperledger/burrow">Hyperledger Burrow</a>
+to further interoperability with the broader Ethereum ecosystem. Recursive Linear Prefix (RLP) is a data format used to store
+state in Ethereum, more precisely it is an algorithm for representing arbitrary data structures in binary form.
+Unlike other serialization techniques however, the output is position dependant in that recovering the original object
+requires knowledge of the input structure.</p>
+
+<h2 id="history">History</h2>
+
+<p>The first mention of RLP encoding was in the Ethereum <a href="https://ethereum.github.io/yellowpaper/paper.pdf">yellow paper</a>
+which logically defines the encoding procedure adopted by <a href="https://vitalik.ca/">Vitalik</a>. It&rsquo;s not entirely clear why this
+method was chosen, but it is likely to have been devised for space efficiency. To quote the <a href="https://github.com/ethereum/wiki/wiki/Design-Rationale#rlp">design rationale</a>:</p>
+
+<blockquote>
+<p>RLP is intended to be a highly minimalistic serialization format; its sole purpose is to store nested arrays of bytes. Unlike protobuf, BSON and other existing solutions, RLP does not attempt to define any specific data types such as booleans, floats, doubles or even integers; instead, it simply exists to store structure, in the form of nested arrays, and leaves it up to the protocol to determine the meaning of the arrays.</p>
+</blockquote>
+
+<p>Simply put, this means that we can not always expect the input of our decode function to conform to our target representation.</p>
+
+<h2 id="internals">Internals</h2>
+
+<p>As described on the <a href="https://github.com/ethereum/wiki/wiki/RLP">wiki</a>, the input to the encoding function is an &lsquo;item&rsquo;
+which may be a string (byte array) or a list of items. This is evaluated against the following set of conditions in which
+a list is recursively solved for nested strings.</p>
+
+<table>
+<thead>
+<tr>
+<th>Prefix</th>
+<th>Condition</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>-</td>
+<td>[0x00, 0x7f]</td>
+</tr>
+
+<tr>
+<td>0x80</td>
+<td>string - 0-55 bytes</td>
+</tr>
+
+<tr>
+<td>0xb7</td>
+<td>string - &gt; 55 bytes</td>
+</tr>
+
+<tr>
+<td>0xc0</td>
+<td>list - 0-55 bytes</td>
+</tr>
+
+<tr>
+<td>0xf7</td>
+<td>list - &gt; 55 bytes</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>The length of each item is also added to its prefix.</p>
+</blockquote>
+
+<h2 id="examples">Examples</h2>
+
+<p>Guided by the above rule set, we can begin to encode / decode some example items. Let&rsquo;s assume we pass the <strong>string</strong>
+<code>foo bar</code> to our encoding function. After evaluating the length (including whitespace) as <code>7</code>, which is distinctly
+less that <code>55</code> bytes, we should add the byte with value <code>0x80</code> to the length to give us our prefix <code>0x87</code>. We can then
+append the raw bytes of our input string.</p>
+
+<pre><code>   f  o  o     b  a  r
+87 66 6f 6f 20 62 61 72
+</code></pre>
+
+<p>To decode this, our function should first check the prefix. As the value is between <code>[0x80,0xb7)</code> we can subtract <code>0x80</code>
+to get the length and return the string at offset <code>1:8</code>.</p>
+
+<p>Given the <strong>list</strong> <code>[foo, bar]</code>, we&rsquo;ll start the encoding by taking the item&rsquo;s length plus the byte value <code>0xc0</code>. We can
+then linearly append each string following the process above; each word is of length <code>3</code>, so the prefix is the value <code>0x83</code>.</p>
+
+<pre><code>[]    {f o  o}    {b a  r}
+c8 83 66 6f 6f 83 62 61 72
+</code></pre>
+
+<p>Let&rsquo;s follow this procedure in reverse to decode the output. The first prefix is between <code>[0xc0,0xf7)</code> so we know to construct
+a list object, but at this point it is still unclear what the sub-items may be - we could have arbitrary lists or strings.
+Therefore the simplest approach is to enumerate over the remaining bytes, taking the next prefix (<code>0x83</code>) we can extract the
+first string, leaving us with 4 bytes (including prefix) as specified by the outer prefix. So our recursive function should
+know to continue decoding our second string.</p>
+
+                </section>
+            </article>
+        </section>
+    </body>
+</html>

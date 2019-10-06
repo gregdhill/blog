@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
+	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
+	<meta name="author" content="Gregory Hill">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gregory Hill</title>
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/img/manifest.json">
+	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/img/favicon.ico">
+	<meta name="msapplication-config" content="/img/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+</head>
+    <body>
+        <div class="post">
+            <article>
+                <header>
+                    <h1>
+                        Decentralized Autonomous Organizations (DAO)
+                    </h1>
+                    <h2 class="headline">
+                    Sep 28, 2019
+                    · 588 words
+                    · 3 minute read
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    
+
+<p>In traditional governance systems, we rely upon human entities to enact policies on
+behalf of constituents. This may viewed as in contemporary politics or in the hierarchical
+structure of an enterprise. An historical issue however, is that it is not always possible
+to trust the judgement of those in charge. In economics, this is known as the
+<a href="https://en.wikipedia.org/wiki/Principal%E2%80%93agent_problem">principle-agent problem</a>.</p>
+
+<p>A DAO is a form of self-enforcing protocol, typically modelled as a smart contract. Each
+decision is recorded on a public ledger which ensures transparency. It allows participants
+to propose, vote on and enact policies, guided by a strict set of rules.</p>
+
+<p>An <a href="https://www.wired.com/2016/06/50-million-hack-just-showed-dao-human/">infamous attack</a>
+brought a lot of attention to the subject a few years ago, but there have been many
+advancements since. For example, <a href="https://makerdao.com/en/dai/">MakerDAO</a> have created the
+&lsquo;Dai&rsquo; stablecoin, pinned to the value of the US dollar. I will save this topic for a future
+post, but if you want to know more now, checkout <a href="https://medium.com/@james_3093/the-dai-stablecoin-is-a-game-changer-for-ethereum-and-the-entire-cryptocurrency-ecosystem-13fb412d1e75">this post</a>.
+Another interesting development is <a href="https://medium.com/@simondlr/the-moloch-dao-collapsing-the-firm-2a800b3aa2e7">MolochDAO</a>
+which aims to drive community funding for open-source projects. In short, stakeholders vote on proposals
+(typically for work to be undertaken) and upon success the proposer is awarded some amount of token. They
+can then choose to use this power to vote on other proposals or burn it (convert to ether).</p>
+
+<h2 id="example">Example</h2>
+
+<p>Borrowing some of the key ideas from MolochDAO, I&rsquo;ve put together an example contract:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-solidity" data-lang="solidity"><span style="color:#66d9ef">pragma solidity</span> <span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">5</span>.<span style="color:#ae81ff">0</span>;
+
+<span style="color:#66d9ef">contract</span> MolochDAO {
+    <span style="color:#66d9ef">uint</span> pot;
+    <span style="color:#66d9ef">uint</span> participants;
+    <span style="color:#66d9ef">mapping</span> (<span style="color:#66d9ef">address</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">uint</span>) power;
+    <span style="color:#66d9ef">mapping</span> (<span style="color:#66d9ef">address</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">uint</span>) proposals;
+    <span style="color:#66d9ef">mapping</span> (<span style="color:#66d9ef">address</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">uint</span>) votes;
+
+    <span style="color:#75715e">// initial seed funds
+</span><span style="color:#75715e"></span>    constructor() <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">payable</span> {
+        pot <span style="color:#f92672">=</span> msg.value;
+        participants<span style="color:#f92672">++</span>;
+        power[msg.sender] <span style="color:#f92672">=</span> msg.value;
+    }
+    
+    <span style="color:#75715e">// caller burns participation for token
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">function</span> burn() <span style="color:#66d9ef">public</span> {
+        <span style="color:#66d9ef">if</span> (power[msg.sender] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+            <span style="color:#66d9ef">return</span>;
+        }
+        participants<span style="color:#f92672">--</span>;
+        pot <span style="color:#f92672">-=</span> power[msg.sender];
+        power[msg.sender] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        msg.sender.transfer(power[msg.sender]);
+    }
+    
+    <span style="color:#75715e">// create a proposal for funds
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">function</span> propose(<span style="color:#66d9ef">uint</span> want) <span style="color:#66d9ef">public</span> {
+        proposals[msg.sender] <span style="color:#f92672">=</span> want;
+    }
+    
+    <span style="color:#75715e">// vote for a proposer
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">function</span> vote(<span style="color:#66d9ef">address</span> proposal) <span style="color:#66d9ef">public</span> {
+        <span style="color:#66d9ef">if</span> (proposals[proposal] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+            <span style="color:#66d9ef">return</span>;
+        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (power[msg.sender] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+            votes[proposal]<span style="color:#f92672">++</span>;
+        }
+
+        <span style="color:#66d9ef">if</span> (votes[proposal] <span style="color:#f92672">==</span> participants) {
+            power[proposal] <span style="color:#f92672">+=</span> proposals[proposal];
+            votes[proposal] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        }
+    }
+}</code></pre></div>
+<p>This sets up an initial seed pot in the constructor and anyone can then <code>propose</code> to take
+an amount of the shares. If we receive enough votes, the proposer will be added to the pool
+with the option to <code>burn</code> their share to receive ether.</p>
+
+<blockquote>
+<p>Do not use this contract with token of value.</p>
+</blockquote>
+
+<p>I should add that this contract is nowhere near complete or even fair to all participants.
+For instance, the last party to vote will incur additional gas costs. A slightly more critical
+flaw however is that I do not force any kind of unique constraint on the voter, so any participant
+could submit multiple votes to unlock the funds.</p>
+
+<h2 id="addendum">Addendum</h2>
+
+<p>I&rsquo;m excited to share some work I&rsquo;ve <a href="https://github.com/hyperledger/burrow/pull/1238">recently completed</a> on
+<a href="https://github.com/hyperledger/burrow">Hyperledger Burrow</a>. We now support experimental Web3, meaning that
+all of your favorite Ethereum tooling should now work with our built-in JSON RPC.</p>
+
+<p>Lets start a chain with one validator to process blocks and two participants from which we can transact:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">burrow spec -v1 -p2 | burrow configure --curve-type secp256k1 -s- | burrow start -c- </code></pre></div>
+<p>If we now query for the latest block, we should get a response:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -X POST localhost:26660 --data <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   <span style="color:#e6db74">&#39;{&#34;id&#34;:1,&#34;jsonrpc&#34;:&#34;2.0&#34;,&#34;method&#34;:&#34;eth_getBlockByNumber&#34;,&#34;params&#34;:[&#34;latest&#34;,false]}&#39;</span></code></pre></div>
+<p><a href="https://www.trufflesuite.com/">Truffle</a> is a tool for smart contract development and testing.
+Follow the configuration instructions in our <a href="http://hyperledger.github.io/burrow/#/reference/web3?id=truffle">docs</a>,
+download the <a href="https://github.com/MolochVentures/moloch">MolochDAO</a> source and follow the <a href="https://github.com/MolochVentures/moloch#deploying-a-new-pool">deploy instructions</a>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git clone git@github.com:MolochVentures/moloch.git
+cd moloch
+npm install
+npx buidler moloch-deploy --network burrow</code></pre></div>
+                </section>
+            </article>
+        </section>
+    </body>
+</html>
