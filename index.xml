@@ -6,10 +6,28 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Rust] Table Driven Tests</title>
+      <link>/posts/rust/table-tests/</link>
+      <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/rust/table-tests/</guid>
+      <description>One of my favorite ways to write tests in Go is with a table driven test. If you are unfamiliar with the concept check out the excellent Dave Cheney post. If you need to unit test a component under a multitude of edge cases, then this is good technique to adopt. Anyway, I&amp;rsquo;m learning Rust in my spare time so I thought I&amp;rsquo;d best give it a go. Hopefully this will suffice, but if you think it could be improved please hit me up on twitter.</description>
+    </item>
+    
+    <item>
+      <title>ERC Token Standards</title>
+      <link>/posts/ethereum/erc-tokens/</link>
+      <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/ethereum/erc-tokens/</guid>
+      <description>You may be familiar with the concept of a Request for Comments (RFC) from a body such as the Internet Engineering Task Force (IETF). They are just technical documents that describe the specifications for a particular technology - HTTP/1.1 is described by RFC-2616 for instance. Application level standards in the Ethereum ecosystem are thus named accordingly, forming one possible part of an Ethereum Improvement Proposal (EIP). For more details on this, check out EIP-1.</description>
+    </item>
     
     <item>
       <title>Decentralized Autonomous Organizations (DAO)</title>
@@ -23,10 +41,10 @@ A DAO is a form of self-enforcing protocol, typically modelled as a smart contra
     
     <item>
       <title>Recursive Linear Prefix (RLP) Encoding</title>
-      <link>/posts/ethereum/rlp_encoding/</link>
+      <link>/posts/ethereum/rlp-encoding/</link>
       <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/posts/ethereum/rlp_encoding/</guid>
+      <guid>/posts/ethereum/rlp-encoding/</guid>
       <description>I was recently tasked with developing a new encoding library for Hyperledger Burrow to further interoperability with the broader Ethereum ecosystem. Recursive Linear Prefix (RLP) is a data format used to store state in Ethereum, more precisely it is an algorithm for representing arbitrary data structures in binary form. Unlike other serialization techniques however, the output is position dependant in that recovering the original object requires knowledge of the input structure.</description>
     </item>
     

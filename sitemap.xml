@@ -4,7 +4,22 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-09-28T00:00:00+00:00</lastmod>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/rust/table-tests/</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/ethereum/erc-tokens/</loc>
+    <lastmod>2019-10-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -13,12 +28,7 @@
   </url>
   
   <url>
-    <loc>/posts/</loc>
-    <lastmod>2019-09-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/ethereum/rlp_encoding/</loc>
+    <loc>/posts/ethereum/rlp-encoding/</loc>
     <lastmod>2019-09-15T00:00:00+00:00</lastmod>
   </url>
   

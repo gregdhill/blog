@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
+	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
+	<meta name="author" content="Gregory Hill">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gregory Hill</title>
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/img/manifest.json">
+	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/img/favicon.ico">
+	<meta name="msapplication-config" content="/img/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+</head>
+    <body>
+        <div class="post">
+            <article>
+                <header>
+                    <h1>
+                        [Rust] Table Driven Tests
+                    </h1>
+                    <h2 class="headline">
+                    Oct 6, 2019
+                    · 254 words
+                    · 2 minute read
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>One of my favorite ways to write tests in Go is with a table driven test. If you are unfamiliar
+with the concept check out the <a href="https://dave.cheney.net/2013/06/09/writing-table-driven-tests-in-go">excellent Dave Cheney post</a>.
+If you need to unit test a component under a multitude of edge cases, then this is good technique to adopt.
+Anyway, I&rsquo;m learning Rust in my spare time so I thought I&rsquo;d best give it a go. Hopefully this will suffice, but if you
+think it could be improved please hit me up on <a href="https://twitter.com/gregorydhill">twitter</a>.</p>
+
+<p>Following in Dave&rsquo;s footsteps, let&rsquo;s implement a recursive function to calculate the
+<a href="https://en.wikipedia.org/wiki/Fibonacci_number">fibonacci number</a>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">fib</span>(n: <span style="color:#66d9ef">i64</span>) -&gt; <span style="color:#66d9ef">i64</span> {
+    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span> {
+            <span style="color:#66d9ef">return</span> n
+    }
+    <span style="color:#66d9ef">return</span> fib(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib(n<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
+}
+</code></pre></div>
+<p>For the structure itself we&rsquo;ll need to define a <code>struct</code> which details our required
+input(s) - in this case <code>n</code> - and our expected result (<code>e</code>). We can then iterate over
+an array of these test cases, using the macro <code>assert_eq!</code> to ensure the computed
+result matches.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">#[test]</span>
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">table</span>() {
+    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Pair</span> {
+        n: <span style="color:#66d9ef">i64</span>,
+        e: <span style="color:#66d9ef">i64</span>,
+    }
+
+    <span style="color:#66d9ef">let</span> fib_tests: [Pair; <span style="color:#ae81ff">7</span>] <span style="color:#f92672">=</span> [
+        Pair {
+            n: <span style="color:#ae81ff">1</span>,
+            e: <span style="color:#ae81ff">1</span>, 
+        },
+        Pair {
+            n: <span style="color:#ae81ff">2</span>,
+            e: <span style="color:#ae81ff">1</span>, 
+        },
+        Pair {
+            n: <span style="color:#ae81ff">3</span>,
+            e: <span style="color:#ae81ff">2</span>, 
+        },
+        Pair {
+            n: <span style="color:#ae81ff">4</span>,
+            e: <span style="color:#ae81ff">3</span>, 
+        },
+        Pair {
+            n: <span style="color:#ae81ff">5</span>,
+            e: <span style="color:#ae81ff">5</span>, 
+        },
+        Pair {
+            n: <span style="color:#ae81ff">6</span>,
+            e: <span style="color:#ae81ff">8</span>, 
+        },
+        Pair {
+            n: <span style="color:#ae81ff">7</span>,
+            e: <span style="color:#ae81ff">13</span>, 
+        },
+    ];
+
+    <span style="color:#66d9ef">for</span> test <span style="color:#66d9ef">in</span> fib_tests.iter() {
+        assert_eq<span style="color:#f92672">!</span>(test.e, fib(test.n))
+    }
+}
+</code></pre></div>
+<p>See the <a href="https://doc.rust-lang.org/rust-by-example/testing/unit_testing.html">docs</a> for
+more information on unit testing in Rust!</p>
+
+                </section>
+            </article>
+        </section>
+    </body>
+</html>
