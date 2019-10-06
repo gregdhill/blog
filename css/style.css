@@ -254,7 +254,7 @@ li {
 .post {
 	max-width: 1200px;
 	margin: auto;
-	margin-bottom: 30px;
+	margin-bottom: 100px;
 }
 
 .post h1, .misc h1 {
@@ -312,6 +312,7 @@ li {
 #misc-body {
 	width: 90%;
 	margin: auto;
+	margin-bottom: 100px;
 }
 
 #misc-body h1 {
