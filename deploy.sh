@@ -15,3 +15,5 @@ hugo
 cd public
 git add --all
 git commit -m "`date`"
+git push origin gh-pages
+git worktree remove public
