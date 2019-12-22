@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on </title>
@@ -6,10 +6,19 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 22 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Proof of Work (Explained)</title>
+      <link>/posts/bitcoin/pow_explained/</link>
+      <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/bitcoin/pow_explained/</guid>
+      <description>So you&amp;rsquo;ve read the theory, but want to understand Bitcoin programmatically. In this post we will analyse the core codebase written in C++ to understand how one can generate and include a block in the chain. Starting with the atomic unit of construction in this context, a block is a grouping of transactions that alter the state of the ledger. For example, a coinbase transaction may be included by a miner to collect a block reward.</description>
+    </item>
     
     <item>
       <title>[Rust] Table Driven Tests</title>
