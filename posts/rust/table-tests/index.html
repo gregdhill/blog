@@ -39,7 +39,6 @@ with the concept check out the <a href="https://dave.cheney.net/2013/06/09/writi
 If you need to unit test a component under a multitude of edge cases, then this is good technique to adopt.
 Anyway, I&rsquo;m learning Rust in my spare time so I thought I&rsquo;d best give it a go. Hopefully this will suffice, but if you
 think it could be improved please hit me up on <a href="https://twitter.com/gregorydhill">twitter</a>.</p>
-
 <p>Following in Dave&rsquo;s footsteps, let&rsquo;s implement a recursive function to calculate the
 <a href="https://en.wikipedia.org/wiki/Fibonacci_number">fibonacci number</a>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">fib</span>(n: <span style="color:#66d9ef">i64</span>) -&gt; <span style="color:#66d9ef">i64</span> {
@@ -48,12 +47,11 @@ think it could be improved please hit me up on <a href="https://twitter.com/greg
     }
     <span style="color:#66d9ef">return</span> fib(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib(n<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
 }
-</code></pre></div>
-<p>For the structure itself we&rsquo;ll need to define a <code>struct</code> which details our required
+</code></pre></div><p>For the structure itself we&rsquo;ll need to define a <code>struct</code> which details our required
 input(s) - in this case <code>n</code> - and our expected result (<code>e</code>). We can then iterate over
 an array of these test cases, using the macro <code>assert_eq!</code> to ensure the computed
 result matches.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">#[test]</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">#[</span><span style="color:#75715e">test</span><span style="color:#75715e">]</span>
 <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">table</span>() {
     <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Pair</span> {
         n: <span style="color:#66d9ef">i64</span>,
@@ -95,8 +93,7 @@ result matches.</p>
         assert_eq<span style="color:#f92672">!</span>(test.e, fib(test.n))
     }
 }
-</code></pre></div>
-<p>See the <a href="https://doc.rust-lang.org/rust-by-example/testing/unit_testing.html">docs</a> for
+</code></pre></div><p>See the <a href="https://doc.rust-lang.org/rust-by-example/testing/unit_testing.html">docs</a> for
 more information on unit testing in Rust!</p>
 
                 </section>
