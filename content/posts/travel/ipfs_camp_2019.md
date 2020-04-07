@@ -2,6 +2,10 @@
 title = "IPFS Camp 2019 (June 27-30)"
 date = "2019-07-06"
 author = "Gregory Hill"
+tags = [
+    "travel",
+    "conferences",
+]
 +++
 
 ![IPFS Camp](/img/ipfs_camp_logo.png)

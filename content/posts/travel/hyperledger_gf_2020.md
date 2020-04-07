@@ -2,6 +2,10 @@
 title = "Hyperledger Global Forum (2020)"
 date = "2020-03-25"
 author = "Gregory Hill"
+tags = [
+    "travel",
+    "conferences",
+]
 +++
 
 Since I am on lock-down due to the ongoing coronavirus pandemic I decided this would be a good time to write up some notes from my recent visit to Phoenix, Arizona. The conference lasted around four days, though I had some buffer around this for travel - with time to visit the local desert botanical gardens! Fortunately, it was still well attended despite the obvious health concerns but the Linux Foundation made every effort to accommodate guests. The first two days were designated for talks and demonstrations, 'ending' with a visit to the ironically named Corona ranch for dinner and drinks. The last two days were exclusively for technical workshops, with representation from most projects in the greenhouse.

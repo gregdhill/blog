@@ -2,6 +2,10 @@
 title = "Decentralized Autonomous Organizations (DAO)"
 date = "2019-09-28"
 author = "Gregory Hill"
+tags = [
+    "ethereum",
+    "solidity",
+]
 +++
 
 In traditional governance systems, we rely upon human entities to enact policies on

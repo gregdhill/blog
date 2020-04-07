@@ -2,6 +2,10 @@
 title = "Proof of Work (Explained)"
 date = "2019-12-22"
 author = "Gregory Hill"
+tags = [
+    "bitcoin",
+    "c++",
+]
 +++
 
 So you've read the theory, but want to understand Bitcoin programmatically. In this post we will analyse the 

@@ -1,17 +1,26 @@
-baseurl = "/"
-languageCode = "en-us"
-theme = "nonagon"
-pygmentsCodeFences = true
+baseURL = "https://greghill.io"
+title = "Greg Hill"
+theme = "tale"
 
-[Params]
-firstname = "Gregory"
-lastname = "Hill"
-github = "https://github.com/gregdhill"
-twitter = "https://twitter.com/gregorydhill"
-scholar = "https://scholar.google.co.uk/citations?user=OoKiidsAAAAJ&hl=en"
-image = "profile.jpg"
-description = "Interested in Blockchains, Cryptography and Distributed Systems."
-keywords = "computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill"
+languageCode = "en-gb"
 
 [Author]
-name = "Greg"
+    name = "Greg Hill"
+
+[markup.highlight]
+codeFences = true
+noClasses = false
+
+[menu]
+  [[menu.main]]
+    identifier = "projects"
+    name = "Projects"
+    title = "Projects"
+    url = "/projects/"
+    weight = 0
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    title = "Posts"
+    url = "/posts/"
+    weight = 0

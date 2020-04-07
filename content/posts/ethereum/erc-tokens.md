@@ -2,6 +2,10 @@
 title = "ERC Token Standards"
 date = "2019-10-05"
 author = "Gregory Hill"
+tags = [
+    "ethereum",
+    "solidity",
+]
 +++
 
 You may be familiar with the concept of a Request for Comments (RFC) from a body such as the Internet Engineering 

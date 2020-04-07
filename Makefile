@@ -1,6 +1,6 @@
 .PHONY: theme
 theme:
-	git submodule update --init themes/nonagon
+	git submodule update --init themes/tale
 
 .PHONY: deploy
 deploy:

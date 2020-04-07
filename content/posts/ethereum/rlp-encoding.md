@@ -2,6 +2,9 @@
 title = "Recursive Linear Prefix (RLP) Encoding"
 date = "2019-09-15"
 author = "Gregory Hill"
+tags = [
+    "ethereum",
+]
 +++
 
 I was recently tasked with developing a new encoding library for [Hyperledger Burrow](https://github.com/hyperledger/burrow)

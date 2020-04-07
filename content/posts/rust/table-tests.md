@@ -1,7 +1,10 @@
 +++
-title = "[Rust] Table Driven Tests"
+title = "Table Driven Tests"
 date = "2019-10-06"
 author = "Gregory Hill"
+tags = [
+    "rust",
+]
 +++
 
 One of my favorite ways to write tests in Go is with a table driven test. If you are unfamiliar
