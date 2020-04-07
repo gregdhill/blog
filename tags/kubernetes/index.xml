@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kubernetes on Greg Hill</title>
+    <link>https://greghill.io/tags/kubernetes/</link>
+    <description>Recent content in kubernetes on Greg Hill</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 27 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://greghill.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Let&#39;s Go Kubernetes</title>
+      <link>https://greghill.io/posts/go/kubernetes/</link>
+      <pubDate>Sat, 27 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://greghill.io/posts/go/kubernetes/</guid>
+      <description>Welcome to the first post from what will hopefully become a series on my adventures with Go! I&amp;rsquo;m really lucky to be able to experiment with some super awesome technologies which I will endeavour to write about more, so if you find this post helpful please let me know on twitter!
+If you&amp;rsquo;re new to Go, follow the getting started docs. You&amp;rsquo;ll also need to configure access to a Kubernetes cluster, or install Minikube - a single local node.</description>
+    </item>
+    
+  </channel>
+</rss>

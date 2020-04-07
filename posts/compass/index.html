@@ -1,40 +1,68 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
-	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
-	<meta name="author" content="Gregory Hill">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Gregory Hill</title>
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/style.css" rel="stylesheet">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
-	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
-	<link rel="manifest" href="/img/manifest.json">
-	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
-	<link rel="shortcut icon" href="/img/favicon.ico">
-	<meta name="msapplication-config" content="/img/browserconfig.xml">
-	<meta name="theme-color" content="#ffffff">
-</head>
+<html lang="en-gb">
+    <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>Evolving Infrastructure &middot; Greg Hill</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="Greg Hill" />
+	</head>
+
     <body>
-        <div class="post">
-            <article>
-                <header>
-                    <h1>
-                        Evolving Infrastructure
-                    </h1>
-                    <h2 class="headline">
-                    Feb 4, 2019
-                    · 842 words
-                    · 4 minute read
-                    </h2>
-                </header>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">Greg Hill</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/posts/">
                 
-                <section id="post-body">
-                    <p>We&rsquo;ve undergone a lot of infrastructure changes recently at work. We actually submitted the very first <a href="https://github.com/helm/charts/tree/master/stable/burrow">DLT framework</a> into Helm&rsquo;s <a href="https://github.com/helm/charts">stable charts</a> over a year ago. This allows anyone with a Kubernetes cluster to deploy a custom blockchain courtesy of <a href="https://github.com/hyperledger/burrow">Burrow</a> (our contribution to the <a href="https://www.hyperledger.org/wp-content/uploads/2018/11/Hyperledger_DataSheet_11.18_Digital.pdf">Hyperledger Greenhouse</a>). We&rsquo;re a great believer in cloud first and open source technologies so not only is Kubernetes a great fit for what we do, but Helm extraordinarily simplifies the whole deployment process through <a href="https://golang.org/pkg/text/template/">Go templating</a>.</p>
+                <span>Posts</span>
+                
+            </a>
+        </li>
+    
+        <li>
+            <a href="/projects/">
+                
+                <span>Projects</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        Gregory Hill
+        <br>
+        <span>on&nbsp;</span><time datetime="2019-02-04 00:00:00 &#43;0000 UTC">February 4, 2019</time>
+</div>
+		<h1 class="post-title">Evolving Infrastructure</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>We&rsquo;ve undergone a lot of infrastructure changes recently at work. We actually submitted the very first <a href="https://github.com/helm/charts/tree/master/stable/burrow">DLT framework</a> into Helm&rsquo;s <a href="https://github.com/helm/charts">stable charts</a> over a year ago. This allows anyone with a Kubernetes cluster to deploy a custom blockchain courtesy of <a href="https://github.com/hyperledger/burrow">Burrow</a> (our contribution to the <a href="https://www.hyperledger.org/wp-content/uploads/2018/11/Hyperledger_DataSheet_11.18_Digital.pdf">Hyperledger Greenhouse</a>). We&rsquo;re a great believer in cloud first and open source technologies so not only is Kubernetes a great fit for what we do, but Helm extraordinarily simplifies the whole deployment process through <a href="https://golang.org/pkg/text/template/">Go templating</a>.</p>
 <p><img src="/img/compass.jpg" alt="https://unsplash.com/photos/iDzKdNI7Qgc"></p>
 <p>Last year, as we began extending the size of our stack we realized a problem. Many of our charts had explicit dependencies on one another which forced us to overload our <a href="https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment">CI/CD</a> systems with synchronous bash scripts. With each new addition, our deployment setup was starting to become slower and increasingly unmaintainable. Enter <a href="https://www.terraform.io">Terraform</a>.</p>
 <blockquote>
@@ -67,8 +95,24 @@
 Using Go templates also enables us to do other interesting things. When a CI pipeline is triggered for a specific git branch tag, namely develop or master, it&rsquo;s far easier for the CD to identify docker images based on the branch tag. Unfortunately, upstream tagged images can easily go stale in many docker based environments due to caching. This can lead to many painful hours debugging live containers, only to discover that the image is outdated. With a custom go templating function however, we can strongly version each tag based on the latest digest as given by the targeted API.</p>
 <p>So, if you&rsquo;re devOpsing for Helm or Kubernetes and have similarly complex deployment requirements, please check out <a href="https://github.com/gregdhill/compass">Compass</a>!</p>
 
-                </section>
-            </article>
-        </section>
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/posts/cryptoknight/" class="left arrow">&#8592;</a>
+		<a href="/posts/go/kubernetes/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			<span>
+			&copy; <time datetime="2020-04-07 16:25:22.429401083 &#43;0100 BST m=&#43;0.041786196">2020</time> Greg Hill. Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
     </body>
 </html>

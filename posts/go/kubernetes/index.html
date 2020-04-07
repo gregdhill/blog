@@ -1,40 +1,68 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
-	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
-	<meta name="author" content="Gregory Hill">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Gregory Hill</title>
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/style.css" rel="stylesheet">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
-	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
-	<link rel="manifest" href="/img/manifest.json">
-	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
-	<link rel="shortcut icon" href="/img/favicon.ico">
-	<meta name="msapplication-config" content="/img/browserconfig.xml">
-	<meta name="theme-color" content="#ffffff">
-</head>
+<html lang="en-gb">
+    <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>Let&#39;s Go Kubernetes &middot; Greg Hill</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="Greg Hill" />
+	</head>
+
     <body>
-        <div class="post">
-            <article>
-                <header>
-                    <h1>
-                        Let&#39;s Go Kubernetes
-                    </h1>
-                    <h2 class="headline">
-                    Apr 27, 2019
-                    · 779 words
-                    · 4 minute read
-                    </h2>
-                </header>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">Greg Hill</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/posts/">
                 
-                <section id="post-body">
-                    <p>Welcome to the first post from what will hopefully become a series on my adventures with Go! I&rsquo;m really lucky to be able to experiment with some super awesome
+                <span>Posts</span>
+                
+            </a>
+        </li>
+    
+        <li>
+            <a href="/projects/">
+                
+                <span>Projects</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        Gregory Hill
+        <br>
+        <span>on&nbsp;</span><time datetime="2019-04-27 00:00:00 &#43;0000 UTC">April 27, 2019</time>
+</div>
+		<h1 class="post-title">Let&#39;s Go Kubernetes</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>Welcome to the first post from what will hopefully become a series on my adventures with Go! I&rsquo;m really lucky to be able to experiment with some super awesome
 technologies which I will endeavour to write about more, so if you find this post helpful please let me know on <a href="https://twitter.com/gregorydhill">twitter</a>!</p>
 <p><img src="/img/kubernetes.png" alt="Kubernetes Logo"></p>
 <p>If you&rsquo;re new to Go, follow the <a href="https://golang.org/doc/install">getting started docs</a>. You&rsquo;ll also need to configure access to a Kubernetes cluster,
@@ -47,82 +75,82 @@ terminology that follows may prove unfamiliar.</p>
 <h2 id="getting-started">Getting Started</h2>
 <p>There are a number of well-maintained libraries provided for us so let&rsquo;s get stuck in. If you&rsquo;re using <a href="https://github.com/golang/go/wiki/Modules">Go modules</a>
 this step shouldn&rsquo;t be necessary, though you may have to initialize the project directory first: <code>go mod init</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">go get -u k8s.io/client-go/...
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">go get -u k8s.io/client-go/...
 go get -u k8s.io/apimachinery/...
 </code></pre></div><p>Let&rsquo;s create our starting file, <code>main.go</code> and copy in the following text:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 
-<span style="color:#f92672">import</span> (
-	<span style="color:#e6db74">&#34;log&#34;</span>
-	<span style="color:#e6db74">&#34;os&#34;</span>
-	<span style="color:#e6db74">&#34;fmt&#34;</span>
-	<span style="color:#e6db74">&#34;path/filepath&#34;</span>
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;log&#34;</span>
+	<span class="s">&#34;os&#34;</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;path/filepath&#34;</span>
 
-	<span style="color:#a6e22e">metav1</span> <span style="color:#e6db74">&#34;k8s.io/apimachinery/pkg/apis/meta/v1&#34;</span>
-	<span style="color:#e6db74">&#34;k8s.io/client-go/kubernetes&#34;</span>
-	<span style="color:#e6db74">&#34;k8s.io/client-go/tools/clientcmd&#34;</span>
+	<span class="nx">metav1</span> <span class="s">&#34;k8s.io/apimachinery/pkg/apis/meta/v1&#34;</span>
+	<span class="s">&#34;k8s.io/client-go/kubernetes&#34;</span>
+	<span class="s">&#34;k8s.io/client-go/tools/clientcmd&#34;</span>
 
-	<span style="color:#75715e">// import all auth plugins
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">_</span> <span style="color:#e6db74">&#34;k8s.io/client-go/plugin/pkg/client/auth&#34;</span>
-)
+	<span class="c1">// import all auth plugins
+</span><span class="c1"></span>	<span class="nx">_</span> <span class="s">&#34;k8s.io/client-go/plugin/pkg/client/auth&#34;</span>
+<span class="p">)</span>
 
-<span style="color:#75715e">// this is the entry point for our program
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-	<span style="color:#75715e">// find the location of our config
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">home</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">filepath</span>.<span style="color:#a6e22e">Join</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Getenv</span>(<span style="color:#e6db74">&#34;HOME&#34;</span>), <span style="color:#e6db74">&#34;.kube&#34;</span>, <span style="color:#e6db74">&#34;config&#34;</span>)
-	<span style="color:#75715e">// note: if home is empty, the following helper function
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">// will try to fetch the default in-cluster setup
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">config</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">clientcmd</span>.<span style="color:#a6e22e">BuildConfigFromFlags</span>(<span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#a6e22e">home</span>)
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
-	}
+<span class="c1">// this is the entry point for our program
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// find the location of our config
+</span><span class="c1"></span>	<span class="nx">home</span> <span class="o">:=</span> <span class="nx">filepath</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nf">Getenv</span><span class="p">(</span><span class="s">&#34;HOME&#34;</span><span class="p">),</span> <span class="s">&#34;.kube&#34;</span><span class="p">,</span> <span class="s">&#34;config&#34;</span><span class="p">)</span>
+	<span class="c1">// note: if home is empty, the following helper function
+</span><span class="c1"></span>	<span class="c1">// will try to fetch the default in-cluster setup
+</span><span class="c1"></span>	<span class="nx">config</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">clientcmd</span><span class="p">.</span><span class="nf">BuildConfigFromFlags</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">,</span> <span class="nx">home</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
 
-	<span style="color:#a6e22e">clientset</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">kubernetes</span>.<span style="color:#a6e22e">NewForConfig</span>(<span style="color:#a6e22e">config</span>)
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
-	}
+	<span class="nx">clientset</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">kubernetes</span><span class="p">.</span><span class="nf">NewForConfig</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
 
-	<span style="color:#75715e">// get a list of all namespaces and iterate the names
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">ns</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">clientset</span>.<span style="color:#a6e22e">Core</span>().<span style="color:#a6e22e">Namespaces</span>().<span style="color:#a6e22e">List</span>(<span style="color:#a6e22e">metav1</span>.<span style="color:#a6e22e">ListOptions</span>{})
-	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">ns</span>.<span style="color:#a6e22e">Items</span> {
-		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">Name</span>)
-	}
-}
+	<span class="c1">// get a list of all namespaces and iterate the names
+</span><span class="c1"></span>	<span class="nx">ns</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">clientset</span><span class="p">.</span><span class="nf">Core</span><span class="p">().</span><span class="nf">Namespaces</span><span class="p">().</span><span class="nf">List</span><span class="p">(</span><span class="nx">metav1</span><span class="p">.</span><span class="nx">ListOptions</span><span class="p">{})</span>
+	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">n</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">ns</span><span class="p">.</span><span class="nx">Items</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">n</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div><p>Save this file, then to compile and run it in one step (assuming you&rsquo;re in the same directory):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">go run .
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">go run .
 </code></pre></div><p>In the (unlikely) event that everything worked first time you should see a list of namespaces in your cluster. However,
 if you&rsquo;ve only just provisioned your cluster, you will not see anything - don&rsquo;t panic! Let&rsquo;s go ahead ask our app to
 create a namespace. Adapt the above code with the following; add a new import, then call the function <code>createNamespace</code>
 to perform a new query against the Kubernetes API. Please note that for the sake of brevity these snippets will not handle
 all errors gracefully, so please ensure to add the appropriate checks before deploying to production!</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">import</span> (
-	<span style="color:#f92672">...</span>
-	<span style="color:#a6e22e">corev1</span> <span style="color:#e6db74">&#34;k8s.io/api/core/v1&#34;</span>
-	<span style="color:#f92672">...</span>
-)
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">import</span> <span class="p">(</span>
+	<span class="o">...</span>
+	<span class="nx">corev1</span> <span class="s">&#34;k8s.io/api/core/v1&#34;</span>
+	<span class="o">...</span>
+<span class="p">)</span>
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">createNamespace</span>(<span style="color:#a6e22e">clientset</span> <span style="color:#a6e22e">kubernetes</span>.<span style="color:#a6e22e">Interface</span>, <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#a6e22e">ns</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">corev1</span>.<span style="color:#a6e22e">Namespace</span>{<span style="color:#a6e22e">ObjectMeta</span>: <span style="color:#a6e22e">metav1</span>.<span style="color:#a6e22e">ObjectMeta</span>{<span style="color:#a6e22e">Name</span>: <span style="color:#a6e22e">name</span>}}
-	<span style="color:#75715e">// we only care if it errors
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">clientset</span>.<span style="color:#a6e22e">Core</span>().<span style="color:#a6e22e">Namespaces</span>().<span style="color:#a6e22e">Create</span>(<span style="color:#a6e22e">ns</span>)
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
-}
+<span class="kd">func</span> <span class="nf">createNamespace</span><span class="p">(</span><span class="nx">clientset</span> <span class="nx">kubernetes</span><span class="p">.</span><span class="nx">Interface</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">ns</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">corev1</span><span class="p">.</span><span class="nx">Namespace</span><span class="p">{</span><span class="nx">ObjectMeta</span><span class="p">:</span> <span class="nx">metav1</span><span class="p">.</span><span class="nx">ObjectMeta</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="nx">name</span><span class="p">}}</span>
+	<span class="c1">// we only care if it errors
+</span><span class="c1"></span>	<span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">clientset</span><span class="p">.</span><span class="nf">Core</span><span class="p">().</span><span class="nf">Namespaces</span><span class="p">().</span><span class="nf">Create</span><span class="p">(</span><span class="nx">ns</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nx">err</span>
+<span class="p">}</span>
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-	<span style="color:#f92672">...</span>
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="o">...</span>
 
-	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">createNamespace</span>(<span style="color:#a6e22e">clientset</span>, <span style="color:#e6db74">&#34;test-namespace&#34;</span>)
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
-	}
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nf">createNamespace</span><span class="p">(</span><span class="nx">clientset</span><span class="p">,</span> <span class="s">&#34;test-namespace&#34;</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
 
-	<span style="color:#a6e22e">ns</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">clientset</span>.<span style="color:#a6e22e">Core</span>().<span style="color:#a6e22e">Namespaces</span>().<span style="color:#a6e22e">List</span>(<span style="color:#a6e22e">metav1</span>.<span style="color:#a6e22e">ListOptions</span>{})
-	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">n</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">ns</span>.<span style="color:#a6e22e">Items</span> {
-		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">n</span>.<span style="color:#a6e22e">Name</span>)
-	}
-}
+	<span class="nx">ns</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">clientset</span><span class="p">.</span><span class="nf">Core</span><span class="p">().</span><span class="nf">Namespaces</span><span class="p">().</span><span class="nf">List</span><span class="p">(</span><span class="nx">metav1</span><span class="p">.</span><span class="nx">ListOptions</span><span class="p">{})</span>
+	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">n</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">ns</span><span class="p">.</span><span class="nx">Items</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">n</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div><p>You should now see <code>test-namespace</code> in your output. To verify this object has been successfully created in your cluster:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get namespaces
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">kubectl get namespaces
 </code></pre></div><p><img src="/img/pokemon.png" alt="Gotta catch &lsquo;em all"></p>
 <h2 id="testing">Testing</h2>
 <p>Note the first argument in the new function <code>createNamespace</code> above, of type <code>kubernetes.Interface</code> - defined in <code>k8s.io/client-go/kubernetes</code>. The helper
@@ -132,22 +160,22 @@ REST client, the library handles requests to your remote cluster&rsquo;s API for
 <p>What if you were to satisfy the interface another way? Perhaps you could match all method signatures without actually sending those requests and altering the state
 of your cluster. That is exactly what has been implemented in <code>k8s.io/client-go/kubernetes/fake</code>, using a simple object tracker that reports the state of it&rsquo;s in-memory
 cluster representation. This enables us to easily unit test our code with far less overhead:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 
-<span style="color:#f92672">import</span> (
-	<span style="color:#e6db74">&#34;testing&#34;</span>
-	<span style="color:#e6db74">&#34;k8s.io/client-go/kubernetes/fake&#34;</span>
-)
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;testing&#34;</span>
+	<span class="s">&#34;k8s.io/client-go/kubernetes/fake&#34;</span>
+<span class="p">)</span>
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TestCreateNamespace</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) {
-	<span style="color:#a6e22e">client</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fake</span>.<span style="color:#a6e22e">NewSimpleClientset</span>()
-	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">createNamespace</span>(<span style="color:#a6e22e">client</span>, <span style="color:#e6db74">&#34;test&#34;</span>)
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
-	}
-}
+<span class="kd">func</span> <span class="nf">TestCreateNamespace</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">client</span> <span class="o">:=</span> <span class="nx">fake</span><span class="p">.</span><span class="nf">NewSimpleClientset</span><span class="p">()</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nf">createNamespace</span><span class="p">(</span><span class="nx">client</span><span class="p">,</span> <span class="s">&#34;test&#34;</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div><p>Save this as <code>main_test.go</code> in the same directory as before and run the test:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">go test .
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">go <span class="nb">test</span> .
 </code></pre></div><h2 id="next">Next</h2>
 <p>I&rsquo;m afraid that&rsquo;s all for now, but I will be adding to this post again soon. Possible topics include:</p>
 <ul>
@@ -157,8 +185,24 @@ cluster representation. This enables us to easily unit test our code with far le
 </ul>
 <p><img src="/img/mining_gopher.jpeg" alt="Mining Gopher - Under Construction"></p>
 
-                </section>
-            </article>
-        </section>
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/posts/compass/" class="left arrow">&#8592;</a>
+		<a href="/posts/travel/ipfs_camp_2019/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			<span>
+			&copy; <time datetime="2020-04-07 16:25:22.448646614 &#43;0100 BST m=&#43;0.061031718">2020</time> Greg Hill. Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
     </body>
 </html>

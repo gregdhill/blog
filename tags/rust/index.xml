@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rust on Greg Hill</title>
+    <link>https://greghill.io/tags/rust/</link>
+    <description>Recent content in rust on Greg Hill</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://greghill.io/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Table Driven Tests</title>
+      <link>https://greghill.io/posts/rust/table-tests/</link>
+      <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://greghill.io/posts/rust/table-tests/</guid>
+      <description>One of my favorite ways to write tests in Go is with a table driven test. If you are unfamiliar with the concept check out the excellent Dave Cheney post. If you need to unit test a component under a multitude of edge cases, then this is good technique to adopt. Anyway, I&amp;rsquo;m learning Rust in my spare time so I thought I&amp;rsquo;d best give it a go. Hopefully this will suffice, but if you think it could be improved please hit me up on twitter.</description>
+    </item>
+    
+  </channel>
+</rss>

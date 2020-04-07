@@ -1,40 +1,68 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
-	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
-	<meta name="author" content="Gregory Hill">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Gregory Hill</title>
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/style.css" rel="stylesheet">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
-	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
-	<link rel="manifest" href="/img/manifest.json">
-	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
-	<link rel="shortcut icon" href="/img/favicon.ico">
-	<meta name="msapplication-config" content="/img/browserconfig.xml">
-	<meta name="theme-color" content="#ffffff">
-</head>
+<html lang="en-gb">
+    <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>Proof of Work (Explained) &middot; Greg Hill</title>
+
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/fonts.css">
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="Greg Hill" />
+	</head>
+
     <body>
-        <div class="post">
-            <article>
-                <header>
-                    <h1>
-                        Proof of Work (Explained)
-                    </h1>
-                    <h2 class="headline">
-                    Dec 22, 2019
-                    · 366 words
-                    · 2 minute read
-                    </h2>
-                </header>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">Greg Hill</h2>
+				</a>
+				<ul>
+    
+    
+        <li>
+            <a href="/posts/">
                 
-                <section id="post-body">
-                    <p>So you&rsquo;ve read the theory, but want to understand Bitcoin programmatically. In this post we will analyse the
+                <span>Posts</span>
+                
+            </a>
+        </li>
+    
+        <li>
+            <a href="/projects/">
+                
+                <span>Projects</span>
+                
+            </a>
+        </li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+    <span>Written by</span>
+        Gregory Hill
+        <br>
+        <span>on&nbsp;</span><time datetime="2019-12-22 00:00:00 &#43;0000 UTC">December 22, 2019</time>
+</div>
+		<h1 class="post-title">Proof of Work (Explained)</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>So you&rsquo;ve read the theory, but want to understand Bitcoin programmatically. In this post we will analyse the
 core codebase written in C++ to understand how one can generate and include a block in the chain. Starting with
 the atomic unit of construction in this context, a block is a grouping of transactions that alter the state of
 the ledger. For example, a <code>coinbase</code> transaction may be included by a miner to collect a block reward. But in
@@ -74,8 +102,24 @@ a desired hash, all we can do is increment it. There&rsquo;s a useful example of
 <p>Providing the final hash meets the criteria and enough nodes know about it, subsequent miners will include it as
 <code>hashPrevBlock</code> in their constructions.</p>
 
-                </section>
-            </article>
-        </section>
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/posts/rust/table-tests/" class="left arrow">&#8592;</a>
+		<a href="/posts/travel/hyperledger_gf_2020/" class="right arrow">&#8594;</a>
+
+		<a href="#" class="top">Top</a>
+	</div>
+</main>
+
+
+        		<footer>
+			<span>
+			&copy; <time datetime="2020-04-07 16:25:22.429848677 &#43;0100 BST m=&#43;0.042233776">2020</time> Greg Hill. Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
+			</span>
+		</footer>
+
     </body>
 </html>

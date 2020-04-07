@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bitcoin on Greg Hill</title>
+    <link>https://greghill.io/tags/bitcoin/</link>
+    <description>Recent content in bitcoin on Greg Hill</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 22 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://greghill.io/tags/bitcoin/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Proof of Work (Explained)</title>
+      <link>https://greghill.io/posts/bitcoin/pow_explained/</link>
+      <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://greghill.io/posts/bitcoin/pow_explained/</guid>
+      <description>So you&amp;rsquo;ve read the theory, but want to understand Bitcoin programmatically. In this post we will analyse the core codebase written in C++ to understand how one can generate and include a block in the chain. Starting with the atomic unit of construction in this context, a block is a grouping of transactions that alter the state of the ledger. For example, a coinbase transaction may be included by a miner to collect a block reward.</description>
+    </item>
+    
+  </channel>
+</rss>
