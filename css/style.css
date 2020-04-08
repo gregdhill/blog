@@ -15,16 +15,16 @@
 }
 
 #home h1 {
-    position: absolute;
-    top: 47%;
-    left: 55%;
-    z-index: 2;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    color: #fff;
-    font : normal 300 60px/1 'Josefin Sans', sans-serif;
-    text-align: center;
-    white-space: nowrap;
+	top: 50%;
+	z-index: 2;
+	-webkit-transform: translate(0%, 0%);
+	transform: translate(0%, 50%);
+	color: #fff;
+	font: normal 300 60px/1 'Josefin Sans', sans-serif;
+		font-size: 60px;
+	text-align: center;
+	white-space: nowrap;
+	margin: auto;
 }
 
 #profile {
@@ -309,17 +309,19 @@ pre code {
 }
 
 .pagination .arrow {
-	-webkit-transition:all 0.3s ease-out;
-	-moz-transition:all 0.3s ease-out;
-	transition:all 0.3s ease-out;
-	color:#555;
-	position:absolute
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+	color: #555;
+	position: absolute;
+	outline: 0;
 }
 
 .pagination .arrow:hover,
-.pagination .arrow:focus {
+.pagination .arrow:focus,
+.catalogue-item:hover {
 	opacity:.6;
-	text-decoration:none
+	text-decoration: none
 }
 
 .pagination .left {
@@ -331,10 +333,11 @@ pre code {
 }
 
 .catalogue-item {
-	border-bottom:1px solid #e5e5e5;
-	color:#555;
-	display:block;
-	padding:2rem 0
+	border-bottom: 1px solid #e5e5e5;
+	color: #555;
+	display: block;
+	padding: 2rem 0;
+	outline: 0;
 }
 
 .catalogue-time {
@@ -369,12 +372,7 @@ pre code {
 }
 
 @media (max-width: 1400px) {
-	#links {
-		left: 30%;
-	}
-	#profile {
-		left: 60%;
-	}
+
 	#home h1 {
 		left: 60%;
 	}
@@ -385,24 +383,17 @@ pre code {
 		width: auto;
 	}
 	#links {
-		top: 15%;
+		top: 20%;
 		left: 50%;
 		width: 100%;
 	}
 	#profile {
 		left: 50%;
-	}
-	#home h1 {
-		left: 50%;
+		top: 60%;
 	}
 }
 
 @media (max-height: 550px) {
-	.scroll {
-		line-height: 0; 
-		font-size: 0;
-		color: transparent; 
-	}
 	#profile {
 		width: 200px;
 		height: 200px;
