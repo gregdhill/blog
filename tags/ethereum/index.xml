@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ethereum on Greg Hill</title>
-    <link>https://greghill.io/tags/ethereum/</link>
-    <description>Recent content in ethereum on Greg Hill</description>
+    <title>ethereum on </title>
+    <link>/tags/ethereum/</link>
+    <description>Recent content in ethereum on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language>
+    <language>en-us</language>
     <lastBuildDate>Mon, 06 Apr 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://greghill.io/tags/ethereum/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/ethereum/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Upgradable Proxy Contracts</title>
-      <link>https://greghill.io/posts/ethereum/proxy-contracts/</link>
+      <link>/posts/ethereum/proxy-contracts/</link>
       <pubDate>Mon, 06 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/ethereum/proxy-contracts/</guid>
+      <guid>/posts/ethereum/proxy-contracts/</guid>
       <description>Smart contracts in Ethereum are immutable; once they have been included in a block they cannot be changed. This is a weird philosophy to adopt from a software engineering perspective. What if there are bugs in your code? Solidity has a plethora of known attacks which, given the economical value at risk, is troubling to say the least. However, we also do not want to interact with an unstable application that can be arbitrarily updated.</description>
     </item>
     
     <item>
       <title>ERC Token Standards</title>
-      <link>https://greghill.io/posts/ethereum/erc-tokens/</link>
+      <link>/posts/ethereum/erc-tokens/</link>
       <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/ethereum/erc-tokens/</guid>
+      <guid>/posts/ethereum/erc-tokens/</guid>
       <description>You may be familiar with the concept of a Request for Comments (RFC) from a body such as the Internet Engineering Task Force (IETF). They are just technical documents that describe the specifications for a particular technology - HTTP/1.1 is described by RFC-2616 for instance. Application level standards in the Ethereum ecosystem are thus named accordingly, forming one possible part of an Ethereum Improvement Proposal (EIP). For more details on this, check out EIP-1.</description>
     </item>
     
     <item>
       <title>Decentralized Autonomous Organizations (DAO)</title>
-      <link>https://greghill.io/posts/ethereum/dao/</link>
+      <link>/posts/ethereum/dao/</link>
       <pubDate>Sat, 28 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/ethereum/dao/</guid>
+      <guid>/posts/ethereum/dao/</guid>
       <description>In traditional governance systems, we rely upon human entities to enact policies on behalf of constituents. This may viewed as in contemporary politics or in the hierarchical structure of an enterprise. An historical issue however, is that it is not always possible to trust the judgement of those in charge. In economics, this is known as the principle-agent problem.
 A DAO is a form of self-enforcing protocol, typically modelled as a smart contract.</description>
     </item>
     
     <item>
       <title>Recursive Linear Prefix (RLP) Encoding</title>
-      <link>https://greghill.io/posts/ethereum/rlp-encoding/</link>
+      <link>/posts/ethereum/rlp-encoding/</link>
       <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/ethereum/rlp-encoding/</guid>
+      <guid>/posts/ethereum/rlp-encoding/</guid>
       <description>I was recently tasked with developing a new encoding library for Hyperledger Burrow to further interoperability with the broader Ethereum ecosystem. Recursive Linear Prefix (RLP) is a data format used to store state in Ethereum, more precisely it is an algorithm for representing arbitrary data structures in binary form. Unlike other serialization techniques however, the output is position dependant in that recovering the original object requires knowledge of the input structure.</description>
     </item>
     

@@ -1,68 +1,39 @@
 <!DOCTYPE html>
-<html lang="en-gb">
-    <head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-		<title>Upgradable Proxy Contracts &middot; Greg Hill</title>
-
-		
-  		<link rel="stylesheet" href="/css/style.css">
-		<link rel="stylesheet" href="/css/fonts.css">
-		
-		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-
-		
-		<link href="" rel="alternate" type="application/rss+xml" title="Greg Hill" />
-	</head>
-
-    <body>
-        		<nav class="nav">
-			<div class="nav-container">
-				<a href="/">
-					<h2 class="nav-title">Greg Hill</h2>
-				</a>
-				<ul>
-    
-    
-        <li>
-            <a href="/posts/">
-                
-                <span>Posts</span>
-                
-            </a>
-        </li>
-    
-        <li>
-            <a href="/projects/">
-                
-                <span>Projects</span>
-                
-            </a>
-        </li>
-    
-</ul>
-			</div>
-		</nav>
-
+<html lang="en"><head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
+	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
+	<meta name="author" content="Gregory Hill">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gregory Hill</title>
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/img/manifest.json">
+	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/img/favicon.ico">
+	<meta name="msapplication-config" content="/img/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+</head><body>
+    <main><div class="post">
+    <div class="post-info">
         
+            Apr 6, 2020
+            · 568 words
+            · 3 minute read
+        
+    </div>
 
-<main>
-	<div class="post">
-		<div class="post-info">
-    <span>Written by</span>
-        Gregory Hill
-        <br>
-        <span>on&nbsp;</span><time datetime="2020-04-06 00:00:00 &#43;0000 UTC">April 6, 2020</time>
-</div>
-		<h1 class="post-title">Upgradable Proxy Contracts</h1>
-<div class="post-line"></div>
+    <h1 class="post-title">
+        Upgradable Proxy Contracts
+    </h1>
 
-		
+    <div class="post-tags"><a class="tag" href=/tags/ethereum/>#ethereum</a><a class="tag" href=/tags/solidity/>#solidity</a></div>
 
-		<p>Smart contracts in Ethereum are immutable; once they have been included in a block they cannot be changed. This is a weird philosophy to adopt from a software engineering perspective. What if there are bugs in your code? Solidity has a <a href="https://consensys.github.io/smart-contract-best-practices/known_attacks/">plethora of known attacks</a> which, given the economical value at risk, is troubling to say the least. However, we also do not want to interact with an unstable application that can be arbitrarily updated.</p>
+    <p>Smart contracts in Ethereum are immutable; once they have been included in a block they cannot be changed. This is a weird philosophy to adopt from a software engineering perspective. What if there are bugs in your code? Solidity has a <a href="https://consensys.github.io/smart-contract-best-practices/known_attacks/">plethora of known attacks</a> which, given the economical value at risk, is troubling to say the least. However, we also do not want to interact with an unstable application that can be arbitrarily updated.</p>
 <p>One of the more impressive concepts that I learned recently regards the decoupling of state and functionality. By separating <em>what</em> a contract stores from <em>how</em> it accesses it we can easily upgrade a contract on chain. Using the infamous DAO hack as an example, let&rsquo;s assume we have a smart contract which stores an amount of funds but also suffers from the reentrancy bug. Without changing the underlying state, we want to rewire the logic to prevent it from being exploited. Additionally, we may not want to force the original consumers to use a new (pre-initialized) contract.</p>
 <p>Before getting into the details, we first need to understand the difference between <code>CALL</code> and <code>DELEGATECALL</code>. If we call a class method in the traditional sense, then we only expect it to alter it&rsquo;s own internal state (omitting arguments). Conversely, if something is delegated then we entrust someone to carry out a task on our behalf. These concepts naturally extend to Ethereum; if we delegate a call we ask a contract to operate on our state instead of it&rsquo;s own.</p>
 <p>In the following example I have defined two contracts; <code>Setter</code> exposes a method to directly alter it&rsquo;s state through the <code>set</code> function, and <code>Getter</code> contains the two forward calls described above. Notice the calling <code>set</code> or <code>call</code> will alter the <code>value</code> stored in <code>Setter</code>, whereas <code>delegatecall</code> will update the <code>value</code> in <code>Getter</code>.</p>
@@ -127,23 +98,7 @@
 <span class="p">}</span>
 </code></pre></div><p>If you are interested in learning about other proxy patterns, read the <a href="https://blog.openzeppelin.com/proxy-patterns/">fantastic article by OpenZeppelin</a>.</p>
 
+</div></main>
+</body>
 
-		
-	</div>
-
-	<div class="pagination">
-		<a href="/posts/travel/hyperledger_gf_2020/" class="left arrow">&#8592;</a>
-
-		<a href="#" class="top">Top</a>
-	</div>
-</main>
-
-
-        		<footer>
-			<span>
-			&copy; <time datetime="2020-04-07 16:25:22.488541473 &#43;0100 BST m=&#43;0.100926567">2020</time> Greg Hill. Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
-			</span>
-		</footer>
-
-    </body>
 </html>

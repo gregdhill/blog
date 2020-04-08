@@ -1,127 +1,73 @@
 <!DOCTYPE html>
-<html lang="en-gb">
-    <head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en"><head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
+	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
+	<meta name="author" content="Gregory Hill">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gregory Hill</title>
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/img/manifest.json">
+	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/img/favicon.ico">
+	<meta name="msapplication-config" content="/img/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+</head><body>
+    <main><div class="catalogue">
+    <h1 class="catalogue-header">ethereum</h1>
+    
+    <a href="/posts/ethereum/proxy-contracts/" class="catalogue-item">
+        <div>
+            <time datetime="2020-04-06 00:00:00 &#43;0000 UTC" class="catalogue-time"></time>
+            <h1 class="catalogue-title">Upgradable Proxy Contracts</h1>
+    
+            <p> Smart contracts in Ethereum are immutable; once they have been included in a block they cannot be changed. This is a weird philosophy to adopt from a software engineering perspective. What if there are bugs in your code? Solidity has a plethora of known attacks which, given the economical value at risk, is troubling to say the least. However, we also do not want to interact with an unstable application that can be arbitrarily updated.</p>
+        </div>
+    </a>
+    
+    <a href="/posts/ethereum/erc-tokens/" class="catalogue-item">
+        <div>
+            <time datetime="2019-10-05 00:00:00 &#43;0000 UTC" class="catalogue-time"></time>
+            <h1 class="catalogue-title">ERC Token Standards</h1>
+    
+            <p> You may be familiar with the concept of a Request for Comments (RFC) from a body such as the Internet Engineering Task Force (IETF). They are just technical documents that describe the specifications for a particular technology - HTTP/1.1 is described by RFC-2616 for instance. Application level standards in the Ethereum ecosystem are thus named accordingly, forming one possible part of an Ethereum Improvement Proposal (EIP). For more details on this, check out EIP-1.</p>
+        </div>
+    </a>
+    
+    <a href="/posts/ethereum/dao/" class="catalogue-item">
+        <div>
+            <time datetime="2019-09-28 00:00:00 &#43;0000 UTC" class="catalogue-time"></time>
+            <h1 class="catalogue-title">Decentralized Autonomous Organizations (DAO)</h1>
+    
+            <p> In traditional governance systems, we rely upon human entities to enact policies on behalf of constituents. This may viewed as in contemporary politics or in the hierarchical structure of an enterprise. An historical issue however, is that it is not always possible to trust the judgement of those in charge. In economics, this is known as the principle-agent problem.
+A DAO is a form of self-enforcing protocol, typically modelled as a smart contract.</p>
+        </div>
+    </a>
+    
+    <a href="/posts/ethereum/rlp-encoding/" class="catalogue-item">
+        <div>
+            <time datetime="2019-09-15 00:00:00 &#43;0000 UTC" class="catalogue-time"></time>
+            <h1 class="catalogue-title">Recursive Linear Prefix (RLP) Encoding</h1>
+    
+            <p> I was recently tasked with developing a new encoding library for Hyperledger Burrow to further interoperability with the broader Ethereum ecosystem. Recursive Linear Prefix (RLP) is a data format used to store state in Ethereum, more precisely it is an algorithm for representing arbitrary data structures in binary form. Unlike other serialization techniques however, the output is position dependant in that recovering the original object requires knowledge of the input structure.</p>
+        </div>
+    </a>
+    
+</div>
 
-		<title>ethereum &middot; Greg Hill</title>
-
-		
-  		<link rel="stylesheet" href="/css/style.css">
-		<link rel="stylesheet" href="/css/fonts.css">
-		
-		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-		<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-
-		
-		<link href="/tags/ethereum/index.xml" rel="alternate" type="application/rss+xml" title="Greg Hill" />
-	</head>
-
-    <body>
-        		<nav class="nav">
-			<div class="nav-container">
-				<a href="/">
-					<h2 class="nav-title">Greg Hill</h2>
-				</a>
-				<ul>
+<div class="pagination">
     
     
-        <li>
-            <a href="/posts/">
-                
-                <span>Posts</span>
-                
-            </a>
-        </li>
-    
-        <li>
-            <a href="/projects/">
-                
-                <span>Projects</span>
-                
-            </a>
-        </li>
-    
-</ul>
-			</div>
-		</nav>
 
-        
+    <span>1</span>
+</div>
 
-<main>
-    <h1>Tag ethereum</h1>
-	<div class="catalogue">
-		
-			<a href="https://greghill.io/posts/ethereum/proxy-contracts/" class="catalogue-item">
-    <div>
-        <time datetime="2020-04-06 00:00:00 &#43;0000 UTC" class="catalogue-time">April 6, 2020</time>
-        <h1 class="catalogue-title">Upgradable Proxy Contracts</h1>
-        <div class="catalogue-line"></div>
-
-        <p>
-            Smart contracts in Ethereum are immutable; once they have been included in a block they cannot be changed. This is a weird philosophy to adopt from a software engineering perspective. What if there are bugs in your code? Solidity has a plethora of known attacks which, given the economical value at risk, is troubling to say the least. However, we also do not want to interact with an unstable application that can be arbitrarily updated.
-        </p>
-    </div>
-</a>
-
-		
-			<a href="https://greghill.io/posts/ethereum/erc-tokens/" class="catalogue-item">
-    <div>
-        <time datetime="2019-10-05 00:00:00 &#43;0000 UTC" class="catalogue-time">October 5, 2019</time>
-        <h1 class="catalogue-title">ERC Token Standards</h1>
-        <div class="catalogue-line"></div>
-
-        <p>
-            You may be familiar with the concept of a Request for Comments (RFC) from a body such as the Internet Engineering Task Force (IETF). They are just technical documents that describe the specifications for a particular technology - HTTP/1.1 is described by RFC-2616 for instance. Application level standards in the Ethereum ecosystem are thus named accordingly, forming one possible part of an Ethereum Improvement Proposal (EIP). For more details on this, check out EIP-1.
-        </p>
-    </div>
-</a>
-
-		
-			<a href="https://greghill.io/posts/ethereum/dao/" class="catalogue-item">
-    <div>
-        <time datetime="2019-09-28 00:00:00 &#43;0000 UTC" class="catalogue-time">September 28, 2019</time>
-        <h1 class="catalogue-title">Decentralized Autonomous Organizations (DAO)</h1>
-        <div class="catalogue-line"></div>
-
-        <p>
-            In traditional governance systems, we rely upon human entities to enact policies on behalf of constituents. This may viewed as in contemporary politics or in the hierarchical structure of an enterprise. An historical issue however, is that it is not always possible to trust the judgement of those in charge. In economics, this is known as the principle-agent problem.
-A DAO is a form of self-enforcing protocol, typically modelled as a smart contract.
-        </p>
-    </div>
-</a>
-
-		
-			<a href="https://greghill.io/posts/ethereum/rlp-encoding/" class="catalogue-item">
-    <div>
-        <time datetime="2019-09-15 00:00:00 &#43;0000 UTC" class="catalogue-time">September 15, 2019</time>
-        <h1 class="catalogue-title">Recursive Linear Prefix (RLP) Encoding</h1>
-        <div class="catalogue-line"></div>
-
-        <p>
-            I was recently tasked with developing a new encoding library for Hyperledger Burrow to further interoperability with the broader Ethereum ecosystem. Recursive Linear Prefix (RLP) is a data format used to store state in Ethereum, more precisely it is an algorithm for representing arbitrary data structures in binary form. Unlike other serialization techniques however, the output is position dependant in that recovering the original object requires knowledge of the input structure.
-        </p>
-    </div>
-</a>
-
-		
-	</div>
-	
-	<div class="pagination">
-		
-		
-	
-		<span>1</span>
-	</div>
 </main>
+</body>
 
-
-        		<footer>
-			<span>
-			&copy; <time datetime="2020-04-07 16:25:22.537043529 &#43;0100 BST m=&#43;0.149428639">2020</time> Greg Hill. Made with <a href='https://gohugo.io'>Hugo</a> using the <a href='https://github.com/EmielH/tale-hugo/'>Tale</a> theme.
-			</span>
-		</footer>
-
-    </body>
 </html>
