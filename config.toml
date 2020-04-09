@@ -11,20 +11,29 @@ image = "profile.jpg"
 description = "Interested in Blockchains, Cryptography and Distributed Systems."
 keywords = "computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill"
 
-[[Params.Links]]
+[[Params.Home.Links]]
 url = "posts"
 icon = "fa-archive"
 
-[[Params.Links]]
+[[Params.Home.Links]]
 url = "tags"
 icon = "fa-tag"
 
-[[Params.Links]]
+[[Params.Home.Links]]
 url = "projects"
-icon = "fa-tasks"
+icon = "fa-file"
 
-[Author]
-name = "Greg"
+[[Params.Social.Links]]
+url = "https://github.com/gregdhill"
+icon = "fa-github"
+
+[[Params.Social.Links]]
+url = "https://twitter.com/gregorydhill"
+icon = "fa-twitter"
+
+[[Params.Social.Links]]
+url = "https://scholar.google.co.uk/citations?user=OoKiidsAAAAJ&hl=en"
+icon = "fa-graduation-cap"
 
 # needed for bitcoin github snippets
 [markup.goldmark.renderer]
