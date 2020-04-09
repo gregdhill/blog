@@ -16,14 +16,14 @@
 
 #home h1 {
 	z-index: 2;
-	-webkit-transform: translate(0%, 0%);
-	transform: translate(0%, 90%);
+	-webkit-transform: translate(0%, 70%);
+	transform: translate(0%, 70%);
 	color: #fff;
-	font: normal 300 60px/1 'Josefin Sans', sans-serif;
+	font-family: "Helvetica Neue","Segoe UI",Helvetica,Arial,sans-serif;
 	font-size: 60px;
 	text-align: center;
 	margin: auto;
-	width: 75%;
+	width: 80%;
 }
 
 #profile {
@@ -79,19 +79,6 @@
 	color: #FFFFFF;
 	outline: 0;
 }
-
-#location {
-	position: absolute; 
-	margin-left: auto;
-	margin-right: auto;
-	left: 0;
-	right: 0;
-	text-align: center;
-	margin-top: 20px;
-    color: #000;
-    font: normal 300 32px/1 'Josefin Sans', sans-serif;
-}
-
 
 * {
 	-webkit-box-sizing:border-box;
@@ -423,3 +410,12 @@ pre code {
 	margin: 5px;
 }
 
+footer {
+	padding: 2rem 0;
+	text-align: center;
+}
+
+.footer-social {
+	outline: 0;
+	margin: 5px;
+}
