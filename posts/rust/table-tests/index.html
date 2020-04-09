@@ -5,8 +5,7 @@
 	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
 	<meta name="author" content="Gregory Hill">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Gregory Hill</title>
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<title>Gregory Hill | Table Driven Tests</title>
 	<link href="/css/style.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
@@ -22,8 +21,8 @@
     <div class="post-info">
         
             Oct 6, 2019
-            · 181 words
-            · 1 minute read
+            · 254 words
+            · 2 minute read
         
     </div>
 
@@ -40,59 +39,59 @@ Anyway, I&rsquo;m learning Rust in my spare time so I thought I&rsquo;d best giv
 think it could be improved please hit me up on <a href="https://twitter.com/gregorydhill">twitter</a>.</p>
 <p>Following in Dave&rsquo;s footsteps, let&rsquo;s implement a recursive function to calculate the
 <a href="https://en.wikipedia.org/wiki/Fibonacci_number">fibonacci number</a>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-rust" data-lang="rust"><span class="k">fn</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span>: <span class="kt">i64</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i64</span> <span class="p">{</span><span class="w">
-</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="w">
-</span><span class="w">    </span><span class="p">}</span><span class="w">
-</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="w">
-</span><span class="w"></span><span class="p">}</span><span class="w">
-</span></code></pre></div><p>For the structure itself we&rsquo;ll need to define a <code>struct</code> which details our required
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">fib</span>(n: <span style="color:#66d9ef">i64</span>) -&gt; <span style="color:#66d9ef">i64</span> {
+    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span> {
+            <span style="color:#66d9ef">return</span> n
+    }
+    <span style="color:#66d9ef">return</span> fib(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> fib(n<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
+}
+</code></pre></div><p>For the structure itself we&rsquo;ll need to define a <code>struct</code> which details our required
 input(s) - in this case <code>n</code> - and our expected result (<code>e</code>). We can then iterate over
 an array of these test cases, using the macro <code>assert_eq!</code> to ensure the computed
 result matches.</p>
-<div class="highlight"><pre class="chroma"><code class="language-rust" data-lang="rust"><span class="cp">#[test]</span><span class="w">
-</span><span class="w"></span><span class="k">fn</span> <span class="nf">table</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">    </span><span class="k">struct</span> <span class="nc">Pair</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">        </span><span class="n">n</span>: <span class="kt">i64</span><span class="p">,</span><span class="w">
-</span><span class="w">        </span><span class="n">e</span>: <span class="kt">i64</span><span class="p">,</span><span class="w">
-</span><span class="w">    </span><span class="p">}</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">fib_tests</span>: <span class="p">[</span><span class="n">Pair</span><span class="p">;</span><span class="w"> </span><span class="mi">7</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w">
-</span><span class="w">        </span><span class="n">Pair</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">            </span><span class="n">n</span>: <span class="mi">1</span><span class="p">,</span><span class="w">
-</span><span class="w">            </span><span class="n">e</span>: <span class="mi">1</span><span class="p">,</span><span class="w"> 
-</span><span class="w">        </span><span class="p">},</span><span class="w">
-</span><span class="w">        </span><span class="n">Pair</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">            </span><span class="n">n</span>: <span class="mi">2</span><span class="p">,</span><span class="w">
-</span><span class="w">            </span><span class="n">e</span>: <span class="mi">1</span><span class="p">,</span><span class="w"> 
-</span><span class="w">        </span><span class="p">},</span><span class="w">
-</span><span class="w">        </span><span class="n">Pair</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">            </span><span class="n">n</span>: <span class="mi">3</span><span class="p">,</span><span class="w">
-</span><span class="w">            </span><span class="n">e</span>: <span class="mi">2</span><span class="p">,</span><span class="w"> 
-</span><span class="w">        </span><span class="p">},</span><span class="w">
-</span><span class="w">        </span><span class="n">Pair</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">            </span><span class="n">n</span>: <span class="mi">4</span><span class="p">,</span><span class="w">
-</span><span class="w">            </span><span class="n">e</span>: <span class="mi">3</span><span class="p">,</span><span class="w"> 
-</span><span class="w">        </span><span class="p">},</span><span class="w">
-</span><span class="w">        </span><span class="n">Pair</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">            </span><span class="n">n</span>: <span class="mi">5</span><span class="p">,</span><span class="w">
-</span><span class="w">            </span><span class="n">e</span>: <span class="mi">5</span><span class="p">,</span><span class="w"> 
-</span><span class="w">        </span><span class="p">},</span><span class="w">
-</span><span class="w">        </span><span class="n">Pair</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">            </span><span class="n">n</span>: <span class="mi">6</span><span class="p">,</span><span class="w">
-</span><span class="w">            </span><span class="n">e</span>: <span class="mi">8</span><span class="p">,</span><span class="w"> 
-</span><span class="w">        </span><span class="p">},</span><span class="w">
-</span><span class="w">        </span><span class="n">Pair</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">            </span><span class="n">n</span>: <span class="mi">7</span><span class="p">,</span><span class="w">
-</span><span class="w">            </span><span class="n">e</span>: <span class="mi">13</span><span class="p">,</span><span class="w"> 
-</span><span class="w">        </span><span class="p">},</span><span class="w">
-</span><span class="w">    </span><span class="p">];</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">fib_tests</span><span class="p">.</span><span class="n">iter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span><span class="w">        </span><span class="n">assert_eq</span><span class="o">!</span><span class="p">(</span><span class="n">test</span><span class="p">.</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">fib</span><span class="p">(</span><span class="n">test</span><span class="p">.</span><span class="n">n</span><span class="p">))</span><span class="w">
-</span><span class="w">    </span><span class="p">}</span><span class="w">
-</span><span class="w"></span><span class="p">}</span><span class="w">
-</span></code></pre></div><p>See the <a href="https://doc.rust-lang.org/rust-by-example/testing/unit_testing.html">docs</a> for
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#75715e">#[test]</span>
+<span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">table</span>() {
+    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Pair</span> {
+        n: <span style="color:#66d9ef">i64</span>,
+        e: <span style="color:#66d9ef">i64</span>,
+    }
+
+    <span style="color:#66d9ef">let</span> fib_tests: [Pair; <span style="color:#ae81ff">7</span>] <span style="color:#f92672">=</span> [
+        Pair {
+            n: <span style="color:#ae81ff">1</span>,
+            e: <span style="color:#ae81ff">1</span>, 
+        },
+        Pair {
+            n: <span style="color:#ae81ff">2</span>,
+            e: <span style="color:#ae81ff">1</span>, 
+        },
+        Pair {
+            n: <span style="color:#ae81ff">3</span>,
+            e: <span style="color:#ae81ff">2</span>, 
+        },
+        Pair {
+            n: <span style="color:#ae81ff">4</span>,
+            e: <span style="color:#ae81ff">3</span>, 
+        },
+        Pair {
+            n: <span style="color:#ae81ff">5</span>,
+            e: <span style="color:#ae81ff">5</span>, 
+        },
+        Pair {
+            n: <span style="color:#ae81ff">6</span>,
+            e: <span style="color:#ae81ff">8</span>, 
+        },
+        Pair {
+            n: <span style="color:#ae81ff">7</span>,
+            e: <span style="color:#ae81ff">13</span>, 
+        },
+    ];
+
+    <span style="color:#66d9ef">for</span> test <span style="color:#66d9ef">in</span> fib_tests.iter() {
+        assert_eq<span style="color:#f92672">!</span>(test.e, fib(test.n))
+    }
+}
+</code></pre></div><p>See the <a href="https://doc.rust-lang.org/rust-by-example/testing/unit_testing.html">docs</a> for
 more information on unit testing in Rust!</p>
 
 </div></main>

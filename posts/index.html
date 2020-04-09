@@ -5,8 +5,7 @@
 	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
 	<meta name="author" content="Gregory Hill">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Gregory Hill</title>
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<title>Gregory Hill | Posts</title>
 	<link href="/css/style.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
@@ -21,95 +20,135 @@
     <main><div class="catalogue">
     <h1 class="catalogue-header">Posts</h1>
     
+    <a href="/posts/substrate/introduction/" class="catalogue-item">
+        <div>
+            
+                <time class="catalogue-time">April 8, 2020</time>
+            
+            <h1 class="catalogue-title">Substrate &amp; Ink</h1>
+    
+            
+                <p>To interact with Polkadot, there are three envisioned development trajectories; a parachain implements it’s own runtime logic (think custom sidechain), a parathread is similar but only produces a block when absolutely necessary to update the relay chain, and a smart contract can run atop any chain with the correct execution environment. Substrate enables the former methodology based on a modular architecture with pluggable consensus and Parity maintain an embedded Domain Specific Language (eDSL) atop Substrate for WASM smart contracts.</p>
+            
+        </div>
+    </a>
+    
     <a href="/posts/ethereum/proxy-contracts/" class="catalogue-item">
         <div>
-            <time datetime="2020-04-06 00:00:00 &#43;0000 UTC" class="catalogue-time"></time>
+            
+                <time class="catalogue-time">April 6, 2020</time>
+            
             <h1 class="catalogue-title">Upgradable Proxy Contracts</h1>
     
-            <p> Smart contracts in Ethereum are immutable; once they have been included in a block they cannot be changed. This is a weird philosophy to adopt from a software engineering perspective. What if there are bugs in your code? Solidity has a plethora of known attacks which, given the economical value at risk, is troubling to say the least. However, we also do not want to interact with an unstable application that can be arbitrarily updated.</p>
+            
+                <p>Smart contracts in Ethereum are immutable; once they have been included in a block they cannot be changed. This is a weird philosophy to adopt from a software engineering perspective. What if there are bugs in your code? Solidity has a plethora of known attacks which, given the economical value at risk, is troubling to say the least. However, we also do not want to interact with an unstable application that can be arbitrarily updated.</p>
+            
         </div>
     </a>
     
     <a href="/posts/travel/hyperledger_gf_2020/" class="catalogue-item">
         <div>
-            <time datetime="2020-03-25 00:00:00 &#43;0000 UTC" class="catalogue-time"></time>
+            
+                <time class="catalogue-time">March 25, 2020</time>
+            
             <h1 class="catalogue-title">Hyperledger Global Forum (2020)</h1>
     
-            <p> Since I am on lock-down due to the ongoing coronavirus pandemic I decided this would be a good time to write up some notes from my recent visit to Phoenix, Arizona. The conference lasted around four days, though I had some buffer around this for travel - with time to visit the local desert botanical gardens! Fortunately, it was still well attended despite the obvious health concerns but the Linux Foundation made every effort to accommodate guests.</p>
+            
+                <p>Since I am on lock-down due to the ongoing coronavirus pandemic I decided this would be a good time to write up some notes from my recent visit to Phoenix, Arizona. The conference lasted around four days, though I had some buffer around this for travel - with time to visit the local desert botanical gardens! Fortunately, it was still well attended despite the obvious health concerns but the Linux Foundation made every effort to accommodate guests.</p>
+            
         </div>
     </a>
     
     <a href="/posts/bitcoin/pow_explained/" class="catalogue-item">
         <div>
-            <time datetime="2019-12-22 00:00:00 &#43;0000 UTC" class="catalogue-time"></time>
+            
+                <time class="catalogue-time">December 22, 2019</time>
+            
             <h1 class="catalogue-title">Proof of Work (Explained)</h1>
     
-            <p> So you’ve read the theory, but want to understand Bitcoin programmatically. In this post we will analyse the core codebase written in C++ to understand how one can generate and include a block in the chain. Starting with the atomic unit of construction in this context, a block is a grouping of transactions that alter the state of the ledger. For example, a coinbase transaction may be included by a miner to collect a block reward.</p>
+            
+                <p>So you’ve read the theory, but want to understand Bitcoin programmatically. In this post we will analyse the core codebase written in C++ to understand how one can generate and include a block in the chain. Starting with the atomic unit of construction in this context, a block is a grouping of transactions that alter the state of the ledger. For example, a coinbase transaction may be included by a miner to collect a block reward.</p>
+            
         </div>
     </a>
     
     <a href="/posts/rust/table-tests/" class="catalogue-item">
         <div>
-            <time datetime="2019-10-06 00:00:00 &#43;0000 UTC" class="catalogue-time"></time>
+            
+                <time class="catalogue-time">October 6, 2019</time>
+            
             <h1 class="catalogue-title">Table Driven Tests</h1>
     
-            <p> One of my favorite ways to write tests in Go is with a table driven test. If you are unfamiliar with the concept check out the excellent Dave Cheney post. If you need to unit test a component under a multitude of edge cases, then this is good technique to adopt. Anyway, I’m learning Rust in my spare time so I thought I’d best give it a go. Hopefully this will suffice, but if you think it could be improved please hit me up on twitter.</p>
+            
+                <p>One of my favorite ways to write tests in Go is with a table driven test. If you are unfamiliar with the concept check out the excellent Dave Cheney post. If you need to unit test a component under a multitude of edge cases, then this is good technique to adopt. Anyway, I’m learning Rust in my spare time so I thought I’d best give it a go. Hopefully this will suffice, but if you think it could be improved please hit me up on twitter.</p>
+            
         </div>
     </a>
     
     <a href="/posts/ethereum/erc-tokens/" class="catalogue-item">
         <div>
-            <time datetime="2019-10-05 00:00:00 &#43;0000 UTC" class="catalogue-time"></time>
+            
+                <time class="catalogue-time">October 5, 2019</time>
+            
             <h1 class="catalogue-title">ERC Token Standards</h1>
     
-            <p> You may be familiar with the concept of a Request for Comments (RFC) from a body such as the Internet Engineering Task Force (IETF). They are just technical documents that describe the specifications for a particular technology - HTTP/1.1 is described by RFC-2616 for instance. Application level standards in the Ethereum ecosystem are thus named accordingly, forming one possible part of an Ethereum Improvement Proposal (EIP). For more details on this, check out EIP-1.</p>
+            
+                <p>You may be familiar with the concept of a Request for Comments (RFC) from a body such as the Internet Engineering Task Force (IETF). They are just technical documents that describe the specifications for a particular technology - HTTP/1.1 is described by RFC-2616 for instance. Application level standards in the Ethereum ecosystem are thus named accordingly, forming one possible part of an Ethereum Improvement Proposal (EIP). For more details on this, check out EIP-1.</p>
+            
         </div>
     </a>
     
     <a href="/posts/ethereum/dao/" class="catalogue-item">
         <div>
-            <time datetime="2019-09-28 00:00:00 &#43;0000 UTC" class="catalogue-time"></time>
+            
+                <time class="catalogue-time">September 28, 2019</time>
+            
             <h1 class="catalogue-title">Decentralized Autonomous Organizations (DAO)</h1>
     
-            <p> In traditional governance systems, we rely upon human entities to enact policies on behalf of constituents. This may viewed as in contemporary politics or in the hierarchical structure of an enterprise. An historical issue however, is that it is not always possible to trust the judgement of those in charge. In economics, this is known as the principle-agent problem.
+            
+                <p>In traditional governance systems, we rely upon human entities to enact policies on behalf of constituents. This may viewed as in contemporary politics or in the hierarchical structure of an enterprise. An historical issue however, is that it is not always possible to trust the judgement of those in charge. In economics, this is known as the principle-agent problem.
 A DAO is a form of self-enforcing protocol, typically modelled as a smart contract.</p>
+            
         </div>
     </a>
     
     <a href="/posts/ethereum/rlp-encoding/" class="catalogue-item">
         <div>
-            <time datetime="2019-09-15 00:00:00 &#43;0000 UTC" class="catalogue-time"></time>
+            
+                <time class="catalogue-time">September 15, 2019</time>
+            
             <h1 class="catalogue-title">Recursive Linear Prefix (RLP) Encoding</h1>
     
-            <p> I was recently tasked with developing a new encoding library for Hyperledger Burrow to further interoperability with the broader Ethereum ecosystem. Recursive Linear Prefix (RLP) is a data format used to store state in Ethereum, more precisely it is an algorithm for representing arbitrary data structures in binary form. Unlike other serialization techniques however, the output is position dependant in that recovering the original object requires knowledge of the input structure.</p>
+            
+                <p>I was recently tasked with developing a new encoding library for Hyperledger Burrow to further interoperability with the broader Ethereum ecosystem. Recursive Linear Prefix (RLP) is a data format used to store state in Ethereum, more precisely it is an algorithm for representing arbitrary data structures in binary form. Unlike other serialization techniques however, the output is position dependant in that recovering the original object requires knowledge of the input structure.</p>
+            
         </div>
     </a>
     
     <a href="/posts/travel/ipfs_camp_2019/" class="catalogue-item">
         <div>
-            <time datetime="2019-07-06 00:00:00 &#43;0000 UTC" class="catalogue-time"></time>
+            
+                <time class="catalogue-time">July 6, 2019</time>
+            
             <h1 class="catalogue-title">IPFS Camp 2019 (June 27-30)</h1>
     
-            <p> I was extremely humbled to attend the first ever Interplanetary File System (IPFS) camp last week. It comprised approximately three days of tutorials, lectures and problem solving in the idyllic Campus La Mola, a short distance from Barcelona, Spain. There were roughly 150 attendees from around the globe who came together to discuss ideas for the distributed web, focusing on content addressable methods of data dissemination and persistence but expanding on higher level technologies which build upon these ideas.</p>
+            
+                <p>I was extremely humbled to attend the first ever Interplanetary File System (IPFS) camp last week. It comprised approximately three days of tutorials, lectures and problem solving in the idyllic Campus La Mola, a short distance from Barcelona, Spain. There were roughly 150 attendees from around the globe who came together to discuss ideas for the distributed web, focusing on content addressable methods of data dissemination and persistence but expanding on higher level technologies which build upon these ideas.</p>
+            
         </div>
     </a>
     
     <a href="/posts/go/kubernetes/" class="catalogue-item">
         <div>
-            <time datetime="2019-04-27 00:00:00 &#43;0000 UTC" class="catalogue-time"></time>
+            
+                <time class="catalogue-time">April 27, 2019</time>
+            
             <h1 class="catalogue-title">Let&#39;s Go Kubernetes</h1>
     
-            <p> Welcome to the first post from what will hopefully become a series on my adventures with Go! I’m really lucky to be able to experiment with some super awesome technologies which I will endeavour to write about more, so if you find this post helpful please let me know on twitter!
+            
+                <p>Welcome to the first post from what will hopefully become a series on my adventures with Go! I’m really lucky to be able to experiment with some super awesome technologies which I will endeavour to write about more, so if you find this post helpful please let me know on twitter!
 If you’re new to Go, follow the getting started docs. You’ll also need to configure access to a Kubernetes cluster, or install Minikube - a single local node.</p>
-        </div>
-    </a>
-    
-    <a href="/posts/compass/" class="catalogue-item">
-        <div>
-            <time datetime="2019-02-04 00:00:00 &#43;0000 UTC" class="catalogue-time"></time>
-            <h1 class="catalogue-title">Evolving Infrastructure</h1>
-    
-            <p> We’ve undergone a lot of infrastructure changes recently at work. We actually submitted the very first DLT framework into Helm’s stable charts over a year ago. This allows anyone with a Kubernetes cluster to deploy a custom blockchain courtesy of Burrow (our contribution to the Hyperledger Greenhouse). We’re a great believer in cloud first and open source technologies so not only is Kubernetes a great fit for what we do, but Helm extraordinarily simplifies the whole deployment process through Go templating.</p>
+            
         </div>
     </a>
     

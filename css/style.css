@@ -15,16 +15,15 @@
 }
 
 #home h1 {
-	top: 50%;
 	z-index: 2;
 	-webkit-transform: translate(0%, 0%);
-	transform: translate(0%, 50%);
+	transform: translate(0%, 90%);
 	color: #fff;
 	font: normal 300 60px/1 'Josefin Sans', sans-serif;
-		font-size: 60px;
+	font-size: 60px;
 	text-align: center;
-	white-space: nowrap;
 	margin: auto;
+	width: 75%;
 }
 
 #profile {
@@ -190,11 +189,11 @@ pre code {
 }
 
 .highlight {
-	background-color:#f9f9f9;
-	border-radius:3px;
-	line-height:1.4;
-	margin:0 0 1rem;
-	padding:1rem
+	background-color: #272822;
+	border-radius: 3px;
+	line-height: 1.4;
+	margin: 0 0 1rem;
+	padding: 1rem
 }
 
 .highlight pre {

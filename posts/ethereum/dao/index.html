@@ -5,8 +5,7 @@
 	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
 	<meta name="author" content="Gregory Hill">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Gregory Hill</title>
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<title>Gregory Hill | Decentralized Autonomous Organizations (DAO)</title>
 	<link href="/css/style.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
@@ -52,52 +51,52 @@ which aims to drive community funding for open-source projects. In short, stakeh
 can then choose to use this power to vote on other proposals or burn it (convert to ether).</p>
 <h2 id="example">Example</h2>
 <p>Borrowing some of the key ideas from MolochDAO, I&rsquo;ve put together an example contract:</p>
-<div class="highlight"><pre class="chroma"><code class="language-solidity" data-lang="solidity"><span class="kr">pragma solidity</span> <span class="o">&gt;=</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-solidity" data-lang="solidity"><span style="color:#66d9ef">pragma solidity</span> <span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">5</span>.<span style="color:#ae81ff">0</span>;
 
-<span class="kd">contract</span> <span class="n">MolochDAO</span> <span class="p">{</span>
-    <span class="kt">uint</span> <span class="n">pot</span><span class="p">;</span>
-    <span class="kt">uint</span> <span class="n">participants</span><span class="p">;</span>
-    <span class="kd">mapping</span> <span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="n">power</span><span class="p">;</span>
-    <span class="kd">mapping</span> <span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="n">proposals</span><span class="p">;</span>
-    <span class="kd">mapping</span> <span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="n">votes</span><span class="p">;</span>
+<span style="color:#66d9ef">contract</span> MolochDAO {
+    <span style="color:#66d9ef">uint</span> pot;
+    <span style="color:#66d9ef">uint</span> participants;
+    <span style="color:#66d9ef">mapping</span> (<span style="color:#66d9ef">address</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">uint</span>) power;
+    <span style="color:#66d9ef">mapping</span> (<span style="color:#66d9ef">address</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">uint</span>) proposals;
+    <span style="color:#66d9ef">mapping</span> (<span style="color:#66d9ef">address</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">uint</span>) votes;
 
-    <span class="c1">// initial seed funds
-</span><span class="c1"></span>    <span class="n">constructor</span><span class="p">()</span> <span class="kr">public</span> <span class="kr">payable</span> <span class="p">{</span>
-        <span class="n">pot</span> <span class="o">=</span> <span class="nb">msg</span><span class="p">.</span><span class="nb">value</span><span class="p">;</span>
-        <span class="n">participants</span><span class="o">++</span><span class="p">;</span>
-        <span class="n">power</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]</span> <span class="o">=</span> <span class="nb">msg</span><span class="p">.</span><span class="nb">value</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span style="color:#75715e">// initial seed funds
+</span><span style="color:#75715e"></span>    constructor() <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">payable</span> {
+        pot <span style="color:#f92672">=</span> msg.value;
+        participants<span style="color:#f92672">++</span>;
+        power[msg.sender] <span style="color:#f92672">=</span> msg.value;
+    }
     
-    <span class="c1">// caller burns participation for token
-</span><span class="c1"></span>    <span class="kd">function</span> <span class="n">burn</span><span class="p">()</span> <span class="kr">public</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">power</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">participants</span><span class="o">--</span><span class="p">;</span>
-        <span class="n">pot</span> <span class="o">-=</span> <span class="n">power</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">];</span>
-        <span class="n">power</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">.</span><span class="nb">transfer</span><span class="p">(</span><span class="n">power</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]);</span>
-    <span class="p">}</span>
+    <span style="color:#75715e">// caller burns participation for token
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">function</span> burn() <span style="color:#66d9ef">public</span> {
+        <span style="color:#66d9ef">if</span> (power[msg.sender] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+            <span style="color:#66d9ef">return</span>;
+        }
+        participants<span style="color:#f92672">--</span>;
+        pot <span style="color:#f92672">-=</span> power[msg.sender];
+        power[msg.sender] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        msg.sender.transfer(power[msg.sender]);
+    }
     
-    <span class="c1">// create a proposal for funds
-</span><span class="c1"></span>    <span class="kd">function</span> <span class="n">propose</span><span class="p">(</span><span class="kt">uint</span> <span class="n">want</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
-        <span class="n">proposals</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]</span> <span class="o">=</span> <span class="n">want</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span style="color:#75715e">// create a proposal for funds
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">function</span> propose(<span style="color:#66d9ef">uint</span> want) <span style="color:#66d9ef">public</span> {
+        proposals[msg.sender] <span style="color:#f92672">=</span> want;
+    }
     
-    <span class="c1">// vote for a proposer
-</span><span class="c1"></span>    <span class="kd">function</span> <span class="n">vote</span><span class="p">(</span><span class="kt">address</span> <span class="n">proposal</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">proposals</span><span class="p">[</span><span class="n">proposal</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">power</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">votes</span><span class="p">[</span><span class="n">proposal</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span>
+    <span style="color:#75715e">// vote for a proposer
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">function</span> vote(<span style="color:#66d9ef">address</span> proposal) <span style="color:#66d9ef">public</span> {
+        <span style="color:#66d9ef">if</span> (proposals[proposal] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+            <span style="color:#66d9ef">return</span>;
+        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (power[msg.sender] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+            votes[proposal]<span style="color:#f92672">++</span>;
+        }
 
-        <span class="k">if</span> <span class="p">(</span><span class="n">votes</span><span class="p">[</span><span class="n">proposal</span><span class="p">]</span> <span class="o">==</span> <span class="n">participants</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">power</span><span class="p">[</span><span class="n">proposal</span><span class="p">]</span> <span class="o">+=</span> <span class="n">proposals</span><span class="p">[</span><span class="n">proposal</span><span class="p">];</span>
-            <span class="n">votes</span><span class="p">[</span><span class="n">proposal</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+        <span style="color:#66d9ef">if</span> (votes[proposal] <span style="color:#f92672">==</span> participants) {
+            power[proposal] <span style="color:#f92672">+=</span> proposals[proposal];
+            votes[proposal] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        }
+    }
+}
 </code></pre></div><p>This sets up an initial seed pot in the constructor and anyone can then <code>propose</code> to take
 an amount of the shares. If we receive enough votes, the proposer will be added to the pool
 with the option to <code>burn</code> their share to receive ether.</p>
@@ -113,15 +112,15 @@ could submit multiple votes to unlock the funds.</p>
 <a href="https://github.com/hyperledger/burrow">Hyperledger Burrow</a>. We now support experimental Web3, meaning that
 all of your favorite Ethereum tooling should now work with our built-in JSON RPC.</p>
 <p>Lets start a chain with one validator to process blocks and two participants from which we can transact:</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">burrow spec -v1 -p2 <span class="p">|</span> burrow configure --curve-type secp256k1 -s- <span class="p">|</span> burrow start -c- 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">burrow spec -v1 -p2 | burrow configure --curve-type secp256k1 -s- | burrow start -c- 
 </code></pre></div><p>If we now query for the latest block, we should get a response:</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl -X POST localhost:26660 --data <span class="se">\
-</span><span class="se"></span>   <span class="s1">&#39;{&#34;id&#34;:1,&#34;jsonrpc&#34;:&#34;2.0&#34;,&#34;method&#34;:&#34;eth_getBlockByNumber&#34;,&#34;params&#34;:[&#34;latest&#34;,false]}&#39;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -X POST localhost:26660 --data <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>   <span style="color:#e6db74">&#39;{&#34;id&#34;:1,&#34;jsonrpc&#34;:&#34;2.0&#34;,&#34;method&#34;:&#34;eth_getBlockByNumber&#34;,&#34;params&#34;:[&#34;latest&#34;,false]}&#39;</span>
 </code></pre></div><p><a href="https://www.trufflesuite.com/">Truffle</a> is a tool for smart contract development and testing.
 Follow the configuration instructions in our <a href="http://hyperledger.github.io/burrow/#/reference/web3?id=truffle">docs</a>,
 download the <a href="https://github.com/MolochVentures/moloch">MolochDAO</a> source and follow the <a href="https://github.com/MolochVentures/moloch#deploying-a-new-pool">deploy instructions</a>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">git clone git@github.com:MolochVentures/moloch.git
-<span class="nb">cd</span> moloch
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git clone git@github.com:MolochVentures/moloch.git
+cd moloch
 npm install
 npx buidler moloch-deploy --network burrow
 </code></pre></div>

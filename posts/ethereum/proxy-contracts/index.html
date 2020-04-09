@@ -5,8 +5,7 @@
 	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
 	<meta name="author" content="Gregory Hill">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Gregory Hill</title>
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<title>Gregory Hill | Upgradable Proxy Contracts</title>
 	<link href="/css/style.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
@@ -37,65 +36,65 @@
 <p>One of the more impressive concepts that I learned recently regards the decoupling of state and functionality. By separating <em>what</em> a contract stores from <em>how</em> it accesses it we can easily upgrade a contract on chain. Using the infamous DAO hack as an example, let&rsquo;s assume we have a smart contract which stores an amount of funds but also suffers from the reentrancy bug. Without changing the underlying state, we want to rewire the logic to prevent it from being exploited. Additionally, we may not want to force the original consumers to use a new (pre-initialized) contract.</p>
 <p>Before getting into the details, we first need to understand the difference between <code>CALL</code> and <code>DELEGATECALL</code>. If we call a class method in the traditional sense, then we only expect it to alter it&rsquo;s own internal state (omitting arguments). Conversely, if something is delegated then we entrust someone to carry out a task on our behalf. These concepts naturally extend to Ethereum; if we delegate a call we ask a contract to operate on our state instead of it&rsquo;s own.</p>
 <p>In the following example I have defined two contracts; <code>Setter</code> exposes a method to directly alter it&rsquo;s state through the <code>set</code> function, and <code>Getter</code> contains the two forward calls described above. Notice the calling <code>set</code> or <code>call</code> will alter the <code>value</code> stored in <code>Setter</code>, whereas <code>delegatecall</code> will update the <code>value</code> in <code>Getter</code>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-solidity" data-lang="solidity"><span class="kr">pragma solidity</span> <span class="o">&gt;=</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-solidity" data-lang="solidity"><span style="color:#66d9ef">pragma solidity</span> <span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">0</span>;
 
-<span class="kd">contract</span> <span class="n">Setter</span> <span class="p">{</span>
-    <span class="kt">uint</span> <span class="kr">public</span> <span class="nb">value</span><span class="p">;</span>
+<span style="color:#66d9ef">contract</span> Setter {
+    <span style="color:#66d9ef">uint</span> <span style="color:#66d9ef">public</span> value;
     
-    <span class="kd">function</span> <span class="n">set</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">_value</span><span class="p">)</span> <span class="kr">external</span> <span class="p">{</span>
-        <span class="nb">value</span> <span class="o">=</span> <span class="n">_value</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    <span style="color:#66d9ef">function</span> set(<span style="color:#66d9ef">uint256</span> _value) <span style="color:#66d9ef">external</span> {
+        value <span style="color:#f92672">=</span> _value;
+    }
+}
 
-<span class="kd">contract</span> <span class="n">Getter</span> <span class="p">{</span>
-    <span class="kt">uint</span> <span class="kr">public</span> <span class="nb">value</span><span class="p">;</span>
+<span style="color:#66d9ef">contract</span> Getter {
+    <span style="color:#66d9ef">uint</span> <span style="color:#66d9ef">public</span> value;
     
-    <span class="kd">function</span> <span class="nb">call</span><span class="p">(</span><span class="kt">address</span> <span class="n">setter</span><span class="p">,</span> <span class="kt">uint256</span> <span class="nb">value</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
-        <span class="n">setter</span><span class="p">.</span><span class="nb">call</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodeWithSignature</span><span class="p">(</span><span class="s">&#34;set(uint256)&#34;</span><span class="p">,</span> <span class="nb">value</span><span class="p">));</span>
-    <span class="p">}</span>
+    <span style="color:#66d9ef">function</span> call(<span style="color:#66d9ef">address</span> setter, <span style="color:#66d9ef">uint256</span> value) <span style="color:#66d9ef">public</span> {
+        setter.call(abi.encodeWithSignature(<span style="color:#e6db74">&#34;set(uint256)&#34;</span>, value));
+    }
     
-    <span class="kd">function</span> <span class="nb">delegatecall</span><span class="p">(</span><span class="kt">address</span> <span class="n">setter</span><span class="p">,</span> <span class="kt">uint256</span> <span class="nb">value</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
-        <span class="n">setter</span><span class="p">.</span><span class="nb">delegatecall</span><span class="p">(</span><span class="n">abi</span><span class="p">.</span><span class="n">encodeWithSignature</span><span class="p">(</span><span class="s">&#34;set(uint256)&#34;</span><span class="p">,</span> <span class="nb">value</span><span class="p">));</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    <span style="color:#66d9ef">function</span> delegatecall(<span style="color:#66d9ef">address</span> setter, <span style="color:#66d9ef">uint256</span> value) <span style="color:#66d9ef">public</span> {
+        setter.delegatecall(abi.encodeWithSignature(<span style="color:#e6db74">&#34;set(uint256)&#34;</span>, value));
+    }
+}
 </code></pre></div><p>Another feature of Solidity that we will utilise is known as the fallback function. This unnamed function cannot take any arguments and is not able to return anything, but will run instead if the called function is not found - suitable for a proxy.</p>
 <p>The proxy technique was first popularized by Nick Johnson of the Ethereum Foundation <a href="https://gist.github.com/Arachnid/4ca9da48d51e23e5cfe0f0e14dd6318f">here</a>. The basic idea is that the proxy extends the same storage layout but would forward any and all calls to the registered logic contract.</p>
 <p>In this example, we first deploy the proxy and then register either of the two functional contracts to update the <code>value</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-solidity" data-lang="solidity"><span class="kd">contract</span> <span class="n">Storage</span> <span class="p">{</span>
-    <span class="kt">uint</span> <span class="kr">public</span> <span class="nb">value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-solidity" data-lang="solidity"><span style="color:#66d9ef">contract</span> Storage {
+    <span style="color:#66d9ef">uint</span> <span style="color:#66d9ef">public</span> value <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+}
 
-<span class="kd">contract</span> <span class="n">Proxy</span> <span class="kr">is</span> <span class="n">Storage</span> <span class="p">{</span>
-    <span class="kt">address</span> <span class="kr">internal</span> <span class="n">proxied</span><span class="p">;</span>
+<span style="color:#66d9ef">contract</span> Proxy <span style="color:#66d9ef">is</span> Storage {
+    <span style="color:#66d9ef">address</span> <span style="color:#66d9ef">internal</span> proxied;
 
-    <span class="kd">function</span> <span class="n">redirect</span><span class="p">(</span><span class="kt">address</span> <span class="n">_proxied</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
-        <span class="n">proxied</span> <span class="o">=</span> <span class="n">_proxied</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span style="color:#66d9ef">function</span> redirect(<span style="color:#66d9ef">address</span> _proxied) <span style="color:#66d9ef">public</span> {
+        proxied <span style="color:#f92672">=</span> _proxied;
+    }
 
-    <span class="kd">function</span> <span class="p">()</span> <span class="kr">external</span> <span class="kr">payable</span> <span class="p">{</span>
-        <span class="kt">address</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">proxied</span><span class="p">;</span>
-        <span class="k">assembly</span> <span class="p">{</span>
-            <span class="ow">let</span> <span class="nv">freememstart</span> <span class="o">:=</span> <span class="nf">mload</span><span class="p">(</span><span class="mh">0x40</span><span class="p">)</span>
-            <span class="nf">calldatacopy</span><span class="p">(</span><span class="n">freememstart</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nf">calldatasize</span><span class="p">())</span>
-            <span class="ow">let</span> <span class="nv">success</span> <span class="o">:=</span> <span class="nf">delegatecall</span><span class="p">(</span><span class="nf">not</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">addr</span><span class="p">,</span> <span class="n">freememstart</span><span class="p">,</span> <span class="nf">calldatasize</span><span class="p">(),</span> <span class="n">freememstart</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
-            <span class="nf">switch</span> <span class="n">success</span>
-            <span class="n">case</span> <span class="mi">0</span> <span class="p">{</span> <span class="nf">revert</span><span class="p">(</span><span class="n">freememstart</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span> <span class="p">}</span>
-            <span class="n">default</span> <span class="p">{</span> <span class="nf">return</span><span class="p">(</span><span class="n">freememstart</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span> <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    <span style="color:#66d9ef">function</span> () <span style="color:#66d9ef">external</span> <span style="color:#66d9ef">payable</span> {
+        <span style="color:#66d9ef">address</span> addr <span style="color:#f92672">=</span> proxied;
+        <span style="color:#66d9ef">assembly</span> {
+            <span style="color:#f92672">let</span> freememstart <span style="color:#f92672">:=</span> <span style="color:#a6e22e">mload</span>(<span style="color:#ae81ff">0x40</span>)
+            <span style="color:#a6e22e">calldatacopy</span>(freememstart, <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">calldatasize</span>())
+            <span style="color:#f92672">let</span> success <span style="color:#f92672">:=</span> <span style="color:#a6e22e">delegatecall</span>(<span style="color:#a6e22e">not</span>(<span style="color:#ae81ff">0</span>), addr, freememstart, <span style="color:#a6e22e">calldatasize</span>(), freememstart, <span style="color:#ae81ff">32</span>)
+            <span style="color:#a6e22e">switch</span> success
+            case <span style="color:#ae81ff">0</span> { <span style="color:#a6e22e">revert</span>(freememstart, <span style="color:#ae81ff">32</span>) }
+            default { <span style="color:#a6e22e">return</span>(freememstart, <span style="color:#ae81ff">32</span>) }
+        }
+    }
+}
 
-<span class="kd">contract</span> <span class="n">Addition</span> <span class="kr">is</span> <span class="n">Storage</span> <span class="p">{</span>
-    <span class="kd">function</span> <span class="n">add</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_value</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
-        <span class="nb">value</span> <span class="o">+=</span> <span class="n">_value</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span style="color:#66d9ef">contract</span> Addition <span style="color:#66d9ef">is</span> Storage {
+    <span style="color:#66d9ef">function</span> add(<span style="color:#66d9ef">uint</span> _value) <span style="color:#66d9ef">public</span> {
+        value <span style="color:#f92672">+=</span> _value;
+    }
+}
 
-<span class="kd">contract</span> <span class="n">Subtraction</span> <span class="kr">is</span> <span class="n">Storage</span> <span class="p">{</span>
-    <span class="kd">function</span> <span class="n">sub</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_value</span><span class="p">)</span> <span class="kr">public</span> <span class="p">{</span>
-        <span class="nb">value</span> <span class="o">-=</span> <span class="n">_value</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span style="color:#66d9ef">contract</span> Subtraction <span style="color:#66d9ef">is</span> Storage {
+    <span style="color:#66d9ef">function</span> sub(<span style="color:#66d9ef">uint</span> _value) <span style="color:#66d9ef">public</span> {
+        value <span style="color:#f92672">-=</span> _value;
+    }
+}
 </code></pre></div><p>If you are interested in learning about other proxy patterns, read the <a href="https://blog.openzeppelin.com/proxy-patterns/">fantastic article by OpenZeppelin</a>.</p>
 
 </div></main>

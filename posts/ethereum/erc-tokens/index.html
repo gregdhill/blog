@@ -5,8 +5,7 @@
 	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
 	<meta name="author" content="Gregory Hill">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Gregory Hill</title>
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<title>Gregory Hill | ERC Token Standards</title>
 	<link href="/css/style.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
@@ -45,30 +44,30 @@ For more details on this, check out <a href="https://github.com/ethereum/EIPs/bl
 and two <a href="https://solidity.readthedocs.io/en/v0.4.21/contracts.html#events">events</a> that should be triggered
 in order for the smart contract to be considered compliant.</p>
 <h3 id="functions">Functions</h3>
-<div class="highlight"><pre class="chroma"><code class="language-solidity" data-lang="solidity"><span class="c1">// Get the total number of tokens possible:
-</span><span class="c1"></span><span class="kd">function</span> <span class="n">totalSupply</span><span class="p">()</span> <span class="kr">constant</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span> <span class="n">totalSupply</span><span class="p">)</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-solidity" data-lang="solidity"><span style="color:#75715e">// Get the total number of tokens possible:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> totalSupply() <span style="color:#66d9ef">constant</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">uint256</span> totalSupply)
 
-<span class="c1">// Get the target account&#39;s balance:
-</span><span class="c1"></span><span class="kd">function</span> <span class="n">balanceOf</span><span class="p">(</span><span class="kt">address</span> <span class="n">_owner</span><span class="p">)</span> <span class="kr">constant</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span> <span class="nb">balance</span><span class="p">)</span>
+<span style="color:#75715e">// Get the target account&#39;s balance:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> balanceOf(<span style="color:#66d9ef">address</span> _owner) <span style="color:#66d9ef">constant</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">uint256</span> balance)
 
-<span class="c1">// Send token to target account:
-</span><span class="c1"></span><span class="kd">function</span> <span class="nb">transfer</span><span class="p">(</span><span class="kt">address</span> <span class="n">_to</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_value</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span> <span class="n">success</span><span class="p">)</span>
+<span style="color:#75715e">// Send token to target account:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> transfer(<span style="color:#66d9ef">address</span> _to, <span style="color:#66d9ef">uint256</span> _value) <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bool</span> success)
 
-<span class="c1">// Send token to target account from authorized account:
-</span><span class="c1"></span><span class="kd">function</span> <span class="n">transferFrom</span><span class="p">(</span><span class="kt">address</span> <span class="n">_from</span><span class="p">,</span> <span class="kt">address</span> <span class="n">_to</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_value</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span> <span class="n">success</span><span class="p">)</span>
+<span style="color:#75715e">// Send token to target account from authorized account:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> transferFrom(<span style="color:#66d9ef">address</span> _from, <span style="color:#66d9ef">address</span> _to, <span style="color:#66d9ef">uint256</span> _value) <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bool</span> success)
 
-<span class="c1">// Allow the target account to withdraw up to value:
-</span><span class="c1"></span><span class="kd">function</span> <span class="n">approve</span><span class="p">(</span><span class="kt">address</span> <span class="n">_spender</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_value</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span> <span class="n">success</span><span class="p">)</span>
+<span style="color:#75715e">// Allow the target account to withdraw up to value:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> approve(<span style="color:#66d9ef">address</span> _spender, <span style="color:#66d9ef">uint256</span> _value) <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bool</span> success)
 
-<span class="c1">// Amount approved account is allowed to spend:
-</span><span class="c1"></span><span class="kd">function</span> <span class="n">allowance</span><span class="p">(</span><span class="kt">address</span> <span class="n">_owner</span><span class="p">,</span> <span class="kt">address</span> <span class="n">_spender</span><span class="p">)</span> <span class="kr">constant</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span> <span class="n">remaining</span><span class="p">)</span>
+<span style="color:#75715e">// Amount approved account is allowed to spend:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> allowance(<span style="color:#66d9ef">address</span> _owner, <span style="color:#66d9ef">address</span> _spender) <span style="color:#66d9ef">constant</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">uint256</span> remaining)
 
 </code></pre></div><h3 id="events">Events</h3>
-<div class="highlight"><pre class="chroma"><code class="language-solidity" data-lang="solidity"><span class="c1">// Trigger on token transfer:
-</span><span class="c1"></span><span class="kd">event</span> <span class="n">Transfer</span><span class="p">(</span><span class="kt">address</span> <span class="kr">indexed</span> <span class="n">_from</span><span class="p">,</span> <span class="kt">address</span> <span class="kr">indexed</span> <span class="n">_to</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_value</span><span class="p">)</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-solidity" data-lang="solidity"><span style="color:#75715e">// Trigger on token transfer:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">event</span> Transfer(<span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> _from, <span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> _to, <span style="color:#66d9ef">uint256</span> _value)
 
-<span class="c1">// Trigger when account is approved:
-</span><span class="c1"></span><span class="kd">event</span> <span class="n">Approval</span><span class="p">(</span><span class="kt">address</span> <span class="kr">indexed</span> <span class="n">_owner</span><span class="p">,</span> <span class="kt">address</span> <span class="kr">indexed</span> <span class="n">_spender</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">_value</span><span class="p">)</span>
+<span style="color:#75715e">// Trigger when account is approved:
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">event</span> Approval(<span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> _owner, <span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> _spender, <span style="color:#66d9ef">uint256</span> _value)
 </code></pre></div><h3 id="example">Example</h3>
 <p>Before reading ahead you should first be aware of
 <a href="https://solidity.readthedocs.io/en/v0.5.3/contracts.html#abstract-contracts">abstract</a> contracts and
@@ -78,49 +77,49 @@ inherited definitions will be preserved. The <a href="https://github.com/OpenZep
 by OpenZeppelin details many such APIs for developers to reuse. In particular,
 <a href="https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol">IERC20.sol</a>
 contains all definitions for ERC-20. We can import this interface and assert that our contract implements it:</p>
-<div class="highlight"><pre class="chroma"><code class="language-solidity" data-lang="solidity"><span class="kr">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">.</span><span class="mi">0</span><span class="p">;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-solidity" data-lang="solidity"><span style="color:#66d9ef">pragma solidity</span> <span style="color:#f92672">^</span><span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">5</span>.<span style="color:#ae81ff">0</span>;
 
-<span class="kn">import</span> <span class="s">&#34;./IERC20.sol&#34;</span><span class="p">;</span>
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;./IERC20.sol&#34;</span>;
 
-<span class="kd">contract</span> <span class="n">Token</span> <span class="kr">is</span> <span class="n">IERC20</span> <span class="p">{</span>
-    <span class="kt">uint256</span> <span class="n">supply</span><span class="p">;</span>
-    <span class="kd">mapping</span> <span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint256</span><span class="p">)</span> <span class="n">balances</span><span class="p">;</span>
-    <span class="n">constructor</span><span class="p">()</span> <span class="kr">public</span> <span class="p">{</span>  
-        <span class="n">supply</span> <span class="o">=</span> <span class="mi">1000000000</span><span class="p">;</span>  
-        <span class="n">balances</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]</span> <span class="o">=</span> <span class="n">supply</span><span class="p">;</span>  
-        <span class="n">emit</span> <span class="n">Transfer</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">,</span> <span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">,</span> <span class="n">supply</span><span class="p">);</span>  
-    <span class="p">}</span>
+<span style="color:#66d9ef">contract</span> Token <span style="color:#66d9ef">is</span> IERC20 {
+    <span style="color:#66d9ef">uint256</span> supply;
+    <span style="color:#66d9ef">mapping</span> (<span style="color:#66d9ef">address</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">uint256</span>) balances;
+    constructor() <span style="color:#66d9ef">public</span> {  
+        supply <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000000000</span>;  
+        balances[msg.sender] <span style="color:#f92672">=</span> supply;  
+        emit Transfer(msg.sender, msg.sender, supply);  
+    }
     
-    <span class="kd">function</span> <span class="n">totalSupply</span><span class="p">()</span> <span class="kr">external</span> <span class="kr">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">supply</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span style="color:#66d9ef">function</span> totalSupply() <span style="color:#66d9ef">external</span> <span style="color:#66d9ef">view</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">uint256</span>) {
+        <span style="color:#66d9ef">return</span> supply;
+    }
 
-    <span class="kd">function</span> <span class="n">balanceOf</span><span class="p">(</span><span class="kt">address</span> <span class="n">account</span><span class="p">)</span> <span class="kr">external</span> <span class="kr">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">balances</span><span class="p">[</span><span class="n">account</span><span class="p">];</span>
-    <span class="p">}</span>
+    <span style="color:#66d9ef">function</span> balanceOf(<span style="color:#66d9ef">address</span> account) <span style="color:#66d9ef">external</span> <span style="color:#66d9ef">view</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">uint256</span>) {
+        <span style="color:#66d9ef">return</span> balances[account];
+    }
 
-    <span class="kd">function</span> <span class="nb">transfer</span><span class="p">(</span><span class="kt">address</span> <span class="n">recipient</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">amount</span><span class="p">)</span> <span class="kr">external</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">balances</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">amount</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">balances</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]</span> <span class="o">-=</span> <span class="n">amount</span><span class="p">;</span>
-            <span class="n">balances</span><span class="p">[</span><span class="n">recipient</span><span class="p">]</span> <span class="o">+=</span> <span class="n">amount</span><span class="p">;</span>
-            <span class="n">emit</span> <span class="n">Transfer</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">,</span> <span class="n">recipient</span><span class="p">,</span> <span class="n">amount</span><span class="p">);</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span style="color:#66d9ef">function</span> transfer(<span style="color:#66d9ef">address</span> recipient, <span style="color:#66d9ef">uint256</span> amount) <span style="color:#66d9ef">external</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bool</span>) {
+        <span style="color:#66d9ef">if</span> (balances[msg.sender] <span style="color:#f92672">&gt;</span> amount) {
+            balances[msg.sender] <span style="color:#f92672">-=</span> amount;
+            balances[recipient] <span style="color:#f92672">+=</span> amount;
+            emit Transfer(msg.sender, recipient, amount);
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+        }
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+    }
 
-    <span class="kd">function</span> <span class="n">allowance</span><span class="p">(</span><span class="kt">address</span> <span class="n">owner</span><span class="p">,</span> <span class="kt">address</span> <span class="n">spender</span><span class="p">)</span> <span class="kr">external</span> <span class="kr">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint256</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span style="color:#66d9ef">function</span> allowance(<span style="color:#66d9ef">address</span> owner, <span style="color:#66d9ef">address</span> spender) <span style="color:#66d9ef">external</span> <span style="color:#66d9ef">view</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">uint256</span>) {
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+    }
 
-    <span class="kd">function</span> <span class="n">approve</span><span class="p">(</span><span class="kt">address</span> <span class="n">spender</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">amount</span><span class="p">)</span> <span class="kr">external</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span style="color:#66d9ef">function</span> approve(<span style="color:#66d9ef">address</span> spender, <span style="color:#66d9ef">uint256</span> amount) <span style="color:#66d9ef">external</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bool</span>) {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+    }
     
-    <span class="kd">function</span> <span class="n">transferFrom</span><span class="p">(</span><span class="kt">address</span> <span class="nb">sender</span><span class="p">,</span> <span class="kt">address</span> <span class="n">recipient</span><span class="p">,</span> <span class="kt">uint256</span> <span class="n">amount</span><span class="p">)</span> <span class="kr">external</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    <span style="color:#66d9ef">function</span> transferFrom(<span style="color:#66d9ef">address</span> sender, <span style="color:#66d9ef">address</span> recipient, <span style="color:#66d9ef">uint256</span> amount) <span style="color:#66d9ef">external</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bool</span>) {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+    }
+}
 </code></pre></div><h3 id="makerdao">MakerDAO</h3>
 <p>I had previously mentioned this in my post on <a href="../dao/">Decentralized Autonomous Organizations (DAO)</a>,
 MakerDAO is responsible for the stablecoin named Dai. To mint this token, a user must lock up their Ether
