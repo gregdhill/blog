@@ -1,11 +1,9 @@
 baseurl = "/"
 languageCode = "en-us"
 theme = "nonagon"
-pygmentsCodeFences = true
 
 [Params]
-firstname = "Gregory"
-lastname = "Hill"
+name = "Gregory Hill"
 github = "https://github.com/gregdhill"
 twitter = "https://twitter.com/gregorydhill"
 scholar = "https://scholar.google.co.uk/citations?user=OoKiidsAAAAJ&hl=en"
@@ -25,10 +23,9 @@ icon = "fa-tag"
 url = "projects"
 icon = "fa-tasks"
 
-
 [Author]
 name = "Greg"
 
-[markup.highlight]
-codeFences = true
-noClasses = false
+# needed for bitcoin github snippets
+[markup.goldmark.renderer]
+unsafe = true

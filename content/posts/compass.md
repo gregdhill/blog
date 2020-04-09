@@ -2,6 +2,9 @@
 title = "Evolving Infrastructure"
 date = "2019-02-04"
 author = "Gregory Hill"
+tags = [
+    "kubernetes",
+]
 +++
 
 We've undergone a lot of infrastructure changes recently at work. We actually submitted the very first [DLT framework](https://github.com/helm/charts/tree/master/stable/burrow) into Helm's [stable charts](https://github.com/helm/charts) over a year ago. This allows anyone with a Kubernetes cluster to deploy a custom blockchain courtesy of [Burrow](https://github.com/hyperledger/burrow) (our contribution to the [Hyperledger Greenhouse](https://www.hyperledger.org/wp-content/uploads/2018/11/Hyperledger_DataSheet_11.18_Digital.pdf)). We're a great believer in cloud first and open source technologies so not only is Kubernetes a great fit for what we do, but Helm extraordinarily simplifies the whole deployment process through [Go templating](https://golang.org/pkg/text/template/).
