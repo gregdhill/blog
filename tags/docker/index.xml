@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>bitcoin on </title>
-    <link>https://greghill.io/tags/bitcoin/</link>
-    <description>Recent content in bitcoin on </description>
+    <title>docker on </title>
+    <link>https://greghill.io/tags/docker/</link>
+    <description>Recent content in docker on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 10 Apr 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://greghill.io/tags/bitcoin/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://greghill.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,15 +19,6 @@
       <guid>https://greghill.io/posts/bitcoin/docker/</guid>
       <description>There are over 500,000 lines of code in Bitcoin Core, roughly 70% of which is pure C++. Compile times vary, but if you just want to get a node up and running, docker is the easiest way to go. Here&amp;rsquo;s something I prepared earlier&amp;hellip;
 Courtesy of the official docs, there are only four commands to run which build bitcoind, bitcoin-cli and bitcoin-qt. The dependencies are clearly outlined for different architectures - including OSx, Windows and Unix flavours - but in my Dockerfile I have chosen to extend Ubuntu.</description>
-    </item>
-    
-    <item>
-      <title>Proof of Work (Explained)</title>
-      <link>https://greghill.io/posts/bitcoin/pow_explained/</link>
-      <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://greghill.io/posts/bitcoin/pow_explained/</guid>
-      <description>So you&amp;rsquo;ve read the theory, but want to understand Bitcoin programmatically. In this post we will analyse the core codebase written in C++ to understand how one can generate and include a block in the chain. Starting with the atomic unit of construction in this context, a block is a grouping of transactions that alter the state of the ledger. For example, a coinbase transaction may be included by a miner to collect a block reward.</description>
     </item>
     
   </channel>

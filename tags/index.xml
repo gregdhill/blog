@@ -2,111 +2,120 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on </title>
-    <link>/tags/</link>
+    <link>https://greghill.io/tags/</link>
     <description>Recent content in Tags on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Apr 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://greghill.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>bitcoin</title>
+      <link>https://greghill.io/tags/bitcoin/</link>
+      <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://greghill.io/tags/bitcoin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>https://greghill.io/tags/docker/</link>
+      <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://greghill.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>ink</title>
-      <link>/tags/ink/</link>
+      <link>https://greghill.io/tags/ink/</link>
       <pubDate>Wed, 08 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/ink/</guid>
+      <guid>https://greghill.io/tags/ink/</guid>
       <description></description>
     </item>
     
     <item>
       <title>rust</title>
-      <link>/tags/rust/</link>
+      <link>https://greghill.io/tags/rust/</link>
       <pubDate>Wed, 08 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/rust/</guid>
+      <guid>https://greghill.io/tags/rust/</guid>
       <description></description>
     </item>
     
     <item>
       <title>substrate</title>
-      <link>/tags/substrate/</link>
+      <link>https://greghill.io/tags/substrate/</link>
       <pubDate>Wed, 08 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/substrate/</guid>
+      <guid>https://greghill.io/tags/substrate/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ethereum</title>
-      <link>/tags/ethereum/</link>
+      <link>https://greghill.io/tags/ethereum/</link>
       <pubDate>Mon, 06 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/ethereum/</guid>
+      <guid>https://greghill.io/tags/ethereum/</guid>
       <description></description>
     </item>
     
     <item>
       <title>solidity</title>
-      <link>/tags/solidity/</link>
+      <link>https://greghill.io/tags/solidity/</link>
       <pubDate>Mon, 06 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/solidity/</guid>
+      <guid>https://greghill.io/tags/solidity/</guid>
       <description></description>
     </item>
     
     <item>
       <title>conferences</title>
-      <link>/tags/conferences/</link>
+      <link>https://greghill.io/tags/conferences/</link>
       <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/conferences/</guid>
+      <guid>https://greghill.io/tags/conferences/</guid>
       <description></description>
     </item>
     
     <item>
       <title>travel</title>
-      <link>/tags/travel/</link>
+      <link>https://greghill.io/tags/travel/</link>
       <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/travel/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>bitcoin</title>
-      <link>/tags/bitcoin/</link>
-      <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/bitcoin/</guid>
+      <guid>https://greghill.io/tags/travel/</guid>
       <description></description>
     </item>
     
     <item>
       <title>c&#43;&#43;</title>
-      <link>/tags/c&#43;&#43;/</link>
+      <link>https://greghill.io/tags/c&#43;&#43;/</link>
       <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/c&#43;&#43;/</guid>
+      <guid>https://greghill.io/tags/c&#43;&#43;/</guid>
       <description></description>
     </item>
     
     <item>
       <title>go</title>
-      <link>/tags/go/</link>
+      <link>https://greghill.io/tags/go/</link>
       <pubDate>Sat, 27 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/go/</guid>
+      <guid>https://greghill.io/tags/go/</guid>
       <description></description>
     </item>
     
     <item>
       <title>kubernetes</title>
-      <link>/tags/kubernetes/</link>
+      <link>https://greghill.io/tags/kubernetes/</link>
       <pubDate>Sat, 27 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/kubernetes/</guid>
+      <guid>https://greghill.io/tags/kubernetes/</guid>
       <description></description>
     </item>
     

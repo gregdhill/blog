@@ -63,7 +63,7 @@
 	color: #fff;
 	position: absolute;
 	top: 50%;
-	left: 40%;
+	left: 35%;
 	-webkit-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 	text-align: center;
@@ -156,12 +156,12 @@ code {
 }
 
 code {
-	background-color:#f9f9f9;
-	border-radius:3px;
-	color:#bf616a;
-	font-size:85%;
-	padding:.25em .5em;
-	white-space:pre-wrap
+	background-color: #f9f9f9;
+	border-radius: 3px;
+	color: #bf616a;
+	font-size: 85%;
+	padding: .25em .5em;
+	overflow-x: scroll;
 }
 
 pre {
