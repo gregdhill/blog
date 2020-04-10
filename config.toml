@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://greghill.io"
 languageCode = "en-us"
 theme = "nonagon"
 
