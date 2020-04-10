@@ -24,6 +24,8 @@
 	text-align: center;
 	margin: auto;
 	width: 80%;
+	position: absolute;
+	left: 10%;
 }
 
 #profile {
@@ -355,13 +357,6 @@ pre code {
 	margin-top: 50px;
 	margin-bottom: 0;
 	font-size:3rem;
-}
-
-@media (max-width: 1400px) {
-
-	#home h1 {
-		left: 60%;
-	}
 }
 
 @media (max-width: 1200px) {
