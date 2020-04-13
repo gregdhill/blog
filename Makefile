@@ -5,3 +5,9 @@ theme:
 .PHONY: deploy
 deploy:
 	./deploy.sh
+
+.PHONY: ipfs
+ipfs:
+	hugo
+	ipfs add -r public
+	rm -rf public

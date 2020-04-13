@@ -1,6 +1,7 @@
-baseurl = "https://greghill.io"
+baseurl = ""
 languageCode = "en-us"
 theme = "nonagon"
+relativeurls = true
 
 [Params]
 name = "Gregory Hill"
