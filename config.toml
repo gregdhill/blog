@@ -1,7 +1,8 @@
+# empty url and relative needed for ipfs
 baseurl = ""
+relativeurls = true
 languageCode = "en-us"
 theme = "nonagon"
-relativeurls = true
 
 [Params]
 name = "Gregory Hill"
