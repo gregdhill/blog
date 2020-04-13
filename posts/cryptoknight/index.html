@@ -6,14 +6,14 @@
 	<meta name="author" content="Gregory Hill">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Gregory Hill | Generating &amp; Modelling Cryptography</title>
-	<link href="/css/style.css" rel="stylesheet">
+	<link href="../../css/style.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon.png">
 	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
 	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
-	<link rel="manifest" href="/img/manifest.json">
-	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
-	<link rel="shortcut icon" href="/img/favicon.ico">
+	<link rel="manifest" href="../../img/manifest.json">
+	<link rel="mask-icon" href="../../img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="../../img/favicon.ico">
 	<meta name="msapplication-config" content="/img/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
 </head><body>
@@ -33,7 +33,7 @@
     <div class="post-tags"></div>
 
     <p>CryptoKnight is a framework I recently released which follows the methodology described in my publication for synthesizing a scalable dataset of cryptographic primitives to feed a unique Convolutional Neural Network. In effect, this allows us to generate and model a substantial amount of data to quickly identify cryptographic algorithms (such as AES, RSA, RC4, or MD5) in reference binary executables. By safely learning this statistical representation, malware analysts can efficiently compare it against crypto-ransomware samples in a controlled environment.</p>
-<p><img src="/img/knight.jpeg" alt=""></p>
+<p><img src="../../img/knight.jpeg" alt=""></p>
 <p>The aim of this post is to introduce newcomers to the toolkit; potential malware analysts, reverse engineers or even collaborators / maintainers!</p>
 <h2 id="getting-started">Getting Started</h2>
 <p>The first thing that you&rsquo;ll need to do is download the source code:</p>
@@ -53,7 +53,7 @@
 <pre><code>python crypto.py --tune
 </code></pre><p>This performs a hyperparameter grid search to locate optimal settings for the task, but just watch you don&rsquo;t overfit the data!</p>
 <h2 id="analysis">Analysis</h2>
-<p><img src="/img/cryptoknight_screenshot.png" alt="Deep Learning Based Cryptographic Primitive Classification"></p>
+<p><img src="../../img/cryptoknight_screenshot.png" alt="Deep Learning Based Cryptographic Primitive Classification"></p>
 <p>With a trained model, we can now test a new sample. Suppose we have a binary called hash.exe which takes the MD5 of a file or string. Let&rsquo;s ask CryptoKnight to attack it!</p>
 <pre><code>python knight.py --predict hash.exe
 </code></pre><p>The program will be started in a sub-shell, attached to our dynamic instrumentation tool. This will carefully trace the application, output a sample listing and report other metrics. It will then call the model to analyze the sample and output the strongest correlation, which in this case should be MD5.</p>

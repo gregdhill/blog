@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ipfs on </title>
+    <link>/tags/ipfs/</link>
+    <description>Recent content in ipfs on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 11 Apr 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/ipfs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ENS &amp; IPFS</title>
+      <link>/posts/ethereum/ens-ipfs/</link>
+      <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/ethereum/ens-ipfs/</guid>
+      <description>By utilizing the Ethereum Name Service (ENS) for resolution and the Interplanetary File System (IPFS) for content hosting it is possible to decentralize a static website while retaining the predictable URL.
+My primary setup leverages GitHub pages to host a blog compiled with Hugo - linked to my domain name. Whenever I want to publish a change, I build the latest website from my markdown content using my custom theme and push it to a separate branch in my personal repository.</description>
+    </item>
+    
+  </channel>
+</rss>

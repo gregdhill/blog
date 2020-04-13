@@ -6,14 +6,14 @@
 	<meta name="author" content="Gregory Hill">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Gregory Hill | Containerizing Bitcoin</title>
-	<link href="/css/style.css" rel="stylesheet">
+	<link href="../../../css/style.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="../../../img/apple-touch-icon.png">
 	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
 	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
-	<link rel="manifest" href="/img/manifest.json">
-	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
-	<link rel="shortcut icon" href="/img/favicon.ico">
+	<link rel="manifest" href="../../../img/manifest.json">
+	<link rel="mask-icon" href="../../../img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="../../../img/favicon.ico">
 	<meta name="msapplication-config" content="/img/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
 </head><body>
@@ -30,7 +30,7 @@
         Containerizing Bitcoin
     </h1>
 
-    <div class="post-tags"><a class="tag" href=/tags/bitcoin/>#bitcoin</a><a class="tag" href=/tags/docker/>#docker</a></div>
+    <div class="post-tags"><a class="tag" href=../../../tags/bitcoin/>#bitcoin</a><a class="tag" href=../../../tags/docker/>#docker</a></div>
 
     <p>There are over 500,000 lines of code in Bitcoin Core, roughly 70% of which is pure C++. Compile times vary, but if you just want to get a node up and running, docker is the easiest way to go. Here&rsquo;s something I prepared <a href="https://github.com/gregdhill/bitcoin-docker">earlier</a>&hellip;</p>
 <p>Courtesy of the <a href="https://github.com/bitcoin/bitcoin/blob/master/doc/build-unix.md#to-build">official docs</a>, there are only four commands to run which build <code>bitcoind</code>, <code>bitcoin-cli</code> and <code>bitcoin-qt</code>. The dependencies are clearly outlined for different architectures - including OSx, Windows and Unix flavours - but in my Dockerfile I have chosen to extend Ubuntu. Checkout the repository linked above to build the image yourself or use <code>gregdhill/bitcoin:latest</code>.</p>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
+	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
+	<meta name="author" content="Gregory Hill">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gregory Hill | ELI5: Bitcoin Difficulty</title>
+	<link href="../../../css/style.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="../../../img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="../../../img/manifest.json">
+	<link rel="mask-icon" href="../../../img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="../../../img/favicon.ico">
+	<meta name="msapplication-config" content="/img/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+</head><body>
+    <main><div class="post">
+    <div class="post-info">
+        
+            Apr 13, 2020
+            · 415 words
+            · 2 minute read
+        
+    </div>
+
+    <h1 class="post-title">
+        ELI5: Bitcoin Difficulty
+    </h1>
+
+    <div class="post-tags"><a class="tag" href=../../../tags/bitcoin/>#bitcoin</a></div>
+
+    <p>In Bitcoin, difficulty is the measure of how hard it is to mine a block. To ensure constant output, this rate is adjusted every 2016 blocks - anticipating block production to take around ten minutes, we can expect recalculation every two weeks. If more blocks are produced than expected then the difficulty is increased, otherwise it is lowered.</p>
+<p>The following formulae can be used to calculate the difficulty rate for any given height - substituting an expected average of 600 seconds (10 minutes) and a base difficulty (introduced at genesis) of <code>1.0</code>.</p>
+<pre><code>expected / actual = rate
+currentDifficulty * rate = newDifficulty
+</code></pre><p>If we look at a historical view of difficulty adjustments <a href="https://btc.com/stats/diff">on mainnet</a> the first recalculation was at height <code>32,256</code> with an average block production time of 508 seconds. We can estimate the first difficulty as follows:</p>
+<pre><code>600 / 508 = 1.18
+1 * 1.18 = 1.18
+</code></pre><p>The subsequent adjustment is expected at height <code>32,256 + 2016 = 34,272</code>. Taking the new average production rate of 544 seconds we can calculate the following difficulty:</p>
+<pre><code>600 / 544 = 1.1
+1.18 * 1.1 = 1.298
+</code></pre><p>Despite some loss in precision, we can see these figures are roughly accurate.</p>
+<h2 id="target-threshold">Target Threshold</h2>
+<p>From the <a href="https://bitcoin.org/en/glossary/nbits">Bitcoin Technical Glossary</a>:</p>
+<blockquote>
+<p>The target is the threshold below which a block header hash must be in order for the block to be valid, and nBits is the encoded form of the target threshold as it appears in the block header.</p>
+</blockquote>
+<p>As you may have seen in my <a href="../pow_explained">previous post</a>, a <a href="https://bitcoin.org/en/developer-reference#block-headers">Bitcoin Block Header</a> contains a field <code>nBits</code> which is a 32-bit compact encoding which correlates to the 256-bit target threshold. The miner increments <code>nNonce</code> to compute the header&rsquo;s hash, aiming to find a representation that is less than or equal to the target. The calculation is then taken as follows, where the maximum target is roughly <code>2^224</code>:</p>
+<pre><code>targetMax / difficulty = target
+</code></pre><p>Using block <code>32,256</code> again as an example, we can see that <code>nBits</code> are registered as <code>0x1d00d86a</code>. To analyze how this works, let&rsquo;s derive the target threshold first. In <a href="https://en.bitcoin.it/wiki/Difficulty">difficulty encoding</a> we take note of two components, the first byte is the exponent (<code>0x1d</code>) and remaining three bytes form the mantissa (<code>0x00d86a</code>).</p>
+<pre><code>mantissa * 2**(8*(exponent - 3)) = target
+0x00d86a * 2**(8*(0x1d - 3))
+= 22791060871177364286867400663010583169263383106957897897309909286912
+</code></pre><p>If we convert the block hash to an integer we can compare it to the threshold:</p>
+<pre><code>0x000000004f2886a170adb7204cb0c7a824217dd24d11a74423d564c4e0904967
+= 8336342430463410544411468431803888761223874031130229104713497856359
+</code></pre><p>As you can see this is clearly less than the target so is a valid entry.</p>
+
+</div></main>
+</body><footer>
+
+    
+        <a class="footer-social" href="https://github.com/gregdhill">
+            <i class="grow fa fa-github fa-2x" aria-hidden="true"></i>
+        </a>
+    
+        <a class="footer-social" href="https://twitter.com/gregorydhill">
+            <i class="grow fa fa-twitter fa-2x" aria-hidden="true"></i>
+        </a>
+    
+        <a class="footer-social" href="https://scholar.google.co.uk/citations?user=OoKiidsAAAAJ&amp;hl=en">
+            <i class="grow fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
+        </a>
+    
+
+</footer></html>

@@ -6,14 +6,14 @@
 	<meta name="author" content="Gregory Hill">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Gregory Hill | Upgradable Proxy Contracts</title>
-	<link href="/css/style.css" rel="stylesheet">
+	<link href="../../../css/style.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="../../../img/apple-touch-icon.png">
 	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
 	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
-	<link rel="manifest" href="/img/manifest.json">
-	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
-	<link rel="shortcut icon" href="/img/favicon.ico">
+	<link rel="manifest" href="../../../img/manifest.json">
+	<link rel="mask-icon" href="../../../img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="../../../img/favicon.ico">
 	<meta name="msapplication-config" content="/img/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
 </head><body>
@@ -30,7 +30,7 @@
         Upgradable Proxy Contracts
     </h1>
 
-    <div class="post-tags"><a class="tag" href=/tags/ethereum/>#ethereum</a><a class="tag" href=/tags/solidity/>#solidity</a></div>
+    <div class="post-tags"><a class="tag" href=../../../tags/ethereum/>#ethereum</a><a class="tag" href=../../../tags/solidity/>#solidity</a></div>
 
     <p>Smart contracts in Ethereum are immutable; once they have been included in a block they cannot be changed. This is a weird philosophy to adopt from a software engineering perspective. What if there are bugs in your code? Solidity has a <a href="https://consensys.github.io/smart-contract-best-practices/known_attacks/">plethora of known attacks</a> which, given the economical value at risk, is troubling to say the least. However, we also do not want to interact with an unstable application that can be arbitrarily updated.</p>
 <p>One of the more impressive concepts that I learned recently regards the decoupling of state and functionality. By separating <em>what</em> a contract stores from <em>how</em> it accesses it we can easily upgrade a contract on chain. Using the infamous DAO hack as an example, let&rsquo;s assume we have a smart contract which stores an amount of funds but also suffers from the reentrancy bug. Without changing the underlying state, we want to rewire the logic to prevent it from being exploited. Additionally, we may not want to force the original consumers to use a new (pre-initialized) contract.</p>

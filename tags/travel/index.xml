@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>travel on </title>
-    <link>https://greghill.io/tags/travel/</link>
+    <link>/tags/travel/</link>
     <description>Recent content in travel on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 25 Mar 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://greghill.io/tags/travel/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/travel/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hyperledger Global Forum (2020)</title>
-      <link>https://greghill.io/posts/travel/hyperledger_gf_2020/</link>
+      <link>/posts/travel/hyperledger_gf_2020/</link>
       <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/travel/hyperledger_gf_2020/</guid>
+      <guid>/posts/travel/hyperledger_gf_2020/</guid>
       <description>Since I am on lock-down due to the ongoing coronavirus pandemic I decided this would be a good time to write up some notes from my recent visit to Phoenix, Arizona. The conference lasted around four days, though I had some buffer around this for travel - with time to visit the local desert botanical gardens! Fortunately, it was still well attended despite the obvious health concerns but the Linux Foundation made every effort to accommodate guests.</description>
     </item>
     
     <item>
       <title>IPFS Camp 2019 (June 27-30)</title>
-      <link>https://greghill.io/posts/travel/ipfs_camp_2019/</link>
+      <link>/posts/travel/ipfs_camp_2019/</link>
       <pubDate>Sat, 06 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/travel/ipfs_camp_2019/</guid>
+      <guid>/posts/travel/ipfs_camp_2019/</guid>
       <description>I was extremely humbled to attend the first ever Interplanetary File System (IPFS) camp last week. It comprised approximately three days of tutorials, lectures and problem solving in the idyllic Campus La Mola, a short distance from Barcelona, Spain. There were roughly 150 attendees from around the globe who came together to discuss ideas for the distributed web, focusing on content addressable methods of data dissemination and persistence but expanding on higher level technologies which build upon these ideas.</description>
     </item>
     

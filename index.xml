@@ -2,141 +2,161 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title></title>
-    <link>https://greghill.io/</link>
+    <link>/</link>
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Apr 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://greghill.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>ELI5: Bitcoin Difficulty</title>
+      <link>/posts/bitcoin/eli5-difficulty/</link>
+      <pubDate>Mon, 13 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/bitcoin/eli5-difficulty/</guid>
+      <description>In Bitcoin, difficulty is the measure of how hard it is to mine a block. To ensure constant output, this rate is adjusted every 2016 blocks - anticipating block production to take around ten minutes, we can expect recalculation every two weeks. If more blocks are produced than expected then the difficulty is increased, otherwise it is lowered.
+The following formulae can be used to calculate the difficulty rate for any given height - substituting an expected average of 600 seconds (10 minutes) and a base difficulty (introduced at genesis) of 1.</description>
+    </item>
+    
+    <item>
+      <title>ENS &amp; IPFS</title>
+      <link>/posts/ethereum/ens-ipfs/</link>
+      <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/ethereum/ens-ipfs/</guid>
+      <description>By utilizing the Ethereum Name Service (ENS) for resolution and the Interplanetary File System (IPFS) for content hosting it is possible to decentralize a static website while retaining the predictable URL.
+My primary setup leverages GitHub pages to host a blog compiled with Hugo - linked to my domain name. Whenever I want to publish a change, I build the latest website from my markdown content using my custom theme and push it to a separate branch in my personal repository.</description>
+    </item>
+    
+    <item>
       <title>Containerizing Bitcoin</title>
-      <link>https://greghill.io/posts/bitcoin/docker/</link>
+      <link>/posts/bitcoin/docker/</link>
       <pubDate>Fri, 10 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/bitcoin/docker/</guid>
+      <guid>/posts/bitcoin/docker/</guid>
       <description>There are over 500,000 lines of code in Bitcoin Core, roughly 70% of which is pure C++. Compile times vary, but if you just want to get a node up and running, docker is the easiest way to go. Here&amp;rsquo;s something I prepared earlier&amp;hellip;
 Courtesy of the official docs, there are only four commands to run which build bitcoind, bitcoin-cli and bitcoin-qt. The dependencies are clearly outlined for different architectures - including OSx, Windows and Unix flavours - but in my Dockerfile I have chosen to extend Ubuntu.</description>
     </item>
     
     <item>
       <title>Substrate &amp; Ink</title>
-      <link>https://greghill.io/posts/substrate/introduction/</link>
+      <link>/posts/substrate/introduction/</link>
       <pubDate>Wed, 08 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/substrate/introduction/</guid>
+      <guid>/posts/substrate/introduction/</guid>
       <description>To interact with Polkadot, there are three envisioned development trajectories; a parachain implements it&amp;rsquo;s own runtime logic (think custom sidechain), a parathread is similar but only produces a block when absolutely necessary to update the relay chain, and a smart contract can run atop any chain with the correct execution environment. Substrate enables the former methodology based on a modular architecture with pluggable consensus and Parity maintain an embedded Domain Specific Language (eDSL) atop Substrate for WASM smart contracts.</description>
     </item>
     
     <item>
       <title>Upgradable Proxy Contracts</title>
-      <link>https://greghill.io/posts/ethereum/proxy-contracts/</link>
+      <link>/posts/ethereum/proxy-contracts/</link>
       <pubDate>Mon, 06 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/ethereum/proxy-contracts/</guid>
+      <guid>/posts/ethereum/proxy-contracts/</guid>
       <description>Smart contracts in Ethereum are immutable; once they have been included in a block they cannot be changed. This is a weird philosophy to adopt from a software engineering perspective. What if there are bugs in your code? Solidity has a plethora of known attacks which, given the economical value at risk, is troubling to say the least. However, we also do not want to interact with an unstable application that can be arbitrarily updated.</description>
     </item>
     
     <item>
       <title>Hyperledger Global Forum (2020)</title>
-      <link>https://greghill.io/posts/travel/hyperledger_gf_2020/</link>
+      <link>/posts/travel/hyperledger_gf_2020/</link>
       <pubDate>Wed, 25 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/travel/hyperledger_gf_2020/</guid>
+      <guid>/posts/travel/hyperledger_gf_2020/</guid>
       <description>Since I am on lock-down due to the ongoing coronavirus pandemic I decided this would be a good time to write up some notes from my recent visit to Phoenix, Arizona. The conference lasted around four days, though I had some buffer around this for travel - with time to visit the local desert botanical gardens! Fortunately, it was still well attended despite the obvious health concerns but the Linux Foundation made every effort to accommodate guests.</description>
     </item>
     
     <item>
       <title>Proof of Work (Explained)</title>
-      <link>https://greghill.io/posts/bitcoin/pow_explained/</link>
+      <link>/posts/bitcoin/pow_explained/</link>
       <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/bitcoin/pow_explained/</guid>
+      <guid>/posts/bitcoin/pow_explained/</guid>
       <description>So you&amp;rsquo;ve read the theory, but want to understand Bitcoin programmatically. In this post we will analyse the core codebase written in C++ to understand how one can generate and include a block in the chain. Starting with the atomic unit of construction in this context, a block is a grouping of transactions that alter the state of the ledger. For example, a coinbase transaction may be included by a miner to collect a block reward.</description>
     </item>
     
     <item>
       <title>Table Driven Tests</title>
-      <link>https://greghill.io/posts/rust/table-tests/</link>
+      <link>/posts/rust/table-tests/</link>
       <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/rust/table-tests/</guid>
+      <guid>/posts/rust/table-tests/</guid>
       <description>One of my favorite ways to write tests in Go is with a table driven test. If you are unfamiliar with the concept check out the excellent Dave Cheney post. If you need to unit test a component under a multitude of edge cases, then this is good technique to adopt. Anyway, I&amp;rsquo;m learning Rust in my spare time so I thought I&amp;rsquo;d best give it a go. Hopefully this will suffice, but if you think it could be improved please hit me up on twitter.</description>
     </item>
     
     <item>
       <title>ERC Token Standards</title>
-      <link>https://greghill.io/posts/ethereum/erc-tokens/</link>
+      <link>/posts/ethereum/erc-tokens/</link>
       <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/ethereum/erc-tokens/</guid>
+      <guid>/posts/ethereum/erc-tokens/</guid>
       <description>You may be familiar with the concept of a Request for Comments (RFC) from a body such as the Internet Engineering Task Force (IETF). They are just technical documents that describe the specifications for a particular technology - HTTP/1.1 is described by RFC-2616 for instance. Application level standards in the Ethereum ecosystem are thus named accordingly, forming one possible part of an Ethereum Improvement Proposal (EIP). For more details on this, check out EIP-1.</description>
     </item>
     
     <item>
       <title>Decentralized Autonomous Organizations (DAO)</title>
-      <link>https://greghill.io/posts/ethereum/dao/</link>
+      <link>/posts/ethereum/dao/</link>
       <pubDate>Sat, 28 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/ethereum/dao/</guid>
+      <guid>/posts/ethereum/dao/</guid>
       <description>In traditional governance systems, we rely upon human entities to enact policies on behalf of constituents. This may viewed as in contemporary politics or in the hierarchical structure of an enterprise. An historical issue however, is that it is not always possible to trust the judgement of those in charge. In economics, this is known as the principle-agent problem.
 A DAO is a form of self-enforcing protocol, typically modelled as a smart contract.</description>
     </item>
     
     <item>
       <title>Recursive Linear Prefix (RLP) Encoding</title>
-      <link>https://greghill.io/posts/ethereum/rlp-encoding/</link>
+      <link>/posts/ethereum/rlp-encoding/</link>
       <pubDate>Sun, 15 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/ethereum/rlp-encoding/</guid>
+      <guid>/posts/ethereum/rlp-encoding/</guid>
       <description>I was recently tasked with developing a new encoding library for Hyperledger Burrow to further interoperability with the broader Ethereum ecosystem. Recursive Linear Prefix (RLP) is a data format used to store state in Ethereum, more precisely it is an algorithm for representing arbitrary data structures in binary form. Unlike other serialization techniques however, the output is position dependant in that recovering the original object requires knowledge of the input structure.</description>
     </item>
     
     <item>
       <title>IPFS Camp 2019 (June 27-30)</title>
-      <link>https://greghill.io/posts/travel/ipfs_camp_2019/</link>
+      <link>/posts/travel/ipfs_camp_2019/</link>
       <pubDate>Sat, 06 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/travel/ipfs_camp_2019/</guid>
+      <guid>/posts/travel/ipfs_camp_2019/</guid>
       <description>I was extremely humbled to attend the first ever Interplanetary File System (IPFS) camp last week. It comprised approximately three days of tutorials, lectures and problem solving in the idyllic Campus La Mola, a short distance from Barcelona, Spain. There were roughly 150 attendees from around the globe who came together to discuss ideas for the distributed web, focusing on content addressable methods of data dissemination and persistence but expanding on higher level technologies which build upon these ideas.</description>
     </item>
     
     <item>
       <title>Let&#39;s Go Kubernetes</title>
-      <link>https://greghill.io/posts/go/kubernetes/</link>
+      <link>/posts/go/kubernetes/</link>
       <pubDate>Sat, 27 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/go/kubernetes/</guid>
+      <guid>/posts/go/kubernetes/</guid>
       <description>Welcome to the first post from what will hopefully become a series on my adventures with Go! I&amp;rsquo;m really lucky to be able to experiment with some super awesome technologies which I will endeavour to write about more, so if you find this post helpful please let me know on twitter!
 If you&amp;rsquo;re new to Go, follow the getting started docs. You&amp;rsquo;ll also need to configure access to a Kubernetes cluster, or install Minikube - a single local node.</description>
     </item>
     
     <item>
       <title>Evolving Infrastructure</title>
-      <link>https://greghill.io/posts/compass/</link>
+      <link>/posts/compass/</link>
       <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/compass/</guid>
+      <guid>/posts/compass/</guid>
       <description>We&amp;rsquo;ve undergone a lot of infrastructure changes recently at work. We actually submitted the very first DLT framework into Helm&amp;rsquo;s stable charts over a year ago. This allows anyone with a Kubernetes cluster to deploy a custom blockchain courtesy of Burrow (our contribution to the Hyperledger Greenhouse). We&amp;rsquo;re a great believer in cloud first and open source technologies so not only is Kubernetes a great fit for what we do, but Helm extraordinarily simplifies the whole deployment process through Go templating.</description>
     </item>
     
     <item>
       <title>Generating &amp; Modelling Cryptography</title>
-      <link>https://greghill.io/posts/cryptoknight/</link>
+      <link>/posts/cryptoknight/</link>
       <pubDate>Mon, 08 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/posts/cryptoknight/</guid>
+      <guid>/posts/cryptoknight/</guid>
       <description>CryptoKnight is a framework I recently released which follows the methodology described in my publication for synthesizing a scalable dataset of cryptographic primitives to feed a unique Convolutional Neural Network. In effect, this allows us to generate and model a substantial amount of data to quickly identify cryptographic algorithms (such as AES, RSA, RC4, or MD5) in reference binary executables. By safely learning this statistical representation, malware analysts can efficiently compare it against crypto-ransomware samples in a controlled environment.</description>
     </item>
     
     <item>
       <title>Projects</title>
-      <link>https://greghill.io/projects/</link>
+      <link>/projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://greghill.io/projects/</guid>
+      <guid>/projects/</guid>
       <description>CryptoKnight: Generating and Modelling Compiled Cryptographic Primitives CryptoKnight is a tool I developed during my undergraduate at Abertay University. It is designed to aid in the analysis of crypto-ransomware; programs that lock down your computer by encrypting files and preventing access until a ransom has been paid. You might remember the attack on the NHS in 2018 which used a particular instance known as WannaCry. My methodology (as previously introduced in preprint) leverages deep learning to process the application and evaluate the particular algorithms within it in a smarter and faster way.</description>
     </item>
     

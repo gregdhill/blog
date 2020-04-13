@@ -6,14 +6,14 @@
 	<meta name="author" content="Gregory Hill">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Gregory Hill | Evolving Infrastructure</title>
-	<link href="/css/style.css" rel="stylesheet">
+	<link href="../../css/style.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon.png">
 	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
 	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
-	<link rel="manifest" href="/img/manifest.json">
-	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
-	<link rel="shortcut icon" href="/img/favicon.ico">
+	<link rel="manifest" href="../../img/manifest.json">
+	<link rel="mask-icon" href="../../img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="../../img/favicon.ico">
 	<meta name="msapplication-config" content="/img/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
 </head><body>
@@ -30,10 +30,10 @@
         Evolving Infrastructure
     </h1>
 
-    <div class="post-tags"><a class="tag" href=/tags/kubernetes/>#kubernetes</a></div>
+    <div class="post-tags"><a class="tag" href=../../tags/kubernetes/>#kubernetes</a></div>
 
     <p>We&rsquo;ve undergone a lot of infrastructure changes recently at work. We actually submitted the very first <a href="https://github.com/helm/charts/tree/master/stable/burrow">DLT framework</a> into Helm&rsquo;s <a href="https://github.com/helm/charts">stable charts</a> over a year ago. This allows anyone with a Kubernetes cluster to deploy a custom blockchain courtesy of <a href="https://github.com/hyperledger/burrow">Burrow</a> (our contribution to the <a href="https://www.hyperledger.org/wp-content/uploads/2018/11/Hyperledger_DataSheet_11.18_Digital.pdf">Hyperledger Greenhouse</a>). We&rsquo;re a great believer in cloud first and open source technologies so not only is Kubernetes a great fit for what we do, but Helm extraordinarily simplifies the whole deployment process through <a href="https://golang.org/pkg/text/template/">Go templating</a>.</p>
-<p><img src="/img/compass.jpg" alt="https://unsplash.com/photos/iDzKdNI7Qgc"></p>
+<p><img src="../../img/compass.jpg" alt="https://unsplash.com/photos/iDzKdNI7Qgc"></p>
 <p>Last year, as we began extending the size of our stack we realized a problem. Many of our charts had explicit dependencies on one another which forced us to overload our <a href="https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment">CI/CD</a> systems with synchronous bash scripts. With each new addition, our deployment setup was starting to become slower and increasingly unmaintainable. Enter <a href="https://www.terraform.io">Terraform</a>.</p>
 <blockquote>
 <p>Terraform enables you to safely and predictably create, change, and improve infrastructure.</p>
