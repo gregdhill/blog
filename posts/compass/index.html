@@ -9,8 +9,8 @@
 	<link href="../../css/style.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon.png">
-	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
-	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+	<link rel="icon" type="image/png" href="../../img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="../../img/favicon-16x16.png" sizes="16x16">
 	<link rel="manifest" href="../../img/manifest.json">
 	<link rel="mask-icon" href="../../img/safari-pinned-tab.svg" color="#5bbad5">
 	<link rel="shortcut icon" href="../../img/favicon.ico">
@@ -32,7 +32,8 @@
 
     <div class="post-tags"><a class="tag" href=../../tags/kubernetes/>#kubernetes</a></div>
 
-    <p>We&rsquo;ve undergone a lot of infrastructure changes recently at work. We actually submitted the very first <a href="https://github.com/helm/charts/tree/master/stable/burrow">DLT framework</a> into Helm&rsquo;s <a href="https://github.com/helm/charts">stable charts</a> over a year ago. This allows anyone with a Kubernetes cluster to deploy a custom blockchain courtesy of <a href="https://github.com/hyperledger/burrow">Burrow</a> (our contribution to the <a href="https://www.hyperledger.org/wp-content/uploads/2018/11/Hyperledger_DataSheet_11.18_Digital.pdf">Hyperledger Greenhouse</a>). We&rsquo;re a great believer in cloud first and open source technologies so not only is Kubernetes a great fit for what we do, but Helm extraordinarily simplifies the whole deployment process through <a href="https://golang.org/pkg/text/template/">Go templating</a>.</p>
+    <div class="post-body">
+        <p>We&rsquo;ve undergone a lot of infrastructure changes recently at work. We actually submitted the very first <a href="https://github.com/helm/charts/tree/master/stable/burrow">DLT framework</a> into Helm&rsquo;s <a href="https://github.com/helm/charts">stable charts</a> over a year ago. This allows anyone with a Kubernetes cluster to deploy a custom blockchain courtesy of <a href="https://github.com/hyperledger/burrow">Burrow</a> (our contribution to the <a href="https://www.hyperledger.org/wp-content/uploads/2018/11/Hyperledger_DataSheet_11.18_Digital.pdf">Hyperledger Greenhouse</a>). We&rsquo;re a great believer in cloud first and open source technologies so not only is Kubernetes a great fit for what we do, but Helm extraordinarily simplifies the whole deployment process through <a href="https://golang.org/pkg/text/template/">Go templating</a>.</p>
 <p><img src="../../img/compass.jpg" alt="https://unsplash.com/photos/iDzKdNI7Qgc"></p>
 <p>Last year, as we began extending the size of our stack we realized a problem. Many of our charts had explicit dependencies on one another which forced us to overload our <a href="https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment">CI/CD</a> systems with synchronous bash scripts. With each new addition, our deployment setup was starting to become slower and increasingly unmaintainable. Enter <a href="https://www.terraform.io">Terraform</a>.</p>
 <blockquote>
@@ -65,6 +66,7 @@
 Using Go templates also enables us to do other interesting things. When a CI pipeline is triggered for a specific git branch tag, namely develop or master, it&rsquo;s far easier for the CD to identify docker images based on the branch tag. Unfortunately, upstream tagged images can easily go stale in many docker based environments due to caching. This can lead to many painful hours debugging live containers, only to discover that the image is outdated. With a custom go templating function however, we can strongly version each tag based on the latest digest as given by the targeted API.</p>
 <p>So, if you&rsquo;re devOpsing for Helm or Kubernetes and have similarly complex deployment requirements, please check out <a href="https://github.com/gregdhill/compass">Compass</a>!</p>
 
+    </div>
 </div></main>
 </body><footer>
 

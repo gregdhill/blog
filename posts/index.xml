@@ -6,10 +6,21 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Dual Booting Windows &amp; Arch Linux</title>
+      <link>/posts/dual-boot/</link>
+      <pubDate>Sat, 25 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/dual-boot/</guid>
+      <description>Having spent far too much time reinstalling my desktop this weekend, I thought it best to write up the process.
+Before continuing, boot into the machine&amp;rsquo;s BIOS to enable UEFI booting and disable Secure Boot.
+Windows 10  Download the latest image and install it on a flash drive. Ensure that the machine boots with this flash drive in UEFI mode. Follow the wizard and delete all existing partitions. Create a new partition for Windows, leaving suitable unallocated space for Linux.</description>
+    </item>
     
     <item>
       <title>ELI5: Bitcoin Difficulty</title>

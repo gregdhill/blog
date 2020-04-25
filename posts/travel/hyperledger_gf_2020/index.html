@@ -9,8 +9,8 @@
 	<link href="../../../css/style.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="apple-touch-icon" sizes="180x180" href="../../../img/apple-touch-icon.png">
-	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
-	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+	<link rel="icon" type="image/png" href="../../../img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="../../../img/favicon-16x16.png" sizes="16x16">
 	<link rel="manifest" href="../../../img/manifest.json">
 	<link rel="mask-icon" href="../../../img/safari-pinned-tab.svg" color="#5bbad5">
 	<link rel="shortcut icon" href="../../../img/favicon.ico">
@@ -32,7 +32,8 @@
 
     <div class="post-tags"><a class="tag" href=../../../tags/travel/>#travel</a><a class="tag" href=../../../tags/conferences/>#conferences</a></div>
 
-    <p>Since I am on lock-down due to the ongoing coronavirus pandemic I decided this would be a good time to write up some notes from my recent visit to Phoenix, Arizona. The conference lasted around four days, though I had some buffer around this for travel - with time to visit the local desert botanical gardens! Fortunately, it was still well attended despite the obvious health concerns but the Linux Foundation made every effort to accommodate guests. The first two days were designated for talks and demonstrations, &lsquo;ending&rsquo; with a visit to the ironically named Corona ranch for dinner and drinks. The last two days were exclusively for technical workshops, with representation from most projects in the greenhouse.</p>
+    <div class="post-body">
+        <p>Since I am on lock-down due to the ongoing coronavirus pandemic I decided this would be a good time to write up some notes from my recent visit to Phoenix, Arizona. The conference lasted around four days, though I had some buffer around this for travel - with time to visit the local desert botanical gardens! Fortunately, it was still well attended despite the obvious health concerns but the Linux Foundation made every effort to accommodate guests. The first two days were designated for talks and demonstrations, &lsquo;ending&rsquo; with a visit to the ironically named Corona ranch for dinner and drinks. The last two days were exclusively for technical workshops, with representation from most projects in the greenhouse.</p>
 <h2 id="workshops">Workshops</h2>
 <p>The primary motivation for my attendance was to present a workshop on <a href="https://github.com/hyperledger/burrow">Hyperledger Burrow</a> for smart contract developers. It was split into two segments over one afternoon, with one particular theme: tokens. After starting a single node chain with Ed25519 &amp; Secp125k1 keys, we guided participants through using truffle and the web3 interface from Javascript. The example here was ERC-20, the technical standard for fungible tokens - inheriting the interface defined by <a href="https://github.com/OpenZeppelin/openzeppelin-contracts">OpenZeppelin</a>. This was followed by a delve into ERC-721 (the non-fungible token standard) using Burrow&rsquo;s native GRPC client through Typescript.</p>
 <p>Once participants were familiar with talking to their node, we decided to start talking to each other! Each node first connected to my chain on the local network, I then asked everyone to post their would-be validator address in <a href="https://chat.hyperledger.org/channel/burrow">Rocket.Chat</a>. After sending each participant some funds, they then bonded onto the network to help produce blocks. Although we were not able to continue, I had also setup one more experiment: <a href="https://github.com/gregdhill/cryptomarmots">CryptoMarmots</a>. If you are familiar with <a href="https://www.cryptokitties.co/">CryptoKitties</a> on Ethereum, then you may see where I am going with this. From the shared chain, the intent was for users to buy, sell and trade tokens corresponding to a virtual marmot.</p>
@@ -41,6 +42,7 @@
 <h2 id="keynotes-and-talks">Keynotes and Talks</h2>
 <p>As an enterprise driven ecosystem, the organizers did an excellent job of dividing the business and technical tracks. The keynotes were still largely use-case focused, as evident during the panel on the first day which discussed several projects; Walmart has driven a food traceability effort, Honeywell started a marketplace for used aircraft parts, and American Express begun a rewards system.</p>
 
+    </div>
 </div></main>
 </body><footer>
 

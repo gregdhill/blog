@@ -9,8 +9,8 @@
 	<link href="../css/style.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
-	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
-	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+	<link rel="icon" type="image/png" href="../img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="../img/favicon-16x16.png" sizes="16x16">
 	<link rel="manifest" href="../img/manifest.json">
 	<link rel="mask-icon" href="../img/safari-pinned-tab.svg" color="#5bbad5">
 	<link rel="shortcut icon" href="../img/favicon.ico">
@@ -19,6 +19,21 @@
 </head><body>
     <main><div class="catalogue">
     <h1 class="catalogue-header">Posts</h1>
+    
+    <a href="../posts/dual-boot/" class="catalogue-item">
+        <div>
+            
+                <time class="catalogue-time">April 25, 2020</time>
+            
+            <h1 class="catalogue-title">Dual Booting Windows &amp; Arch Linux</h1>
+    
+            
+                <p>Having spent far too much time reinstalling my desktop this weekend, I thought it best to write up the process.
+Before continuing, boot into the machine’s BIOS to enable UEFI booting and disable Secure Boot.
+Windows 10  Download the latest image and install it on a flash drive. Ensure that the machine boots with this flash drive in UEFI mode. Follow the wizard and delete all existing partitions. Create a new partition for Windows, leaving suitable unallocated space for Linux.</p>
+            
+        </div>
+    </a>
     
     <a href="../posts/bitcoin/eli5-difficulty/" class="catalogue-item">
         <div>
@@ -136,20 +151,6 @@ Courtesy of the official docs, there are only four commands to run which build b
     
             
                 <p>You may be familiar with the concept of a Request for Comments (RFC) from a body such as the Internet Engineering Task Force (IETF). They are just technical documents that describe the specifications for a particular technology - HTTP/1.1 is described by RFC-2616 for instance. Application level standards in the Ethereum ecosystem are thus named accordingly, forming one possible part of an Ethereum Improvement Proposal (EIP). For more details on this, check out EIP-1.</p>
-            
-        </div>
-    </a>
-    
-    <a href="../posts/ethereum/dao/" class="catalogue-item">
-        <div>
-            
-                <time class="catalogue-time">September 28, 2019</time>
-            
-            <h1 class="catalogue-title">Decentralized Autonomous Organizations (DAO)</h1>
-    
-            
-                <p>In traditional governance systems, we rely upon human entities to enact policies on behalf of constituents. This may viewed as in contemporary politics or in the hierarchical structure of an enterprise. An historical issue however, is that it is not always possible to trust the judgement of those in charge. In economics, this is known as the principle-agent problem.
-A DAO is a form of self-enforcing protocol, typically modelled as a smart contract.</p>
             
         </div>
     </a>

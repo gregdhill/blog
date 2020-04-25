@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
+	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
+	<meta name="author" content="Gregory Hill">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gregory Hill | Dual Booting Windows &amp; Arch Linux</title>
+	<link href="../../css/style.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="../../img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="../../img/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="../../img/manifest.json">
+	<link rel="mask-icon" href="../../img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="../../img/favicon.ico">
+	<meta name="msapplication-config" content="/img/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+</head><body>
+    <main><div class="post">
+    <div class="post-info">
+        
+            Apr 25, 2020
+            · 556 words
+            · 3 minute read
+        
+    </div>
+
+    <h1 class="post-title">
+        Dual Booting Windows &amp; Arch Linux
+    </h1>
+
+    <div class="post-tags"></div>
+
+    <div class="post-body">
+        <p>Having spent far too much time reinstalling my desktop this weekend, I thought it best to write up the process.</p>
+<p>Before continuing, boot into the machine&rsquo;s BIOS to enable <code>UEFI</code> booting and disable <code>Secure Boot</code>.</p>
+<h1 id="windows-10">Windows 10</h1>
+<ol>
+<li>Download the <a href="https://www.microsoft.com/en-gb/software-download/windows10">latest image</a> and install it on a flash drive.</li>
+<li>Ensure that the machine boots with this flash drive in UEFI mode.</li>
+<li>Follow the wizard and delete all existing partitions.</li>
+<li>Create a new partition for Windows, leaving suitable unallocated space for Linux.</li>
+<li>Wait for the installation to complete and then disable fast startup.</li>
+</ol>
+<h1 id="arch-linux">Arch Linux</h1>
+<h2 id="partitioning">Partitioning</h2>
+<p>Run <code>cgdisk /dev/sdX</code> to view the partitions on the primary hard disk.
+You should see the following partitions from the Windows installation:</p>
+<pre><code>1   529.0 MiB   Windows RE              Basic data partition
+2   100.0 MiB   EFI system partition    EFI system partition
+3   16.0 MiB    Microsoft reserver      Microsoft reserved partition
+4   97.0 GiB    Microsoft basic data    Basic data partition
+    140.8 GiB   free space
+</code></pre><p>Navigate the text based partition editor and claim the remaining free space:</p>
+<pre><code>4   ...
+5   140.8 GiB   Linux filesystem        root
+</code></pre><h2 id="encryption">Encryption</h2>
+<p>Encrypt the root partition and open the new LUKS device:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cryptsetup -c aes-xts-plain64 -y --use-random luksFormat /dev/sdX5
+cryptsetup luksOpen /dev/sdX5 luks
+</code></pre></div><h2 id="volumes">Volumes</h2>
+<p>Setup a physical volume (PV) with a volume group (VG) and two logical volumes (LV):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pvcreate /dev/mapper/luks
+vgcreate vg0 /dev/mapper/luks
+lvcreate --size 8G vg0 --name swap
+lvcreate -l +100%FREE vg0 --name root
+
+mkfs.ext4 /dev/mapper/vg0-root
+mkswap /dev/mapper/vg0-swap
+</code></pre></div><p>Mount the root volume, enable the swap and mount the EFI partition created by Windows:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mount /dev/mapper/vg0-root /mnt
+swapon /dev/mapper/vg0-swap
+mkdir /mnt/boot
+mount /dev/sdX2 /mnt/boot
+</code></pre></div><h2 id="installation">Installation</h2>
+<!-- load-keys uk -->
+<h3 id="software">Software</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pacstrap /mnt base base-devel grub efibootmgr intel-ucode dialog wpa_supplicant linux linux-firmware lvm2 dhcpcd
+pacstrap /mnt zsh vim git
+</code></pre></div><h3 id="file-system-table-fstab">File System Table (fstab)</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">genfstab -pU /mnt &gt;&gt; /mnt/etc/fstab
+</code></pre></div><p>Add the following line to <code>/mnt/etc/fstab</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">tmpfs	/tmp	tmpfs	defaults,noatime,mode<span style="color:#f92672">=</span>1777	0	<span style="color:#ae81ff">0</span>
+</code></pre></div><h3 id="chroot">Chroot</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">arch-chroot /mnt
+</code></pre></div><h3 id="system-clock">System Clock</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ln -s /usr/share/zoneinfo/Europe/London /etc/localtime
+hwclock --systohc --utc
+</code></pre></div><h3 id="hostname">Hostname</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">echo $HOSTNAME &gt; /etc/hostname
+</code></pre></div><h3 id="locale">Locale</h3>
+<p>Uncomment <code>en_GB.UTF-8 UTF-8</code> in <code>/etc/locale.gen</code> and run:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">locale-gen
+</code></pre></div><h3 id="users">Users</h3>
+<p>Set the root password:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">passwd
+</code></pre></div><p>Add a new user and set their password:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">useradd -m -g users -G wheel -s /bin/zsh $USERNAME
+passwd $USERNAME
+</code></pre></div><p>Enter visudo:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">visudo
+</code></pre></div><p>Uncomment the following line:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">## Uncomment to allow members of group wheel to execute any command</span>
+%wheel ALL<span style="color:#f92672">=(</span>ALL<span style="color:#f92672">)</span> ALL
+</code></pre></div><h2 id="bootloader">Bootloader</h2>
+<p>Edit <code>/etc/mkinitcpio.conf</code> and add <code>encrypt</code> and <code>lvm2</code> to <code>HOOKS</code> before <code>filesystems</code>.</p>
+<p>Regenerate the <code>initramfs</code> with the <code>linux</code> preset:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mkinitcpio -p linux
+</code></pre></div><p>Install a bootloader:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bootctl --path<span style="color:#f92672">=</span>/boot install
+</code></pre></div><p>Edit <code>/boot/loader/loader.conf</code> and replace the contents with the following:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">default arch
+timeout <span style="color:#ae81ff">3</span>
+editor <span style="color:#ae81ff">0</span>
+</code></pre></div><p>Add a bootloader entry in <code>/boot/loader/entries/arch.conf</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">title Arch Linux
+linux /vmlinuz-linux
+initrd /initramfs-linux.img
+options cryptdevice<span style="color:#f92672">=</span>UUID<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>UUID<span style="color:#e6db74">}</span>:volume root<span style="color:#f92672">=</span>/dev/mapper/volume-root quiet rw
+</code></pre></div><p>Replace <code>${UUID}</code> with the UUID of your root partition. If you use vim to edit the file above, run the following command to automatically read this in:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">:read ! blkid /dev/sdX5
+</code></pre></div><h2 id="reboot">Reboot</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">exit
+umount -R /mnt
+swapoff -a
+reboot
+</code></pre></div><h2 id="addendum">Addendum</h2>
+<p>Several additional components are required to make the system usable. In this section I will list the dependencies to get <code>Wayland</code> up and running with the <code>Sway</code> window manager. Access <code>Arch Linux</code> from the boot menu and login.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo pacman -S wayland waybar xorg-server-xwayland sway termite dmenu
+</code></pre></div><p>Before starting, copy the example config to your user&rsquo;s home directory:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mkdir -p ~/.config/sway
+cp /etc/sway/config ~/.config/sway/
+</code></pre></div><p>Run <code>sway</code> from the command line or add <a href="https://github.com/swaywm/sway/wiki#login-managers">this</a> to autostart.</p>
+<h3 id="yay">Yay</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+</code></pre></div>
+    </div>
+</div></main>
+</body><footer>
+
+    
+        <a class="footer-social" href="https://github.com/gregdhill">
+            <i class="grow fa fa-github fa-2x" aria-hidden="true"></i>
+        </a>
+    
+        <a class="footer-social" href="https://twitter.com/gregorydhill">
+            <i class="grow fa fa-twitter fa-2x" aria-hidden="true"></i>
+        </a>
+    
+        <a class="footer-social" href="https://scholar.google.co.uk/citations?user=OoKiidsAAAAJ&amp;hl=en">
+            <i class="grow fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
+        </a>
+    
+
+</footer></html>

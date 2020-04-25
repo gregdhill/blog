@@ -9,8 +9,8 @@
 	<link href="../../../css/style.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="apple-touch-icon" sizes="180x180" href="../../../img/apple-touch-icon.png">
-	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
-	<link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
+	<link rel="icon" type="image/png" href="../../../img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="../../../img/favicon-16x16.png" sizes="16x16">
 	<link rel="manifest" href="../../../img/manifest.json">
 	<link rel="mask-icon" href="../../../img/safari-pinned-tab.svg" color="#5bbad5">
 	<link rel="shortcut icon" href="../../../img/favicon.ico">
@@ -32,7 +32,8 @@
 
     <div class="post-tags"><a class="tag" href=../../../tags/substrate/>#substrate</a><a class="tag" href=../../../tags/ink/>#ink</a><a class="tag" href=../../../tags/rust/>#rust</a></div>
 
-    <p>To interact with Polkadot, there are three envisioned development trajectories; a parachain implements it&rsquo;s own runtime logic (think custom sidechain), a parathread is similar but only produces a block when absolutely necessary to update the relay chain, and a smart contract can run atop any chain with the correct execution environment. Substrate enables the former methodology based on a modular architecture with pluggable consensus and Parity maintain an embedded Domain Specific Language (eDSL) atop Substrate for WASM smart contracts.</p>
+    <div class="post-body">
+        <p>To interact with Polkadot, there are three envisioned development trajectories; a parachain implements it&rsquo;s own runtime logic (think custom sidechain), a parathread is similar but only produces a block when absolutely necessary to update the relay chain, and a smart contract can run atop any chain with the correct execution environment. Substrate enables the former methodology based on a modular architecture with pluggable consensus and Parity maintain an embedded Domain Specific Language (eDSL) atop Substrate for WASM smart contracts.</p>
 <p>As of the time of writing, interchain support is not yet finalized. Once complete, anything developed with Substrate will be able to communicate with the ecosystem through <a href="https://github.com/paritytech/cumulus">Cumulus</a> using <a href="https://wiki.polkadot.network/docs/en/learn-crosschain">Cross-chain Message Passing</a>. <a href="https://wiki.polkadot.network/docs/en/maintain-collator">Collators</a> will forward transactions from a designated parachain to the <a href="https://wiki.polkadot.network/docs/en/learn-architecture#relay-chain">relay chain</a> to benefit from <em>pooled security</em>. Each parachain slot on the relay chain will have a registered State Transition Function (STF) that validates the bundled transactions.</p>
 <p>In this post I will demonstrate how to implement a custom parachain runtime versus an equivalent on layer two. To interact with the examples it will be helpful to open the official <a href="https://polkadot.js.org/apps/">Polkadot UI</a> on a supported browser or run it locally:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker run --rm -it --name polkadot-ui -p 80:80 chevdor/polkadot-ui:latest
@@ -103,6 +104,7 @@ cargo +nightly contract generate-metadata
 <p>The Framework for Runtime Aggregation of Modularized Entities (FRAME) describes a set of modules, known as pallets, linked by support libraries.
 Pallets are the domain specific dependencies of Substrate - crates that only work within the context of a node.</p>
 
+    </div>
 </div></main>
 </body><footer>
 
