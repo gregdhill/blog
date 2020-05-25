@@ -426,3 +426,45 @@ footer {
 	outline: 0;
 	margin: 5px;
 }
+
+table {
+border: 2px solid #FFFFFF;
+width: 100%;
+text-align: center;
+border-collapse: collapse;
+margin: 0 0 1rem;
+}
+table td, table th {
+border: 1px solid #FFFFFF;
+padding: 3px 4px;
+}
+table tbody td {
+font-size: 16px;
+}
+table td:nth-child(even) {
+background: #EBEBEB;
+}
+table thead {
+background: #FFFFFF;
+border-bottom: 4px solid #333333;
+}
+table thead th {
+font-size: 16px;
+font-weight: bold;
+color: #333333;
+text-align: center;
+border-left: 2px solid #333333;
+}
+table thead th:first-child {
+border-left: none;
+}
+
+table tfoot {
+font-size: 16px;
+font-weight: bold;
+color: #333333;
+border-top: 4px solid #333333;
+}
+table tfoot td {
+font-size: 16px;
+}

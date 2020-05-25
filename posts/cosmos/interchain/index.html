@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
+	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
+	<meta name="author" content="Gregory Hill">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gregory Hill | Interchain Standards</title>
+	<link href="../../../css/style.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="../../../img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="../../../img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="../../../img/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="../../../img/manifest.json">
+	<link rel="mask-icon" href="../../../img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="../../../img/favicon.ico">
+	<meta name="msapplication-config" content="/img/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+</head><body>
+    <main><div class="post">
+    <div class="post-info">
+        
+            May 25, 2020
+            · 885 words
+            · 5 minute read
+        
+    </div>
+
+    <h1 class="post-title">
+        Interchain Standards
+    </h1>
+
+    <div class="post-tags"></div>
+
+    <div class="post-body">
+        <p>The <a href="https://cosmos.network/ibc/">Inter-Blockchain Communication (IBC) protocol</a> is an architecture designed for Cosmos to allow participating processes to share state. Each module is a deterministic process, such as a replicated state machine with fast transaction finality. Unlike sharded architectures (such as Polkadot), IBC does not provide pooled security.</p>
+<p>The specification builds on several assumptions to reason about the capabilities of the protocol. For instance, it assumes
+<strong>fast finality</strong> for any adopted consensus mechanism - Tendermint &amp; GRANDPA are two such examples. These processes should also
+allow for <strong>cheaply-verifiable consensus transcripts</strong> and basic <strong>key / value functionality</strong>.</p>
+<h2 id="clientshttpsgithubcomcosmosicstreemasterspecics-002-client-semantics"><a href="https://github.com/cosmos/ics/tree/master/spec/ics-002-client-semantics">Clients</a></h2>
+<p>A <a href="https://www.parity.io/what-is-a-light-client/">light client</a> provides a way to verify the expected state of a consensus
+mechanism without directly participating in it&rsquo;s process. Given a starting state and a &ldquo;validity predicate&rdquo;, it can follow the
+<strong>consensus transcripts</strong> output by another chain to easily verify their correctness. By submitting a transaction inclusion proof
+it should then be possible for the light client to verify the sub-state of the canonical chain at any particular height.</p>
+<p>Let us assume we have two independent networks, each with a component that can update it&rsquo;s internal state based on externally submitted data. In this case, our component is a light client that can verify <strong>headers</strong> from another chain with a compatible consensus algorithm. For each block agreed upon by the respective network, a corresponding header should be registered by the light client embedded in the counter-chain.</p>
+<p><img src="../../../img/ibc-client.png" alt="">
+<em>Client</em></p>
+<p>Out-of-bounds, we can expect some <a href="https://github.com/cosmos/ics/tree/master/spec/ics-018-relayer-algorithms">relaying process</a> to sign and broadcast these transactions between networks.</p>
+<h2 id="connectionshttpsgithubcomcosmosicstreemasterspecics-003-connection-semantics"><a href="https://github.com/cosmos/ics/tree/master/spec/ics-003-connection-semantics">Connections</a></h2>
+<p>With two stateful clients eliciting up-to-date headers, we now require <em>authorization semantics</em>. That is, both chains need to understand how they can speak with each other. In the following state machine diagram, an actor transacting with chain <strong>A</strong> will trigger the initialization step to connect chain <strong>B</strong>. Each subsequent datagram in the handshake will then require commitment proofs to affirm the counter-chain state.</p>
+<p><img src="../../../img/ibc-connection.png" alt="">
+<em>Connection</em></p>
+<p>Each connection is eternal and uniquely identified on a first-come-first-serve basis.</p>
+<h2 id="ports--moduleshttpsgithubcomcosmosicstreemasterspecics-005-port-allocation"><a href="https://github.com/cosmos/ics/tree/master/spec/ics-005-port-allocation">Ports &amp; Modules</a></h2>
+<p>After establishing a permanent connection between two chains, we would like to begin passing messages.
+Before we can do that however, we need to identify <em>what</em> we are actually going to send data to.</p>
+<p>A <strong>module</strong> is an abstraction used to denote a sub-component of a particular state machine. We will see
+a particular example of this later on, but for now let us imagine these as smart contracts. Each module may
+bind to one or more <strong>ports</strong> to allow incoming traffic to be routed correctly. Additionally, a module can connect
+to multiple outbound ports bound by external modules. They may be released at any point in time.</p>
+<p>To draw a familiar analogy, imagine you are requesting HTTP data from a web server. The server will typically serve requests from port 80 which the client will automatically default to. The client will then bind to an ephemeral port in order for the return traffic to be routed correctly.</p>
+<h2 id="channelshttpsgithubcomcosmosicstreemasterspecics-004-channel-and-packet-semantics"><a href="https://github.com/cosmos/ics/tree/master/spec/ics-004-channel-and-packet-semantics">Channels</a></h2>
+<p>Port allocation and ownership facilitates the permissioning of channels to modules. Through a connection, an actor may open a channel between two modules by linking the source and destination ports. Analogous to a TCP / UDP connection, a channel can be <strong>ordered</strong> or <strong>unordered</strong> and is typically ephemeral. The state machine for establishing a channel can be seen in the following diagram:</p>
+<p><img src="../../../img/ibc-channel.png" alt="">
+<em>Channel</em></p>
+<p>It is important to note that after initialization, each subsequent step requires a proof from the counter-chain to verify against it&rsquo;s corresponding light client. It can determine this by checking the connection object for the source network.</p>
+<h2 id="packetshttpsgithubcomcosmosicstreemasterspecics-004-channel-and-packet-semantics"><a href="https://github.com/cosmos/ics/tree/master/spec/ics-004-channel-and-packet-semantics">Packets</a></h2>
+<p>Once a channel is established, we can send packets containing arbitrary data payloads for use with higher level protocols. We do however require a partial interface defined as follows:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sequence</td>
+<td>order of sends and receives</td>
+</tr>
+<tr>
+<td>timeoutHeight</td>
+<td>consensus height expiry</td>
+</tr>
+<tr>
+<td>timeoutTimestamp</td>
+<td>timestamp expiry</td>
+</tr>
+<tr>
+<td>sourcePort</td>
+<td>sending port</td>
+</tr>
+<tr>
+<td>sourceChannel</td>
+<td>sending channel</td>
+</tr>
+<tr>
+<td>destPort</td>
+<td>receiving port</td>
+</tr>
+<tr>
+<td>destChannel</td>
+<td>receiving channel</td>
+</tr>
+<tr>
+<td>data</td>
+<td>opaque value</td>
+</tr>
+</tbody>
+</table>
+<p>It is a module&rsquo;s responsibility to send and receive packets. Each step in the following state machine diagram should additionally validate connection and channel state, port ownership and timeout. On send we store a constant sized commitment to the packet data and timeout which should be verified by the receiving chain. Finally, the calling module should delete the packet commitment on acknowledgement.</p>
+<p><img src="../../../img/ibc-packet.png" alt="">
+<em>Packet</em></p>
+<p>An ordered channel should optionally check that the sequence numbers are monotonically increasing.</p>
+<h2 id="asset-transferhttpsgithubcomcosmosicstreemasterspecics-020-fungible-token-transfer"><a href="https://github.com/cosmos/ics/tree/master/spec/ics-020-fungible-token-transfer">Asset Transfer</a></h2>
+<p>An example payload for application layer usage is fungible asset transfer via a two-way peg. Specifically, we want to <em>preserve</em>:</p>
+<ul>
+<li>ownership</li>
+<li>fungibility</li>
+<li>total supply</li>
+</ul>
+<p>Let us assume an account on chain <strong>A</strong> wants to send tokens to an account on chain <strong>B</strong>. After channel setup, both chains
+should recognize a particular <em>escrow address</em>. The desired path can then be summarized as follows:</p>
+<h3 id="a---b"><strong>A</strong> -&gt; <strong>B</strong></h3>
+<ol>
+<li><strong>A</strong> transfers <code>amount</code> of tokens from <code>sender</code> to the <em>escrow address</em> for the source channel.</li>
+<li><strong>A</strong> sends packet to <strong>B</strong> with <code>denomination</code>, <code>amount</code> and <code>recipient</code>.</li>
+<li><strong>B</strong> receives packet and mints <code>amount</code> of tokens to <code>recipient</code>.</li>
+</ol>
+<h3 id="b---a"><strong>B</strong> -&gt; <strong>A</strong></h3>
+<ol>
+<li><strong>B</strong> burns <code>amount</code> of tokens owned by <code>sender</code>.</li>
+<li><strong>B</strong> sends a packet to <strong>A</strong> with <code>denomination</code>, <code>amount</code> and <code>recipient</code>.</li>
+<li><strong>A</strong> receives packet and transfers <code>amount</code> of tokens from the <em>escrow account</em> to <code>recipient</code>.</li>
+</ol>
+<blockquote>
+<p>Note: The specification does not handle the &ldquo;diamond problem&rdquo;, where tokens are transferred through chains: <code>A -&gt; B -&gt; D -&gt; C -&gt; A</code>.</p>
+</blockquote>
+
+    </div>
+</div></main>
+</body><footer>
+
+    
+        <a class="footer-social" href="https://github.com/gregdhill">
+            <i class="grow fa fa-github fa-2x" aria-hidden="true"></i>
+        </a>
+    
+        <a class="footer-social" href="https://twitter.com/gregorydhill">
+            <i class="grow fa fa-twitter fa-2x" aria-hidden="true"></i>
+        </a>
+    
+        <a class="footer-social" href="https://scholar.google.co.uk/citations?user=OoKiidsAAAAJ&amp;hl=en">
+            <i class="grow fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
+        </a>
+    
+
+</footer></html>

@@ -6,10 +6,20 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Interchain Standards</title>
+      <link>/posts/cosmos/interchain/</link>
+      <pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cosmos/interchain/</guid>
+      <description>The Inter-Blockchain Communication (IBC) protocol is an architecture designed for Cosmos to allow participating processes to share state. Each module is a deterministic process, such as a replicated state machine with fast transaction finality. Unlike sharded architectures (such as Polkadot), IBC does not provide pooled security.
+The specification builds on several assumptions to reason about the capabilities of the protocol. For instance, it assumes fast finality for any adopted consensus mechanism - Tendermint &amp;amp; GRANDPA are two such examples.</description>
+    </item>
     
     <item>
       <title>Dual Booting Windows &amp; Arch Linux</title>
