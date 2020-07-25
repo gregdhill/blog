@@ -6,10 +6,19 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>LedgerJS</title>
+      <link>/posts/bitcoin/ledger-js/</link>
+      <pubDate>Sat, 25 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/bitcoin/ledger-js/</guid>
+      <description>A hardware wallet is a specialized physical device used to store (and derive) your private keys. Some of the most popular products are developed by Ledger and you may be familiar with the Nano series. They support developing custom applications in C (for now, but Rust is coming) and the active library is well stocked, both Bitcoin and Ethereum have dedicated applications. To build on top of these we need to speak through the application protocol data unit (APDU) - for which Bitcoin has a technical specification.</description>
+    </item>
     
     <item>
       <title>Interchain Standards</title>

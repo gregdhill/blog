@@ -4,16 +4,36 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-05-25T00:00:00+00:00</lastmod>
+    <lastmod>2020-07-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/cosmos/interchain/</loc>
-    <lastmod>2020-05-25T00:00:00+00:00</lastmod>
+    <loc>/tags/bitcoin/</loc>
+    <lastmod>2020-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bitcoin/ledger-js/</loc>
+    <lastmod>2020-07-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/posts/</loc>
+    <lastmod>2020-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/typescript/</loc>
+    <lastmod>2020-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/cosmos/interchain/</loc>
     <lastmod>2020-05-25T00:00:00+00:00</lastmod>
   </url>
   
@@ -23,17 +43,7 @@
   </url>
   
   <url>
-    <loc>/tags/bitcoin/</loc>
-    <lastmod>2020-04-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/posts/bitcoin/eli5-difficulty/</loc>
-    <lastmod>2020-04-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2020-04-13T00:00:00+00:00</lastmod>
   </url>
   

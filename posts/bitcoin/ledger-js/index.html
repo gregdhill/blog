@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
+	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
+	<meta name="author" content="Gregory Hill">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gregory Hill | LedgerJS</title>
+	<link href="../../../css/style.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="../../../img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="../../../img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="../../../img/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="../../../img/manifest.json">
+	<link rel="mask-icon" href="../../../img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="../../../img/favicon.ico">
+	<meta name="msapplication-config" content="/img/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+</head><body>
+    <main><div class="post">
+    <div class="post-info">
+        
+            Jul 25, 2020
+            · 586 words
+            · 3 minute read
+        
+    </div>
+
+    <h1 class="post-title">
+        LedgerJS
+    </h1>
+
+    <div class="post-tags"><a class="tag" href=../../../tags/bitcoin/>#bitcoin</a><a class="tag" href=../../../tags/typescript/>#typescript</a></div>
+
+    <div class="post-body">
+        <p>A hardware wallet is a specialized physical device used to store (and <a href="https://en.bitcoin.it/wiki/Deterministic_wallet">derive</a>) your private keys.
+Some of the most popular products are developed by <a href="https://www.ledger.com/">Ledger</a> and you may be familiar with the Nano series. They support developing
+custom applications in C (for now, but Rust <a href="https://github.com/LedgerHQ/rust-app-demo">is coming</a>) and the active library is well stocked, both
+<a href="https://github.com/LedgerHQ/app-bitcoin">Bitcoin</a> and <a href="https://github.com/LedgerHQ/app-ethereum">Ethereum</a> have dedicated applications. To build on top of
+these we need to speak through the application protocol data unit (APDU) - for which Bitcoin has a <a href="https://blog.ledger.com/btchip-doc/bitcoin-technical-beta.html">technical specification</a>.
+There are also some high-level libraries that simplify this task and in this post I will give an example of how we can use the JS/TS API to read your public keys
+and sign a Bitcoin transaction.</p>
+<h2 id="installation">Installation</h2>
+<p>We will assume that the following script is interpreted through the node runtime, but it is also possible to port this to
+client-side JS using one of the <a href="https://github.com/LedgerHQ/ledgerjs#ledgerhqhw-transport-">supported transports</a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yarn add @ledgerhq/@ledgerhq/hw-transport-node-hid
+yarn add @ledgerhq/hw-app-btc
+</code></pre></div><p>We need a few helper libraries in order to generate the output script later:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yarn add bitcoinjs-lib
+yarn add bigint-buffer
+</code></pre></div><h2 id="getting-started">Getting Started</h2>
+<p>Let&rsquo;s create our script as <code>index.ts</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Transport</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;@ledgerhq/@ledgerhq/hw-transport-node-hid&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">AppBtc</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;@ledgerhq/hw-app-btc&#34;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">bitcoin</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;bitcoinjs-lib&#39;</span>;
+<span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">toBufferLE</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;bigint-buffer&#39;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">OPEN_TIMEOUT</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10000</span>;
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">LISTENER_TIMEOUT</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">30000</span>;
+
+<span style="color:#a6e22e">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main() {</span>
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">transport</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">Transport</span>.<span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">OPEN_TIMEOUT</span>, <span style="color:#a6e22e">LISTENER_TIMEOUT</span>);
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AppBtc</span>(<span style="color:#a6e22e">transport</span>);
+
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">publicKey</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">getWalletPublicKey</span>(<span style="color:#e6db74">&#34;84&#39;/0&#39;/0&#39;/0/0&#34;</span>, {<span style="color:#a6e22e">format</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;bech32&#34;</span>});
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">publicKey</span>.<span style="color:#a6e22e">bitcoinAddress</span>);
+}
+
+<span style="color:#a6e22e">main</span>();
+</code></pre></div><p>Before running this script (using <a href="https://github.com/TypeStrong/ts-node">ts-node</a>) make sure your device
+is connected via USB and the Bitcoin app is open. Unless you have disabled the verification check in the
+settings your device may ask for permission to export the public key for this derivation path.</p>
+<p>The console should print a <a href="https://en.bitcoin.it/wiki/Bech32">Bech32</a> formatted <a href="https://en.bitcoin.it/wiki/Segregated_Witness">SegWit</a>
+address like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq
+</code></pre></div><p>For more details on derivation paths or HD wallets in general;</p>
+<ul>
+<li><a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">BIP-32</a> - Hierarchical Deterministic (HD) Wallets</li>
+<li><a href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki">BIP-39</a> - Mnemonics</li>
+<li><a href="https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki">BIP-44</a> - Multi-Account Hierarchy</li>
+</ul>
+<h2 id="signing-a-transaction">Signing a Transaction</h2>
+<p>Please make sure you are familiar with the concept of unspent transaction outputs (UTXO).
+Unlike in account based architectures (such as Ethereum) balances are calculated differently.
+Your wallet should instead &lsquo;watch&rsquo; for transactions that spend to your address and sum the amount.
+To spend a particular output you need to prove that you are the owner of that address by providing
+a signature that links your public key.</p>
+<p>Before we can sign a new transaction we first need a valid UTXO. If you are running a
+<a href="https://bitcoin.org/en/full-node">full-node</a> we can fetch the hex using the RPC API:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bitcoin-cli getrawtransaction <span style="color:#e6db74">&#34;mytxid&#34;</span> false <span style="color:#e6db74">&#34;myblockhash&#34;</span>
+</code></pre></div><p>The <a href="https://github.com/Blockstream/esplora">Blockstream Esplora</a> API is also particularly useful
+so I published a <a href="https://github.com/interlay/esplora-btc-api">client library</a> in Typescript.</p>
+<p>For now we can copy this into the <code>utxoHex</code> variable below. Also note that we should adjust the <code>txIndex</code>
+to unlock the correct output (there may be multiple).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">utxoHex</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;*****&#34;</span>;
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">txIndex</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">inTx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">splitTransaction</span>(<span style="color:#a6e22e">utxoHex</span>, <span style="color:#66d9ef">true</span>, <span style="color:#66d9ef">false</span>);
+</code></pre></div><p>Finally, let&rsquo;s construct and sign our new transaction to pay <code>100</code> satoshis to the <code>recipient</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">amount</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>;
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">recipient</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;*****&#34;</span>;
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">payment</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">bitcoin</span>.<span style="color:#a6e22e">payments</span>.<span style="color:#a6e22e">p2wpkh</span>({ <span style="color:#a6e22e">address</span>: <span style="color:#66d9ef">recipient</span> });
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">outputScriptHex</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">serializeTransactionOutputs</span>({
+    <span style="color:#a6e22e">version</span>: <span style="color:#66d9ef">Buffer.from</span>(<span style="color:#e6db74">&#34;01000000&#34;</span>, <span style="color:#e6db74">&#39;hex&#39;</span>),
+    <span style="color:#a6e22e">inputs</span><span style="color:#f92672">:</span> [],
+    <span style="color:#a6e22e">outputs</span><span style="color:#f92672">:</span> [{
+        <span style="color:#a6e22e">amount</span>: <span style="color:#66d9ef">toBufferLE</span>(<span style="color:#a6e22e">BigInt</span>(<span style="color:#a6e22e">amount</span>), <span style="color:#ae81ff">8</span>),
+        <span style="color:#a6e22e">script</span>: <span style="color:#66d9ef">payment.output</span><span style="color:#f92672">!</span>,
+    }]
+}).<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;hex&#39;</span>);
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">createPaymentTransactionNew</span>({
+    <span style="color:#a6e22e">inputs</span><span style="color:#f92672">:</span> [[<span style="color:#a6e22e">inTx</span>, <span style="color:#a6e22e">txIndex</span>, <span style="color:#66d9ef">undefined</span>, <span style="color:#66d9ef">undefined</span>]],
+    <span style="color:#a6e22e">associatedKeysets</span><span style="color:#f92672">:</span> [ <span style="color:#e6db74">&#34;84&#39;/0&#39;/0&#39;/0/0&#34;</span> ],
+    <span style="color:#a6e22e">outputScriptHex</span>,
+    <span style="color:#a6e22e">segwit</span>: <span style="color:#66d9ef">true</span>,
+    <span style="color:#a6e22e">sigHashType</span>: <span style="color:#66d9ef">1</span>,
+    <span style="color:#a6e22e">additionals</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#34;bitcoin&#34;</span>, <span style="color:#e6db74">&#34;bech32&#34;</span>],
+});
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">tx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">bitcoin</span>.<span style="color:#a6e22e">Transaction</span>.<span style="color:#a6e22e">fromHex</span>(<span style="color:#a6e22e">result</span>);
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">tx</span>.<span style="color:#a6e22e">toHex</span>());
+</code></pre></div><p>If you accepted the prompts on your device the console should display the signed
+transaction hex. We can now broadcast this through an RPC or REST API.</p>
+
+    </div>
+</div></main>
+</body><footer>
+
+    
+        <a class="footer-social" href="https://github.com/gregdhill">
+            <i class="grow fa fa-github fa-2x" aria-hidden="true"></i>
+        </a>
+    
+        <a class="footer-social" href="https://twitter.com/gregorydhill">
+            <i class="grow fa fa-twitter fa-2x" aria-hidden="true"></i>
+        </a>
+    
+        <a class="footer-social" href="https://scholar.google.co.uk/citations?user=OoKiidsAAAAJ&amp;hl=en">
+            <i class="grow fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
+        </a>
+    
+
+</footer></html>
