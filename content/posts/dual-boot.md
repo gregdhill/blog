@@ -23,7 +23,7 @@ Before continuing, boot into the machine's BIOS to enable `UEFI` booting and dis
 Run `cgdisk /dev/sdX` to view the partitions on the primary hard disk.
 You should see the following partitions from the Windows installation:
 
-```
+```shell
 1   529.0 MiB   Windows RE              Basic data partition
 2   100.0 MiB   EFI system partition    EFI system partition
 3   16.0 MiB    Microsoft reserver      Microsoft reserved partition
@@ -33,7 +33,7 @@ You should see the following partitions from the Windows installation:
 
 Navigate the text based partition editor and claim the remaining free space:
 
-```
+```shell
 4   ...
 5   140.8 GiB   Linux filesystem        root
 ```
@@ -178,7 +178,7 @@ Add a bootloader entry in `/boot/loader/entries/arch.conf`:
 title Arch Linux
 linux /vmlinuz-linux
 initrd /initramfs-linux.img
-options cryptdevice=UUID=${UUID}:volume root=/dev/mapper/volume-root quiet rw
+options cryptdevice=UUID=${UUID}:volume root=/dev/mapper/vg0-root rw
 ```
 
 Replace `${UUID}` with the UUID of your root partition. If you use vim to edit the file above, run the following command to automatically read this in:
@@ -196,6 +196,14 @@ swapoff -a
 reboot
 ```
 
+## Troubleshooting
+
+If the PC boots directly to Windows, you may need to edit the Boot Configuration Data (BCD).
+Open a `powershell` instance with administrator privileges and run the following command:
+
+```powershell
+bcdedit /set "{bootmgr}" path "\EFI\BOOT\BOOTX64.EFI"
+```
 
 ## Addendum
 

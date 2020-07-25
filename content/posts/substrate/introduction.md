@@ -122,9 +122,3 @@ Anything that ingresses into the chain is an extrinsic, namely inherents (inform
 
 The Framework for Runtime Aggregation of Modularized Entities (FRAME) describes a set of modules, known as pallets, linked by support libraries.
 Pallets are the domain specific dependencies of Substrate - crates that only work within the context of a node.
-
-
-
-
-
-
