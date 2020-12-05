@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
+	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
+	<meta name="author" content="Gregory Hill">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gregory Hill | BIP47: TL;DR</title>
+	<link href="../../../css/style.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="../../../img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="../../../img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="../../../img/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="../../../img/manifest.json">
+	<link rel="mask-icon" href="../../../img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="../../../img/favicon.ico">
+	<meta name="msapplication-config" content="/img/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+</head><body>
+    <main><div class="post">
+    <div class="post-info">
+        
+            Dec 5, 2020
+            · 267 words
+            · 2 minute read
+        
+    </div>
+
+    <h1 class="post-title">
+        BIP47: TL;DR
+    </h1>
+
+    <div class="post-tags"><a class="tag" href=../../../tags/bitcoin/>#bitcoin</a></div>
+
+    <div class="post-body">
+        <p><strong><a href="https://github.com/bitcoin/bips/blob/master/bip-0047.mediawiki">BIP-0047</a></strong></p>
+<p><strong>Payment Code</strong>: {version}{features}{bitmessage}{public_key}{chain-code}{reserved}</p>
+<h2 id="version-1">Version 1</h2>
+<h3 id="setup">Setup</h3>
+<ul>
+<li>Alice derives Bob&rsquo;s notification address from his payment code (see <a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">BIP32</a>)</li>
+<li>Alice computes payment code using a shared secret (Alice&rsquo;s private key and Bob&rsquo;s public key)</li>
+<li>Alice sends notification tx to Bob with payment code in <code>OP_RETURN</code> data</li>
+<li>Bob watches for transactions to his notification address</li>
+<li>Bob decodes Alice&rsquo;s payment code using the shared secret</li>
+</ul>
+<blockquote>
+<p>To anonymize payments, Alice may use an ephemeral payment code which is a hardened child of her original payment code.</p>
+</blockquote>
+<h3 id="transfer">Transfer</h3>
+<ul>
+<li>Alice derives 0th private key from her payment code</li>
+<li>Alice derives next unused public key from Bob&rsquo;s payment code (local counter)</li>
+<li>Alice computes shared secret, calculates Bob&rsquo;s ephemeral public key and generates P2PKH address</li>
+<li>Bob computes <code>n</code> ephemeral addresses and watches for transactions</li>
+</ul>
+<p>Note that in this scheme (ECDH) it is computationally infeasible for a third party to correlate Alice&rsquo;s payments to Bob.</p>
+<h3 id="refund">Refund</h3>
+<ul>
+<li>
+<p>Bob derives Alice&rsquo;s notification address from her payment code</p>
+</li>
+<li>
+<p>Bob sends notification tx to Alice with payment code in <code>OP_RETURN</code> data</p>
+</li>
+<li>
+<p>Bob derives 0th private key from his payment code</p>
+</li>
+<li>
+<p>Bob derives next unused public key from Alice&rsquo;s payment code (local counter)</p>
+</li>
+<li>
+<p>Bob computes shared secret, calculates Alice&rsquo;s ephemeral public key and generates P2PKH address</p>
+</li>
+<li>
+<p>Alice computes <code>n</code> ephemeral addresses and watches for transactions</p>
+</li>
+</ul>
+<h2 id="version-2">Version 2</h2>
+<p>Identical to the process above, with one exception. Bob&rsquo;s notification <em>change</em> address is calculated as a multisig:</p>
+<ul>
+<li>BOB_PAYMENT_CODE_ID: payment code identifier; <code>0x02${sha256(bob_payment_code).toString(&quot;hex&quot;)}</code></li>
+<li>ALICE_CHANGE_PUBKEY: notification change output; public key for Alice&rsquo;s change address in tx</li>
+</ul>
+<pre><code>OP_1 &lt;BOB_PAYMENT_CODE_ID&gt; &lt;ALICE_CHANGE_PUBKEY&gt; OP_2 OP_CHECKMULTISIG
+</code></pre><p>Bob should add his payment code identifier to his bloom filter to detect notification transactions.</p>
+
+    </div>
+</div></main>
+</body><footer>
+
+    
+        <a class="footer-social" href="https://github.com/gregdhill">
+            <i class="grow fa fa-github fa-2x" aria-hidden="true"></i>
+        </a>
+    
+        <a class="footer-social" href="https://twitter.com/gregorydhill">
+            <i class="grow fa fa-twitter fa-2x" aria-hidden="true"></i>
+        </a>
+    
+        <a class="footer-social" href="https://scholar.google.co.uk/citations?user=OoKiidsAAAAJ&amp;hl=en">
+            <i class="grow fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
+        </a>
+    
+
+</footer></html>

@@ -35,38 +35,38 @@
     <div class="post-body">
         <p>There are over 500,000 lines of code in Bitcoin Core, roughly 70% of which is pure C++. Compile times vary, but if you just want to get a node up and running, docker is the easiest way to go. Here&rsquo;s something I prepared <a href="https://github.com/gregdhill/bitcoin-docker">earlier</a>&hellip;</p>
 <p>Courtesy of the <a href="https://github.com/bitcoin/bitcoin/blob/master/doc/build-unix.md#to-build">official docs</a>, there are only four commands to run which build <code>bitcoind</code>, <code>bitcoin-cli</code> and <code>bitcoin-qt</code>. The dependencies are clearly outlined for different architectures - including OSx, Windows and Unix flavours - but in my Dockerfile I have chosen to extend Ubuntu. Checkout the repository linked above to build the image yourself or use <code>gregdhill/bitcoin:latest</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
-<span style="color:#66d9ef">services</span>:
-  <span style="color:#66d9ef">node_1</span>:
-    <span style="color:#66d9ef">image</span>: gregdhill/bitcoin:latest
-    <span style="color:#66d9ef">network_mode</span>: host
-    <span style="color:#66d9ef">ports</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
+<span style="color:#f92672">services</span>:
+  <span style="color:#f92672">node_1</span>:
+    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">gregdhill/bitcoin:latest</span>
+    <span style="color:#f92672">network_mode</span>: <span style="color:#ae81ff">host</span>
+    <span style="color:#f92672">ports</span>:
       - <span style="color:#e6db74">&#34;8333:8333&#34;</span>
-    <span style="color:#66d9ef">command</span>: bitcoind -regtest -port=<span style="color:#ae81ff">8333</span> -rpcport=<span style="color:#ae81ff">18443</span> -rpcuser=admin -rpcpassword=admin
-  <span style="color:#66d9ef">node_2</span>:
-    <span style="color:#66d9ef">image</span>: gregdhill/bitcoin:latest
-    <span style="color:#66d9ef">network_mode</span>: host
-    <span style="color:#66d9ef">ports</span>:
+    <span style="color:#f92672">command</span>: <span style="color:#ae81ff">bitcoind -regtest -port=8333 -rpcport=18443 -rpcuser=admin -rpcpassword=admin</span>
+  <span style="color:#f92672">node_2</span>:
+    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">gregdhill/bitcoin:latest</span>
+    <span style="color:#f92672">network_mode</span>: <span style="color:#ae81ff">host</span>
+    <span style="color:#f92672">ports</span>:
       - <span style="color:#e6db74">&#34;8334:8334&#34;</span>
-    <span style="color:#66d9ef">command</span>: bitcoind -regtest -port=<span style="color:#ae81ff">8334</span> -rpcport=<span style="color:#ae81ff">18444</span> -rpcuser=admin -rpcpassword=admin -addnode=<span style="color:#ae81ff">127.0.0.1</span>:<span style="color:#ae81ff">8333</span>
-    <span style="color:#66d9ef">depends_on</span>: 
-    - node_1
-  <span style="color:#66d9ef">node_3</span>:
-    <span style="color:#66d9ef">image</span>: gregdhill/bitcoin:latest
-    <span style="color:#66d9ef">network_mode</span>: host
-    <span style="color:#66d9ef">ports</span>:
+    <span style="color:#f92672">command</span>: <span style="color:#ae81ff">bitcoind -regtest -port=8334 -rpcport=18444 -rpcuser=admin -rpcpassword=admin -addnode=127.0.0.1:8333</span>
+    <span style="color:#f92672">depends_on</span>: 
+    - <span style="color:#ae81ff">node_1</span>
+  <span style="color:#f92672">node_3</span>:
+    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">gregdhill/bitcoin:latest</span>
+    <span style="color:#f92672">network_mode</span>: <span style="color:#ae81ff">host</span>
+    <span style="color:#f92672">ports</span>:
       - <span style="color:#e6db74">&#34;8335:8335&#34;</span>
-    <span style="color:#66d9ef">command</span>: bitcoind -regtest -port=<span style="color:#ae81ff">8335</span> -rpcport=<span style="color:#ae81ff">18445</span> -rpcuser=admin -rpcpassword=admin -addnode=<span style="color:#ae81ff">127.0.0.1</span>:<span style="color:#ae81ff">8333</span>
-    <span style="color:#66d9ef">depends_on</span>: 
-    - node_1
-  <span style="color:#66d9ef">node_4</span>:
-    <span style="color:#66d9ef">image</span>: gregdhill/bitcoin:latest
-    <span style="color:#66d9ef">network_mode</span>: host
-    <span style="color:#66d9ef">ports</span>:
+    <span style="color:#f92672">command</span>: <span style="color:#ae81ff">bitcoind -regtest -port=8335 -rpcport=18445 -rpcuser=admin -rpcpassword=admin -addnode=127.0.0.1:8333</span>
+    <span style="color:#f92672">depends_on</span>: 
+    - <span style="color:#ae81ff">node_1</span>
+  <span style="color:#f92672">node_4</span>:
+    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">gregdhill/bitcoin:latest</span>
+    <span style="color:#f92672">network_mode</span>: <span style="color:#ae81ff">host</span>
+    <span style="color:#f92672">ports</span>:
       - <span style="color:#e6db74">&#34;8336:8336&#34;</span>
-    <span style="color:#66d9ef">command</span>: bitcoind -regtest -port=<span style="color:#ae81ff">8336</span> -rpcport=<span style="color:#ae81ff">18446</span> -rpcuser=admin -rpcpassword=admin -addnode=<span style="color:#ae81ff">127.0.0.1</span>:<span style="color:#ae81ff">8333</span>
-    <span style="color:#66d9ef">depends_on</span>: 
-    - node_1
+    <span style="color:#f92672">command</span>: <span style="color:#ae81ff">bitcoind -regtest -port=8336 -rpcport=18446 -rpcuser=admin -rpcpassword=admin -addnode=127.0.0.1:8333</span>
+    <span style="color:#f92672">depends_on</span>: 
+    - <span style="color:#ae81ff">node_1</span>
 </code></pre></div><p>Save the source above as <code>docker-compose.yaml</code> and run <code>docker-compose up</code> to start a local four node network running in <a href="https://bitcoin.org/en/glossary/regression-test-mode">regression test mode</a>. With this, it is possible to generate new blocks instantaneously through the JSON RPC. We can utilise <code>bitcoin-cli</code> from the same docker image to create an arbitrary number of transactions:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">address<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>docker run --network<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;host&#34;</span> gregdhill/bitcoin:latest bitcoin-cli -rpcpassword<span style="color:#f92672">=</span>admin -rpcuser<span style="color:#f92672">=</span>admin -regtest getnewaddress<span style="color:#66d9ef">)</span>
 docker run --network<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;host&#34;</span> gregdhill/bitcoin:latest bitcoin-cli -rpcpassword<span style="color:#f92672">=</span>admin -rpcuser<span style="color:#f92672">=</span>admin -regtest generatetoaddress <span style="color:#ae81ff">100</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>address<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>

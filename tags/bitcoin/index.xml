@@ -6,10 +6,15 @@
     <description>Recent content in bitcoin on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Jul 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/bitcoin/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sat, 05 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/bitcoin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>BIP47: TL;DR</title>
+      <link>/posts/bitcoin/bip47/</link>
+      <pubDate>Sat, 05 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/bitcoin/bip47/</guid>
+      <description>Reusable payment codes simplify identity management without loss of privacy.</description>
+    </item>
     
     <item>
       <title>LedgerJS</title>

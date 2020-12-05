@@ -50,19 +50,19 @@ yarn add @ledgerhq/hw-app-btc
 yarn add bigint-buffer
 </code></pre></div><h2 id="getting-started">Getting Started</h2>
 <p>Let&rsquo;s create our script as <code>index.ts</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Transport</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;@ledgerhq/@ledgerhq/hw-transport-node-hid&#39;</span>;
-<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">AppBtc</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;@ledgerhq/hw-app-btc&#34;</span>;
-<span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">bitcoin</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;bitcoinjs-lib&#39;</span>;
-<span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">toBufferLE</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;bigint-buffer&#39;</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Transport</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;@ledgerhq/@ledgerhq/hw-transport-node-hid&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">AppBtc</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#34;@ledgerhq/hw-app-btc&#34;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">bitcoin</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;bitcoinjs-lib&#39;</span>;
+<span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">toBufferLE</span>} <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;bigint-buffer&#39;</span>;
 
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">OPEN_TIMEOUT</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10000</span>;
 <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">LISTENER_TIMEOUT</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">30000</span>;
 
-<span style="color:#a6e22e">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main() {</span>
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">transport</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">Transport</span>.<span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">OPEN_TIMEOUT</span>, <span style="color:#a6e22e">LISTENER_TIMEOUT</span>);
+<span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main() {</span>
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">transport</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">Transport</span>.<span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">OPEN_TIMEOUT</span>, <span style="color:#a6e22e">LISTENER_TIMEOUT</span>);
     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">AppBtc</span>(<span style="color:#a6e22e">transport</span>);
 
-    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">publicKey</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">getWalletPublicKey</span>(<span style="color:#e6db74">&#34;84&#39;/0&#39;/0&#39;/0/0&#34;</span>, {<span style="color:#a6e22e">format</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;bech32&#34;</span>});
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">publicKey</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">getWalletPublicKey</span>(<span style="color:#e6db74">&#34;84&#39;/0&#39;/0&#39;/0/0&#34;</span>, {<span style="color:#a6e22e">format</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;bech32&#34;</span>});
     <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">publicKey</span>.<span style="color:#a6e22e">bitcoinAddress</span>);
 }
 
@@ -108,7 +108,7 @@ to unlock the correct output (there may be multiple).</p>
     }]
 }).<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;hex&#39;</span>);
 
-<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">createPaymentTransactionNew</span>({
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">createPaymentTransactionNew</span>({
     <span style="color:#a6e22e">inputs</span><span style="color:#f92672">:</span> [[<span style="color:#a6e22e">inTx</span>, <span style="color:#a6e22e">txIndex</span>, <span style="color:#66d9ef">undefined</span>, <span style="color:#66d9ef">undefined</span>]],
     <span style="color:#a6e22e">associatedKeysets</span><span style="color:#f92672">:</span> [ <span style="color:#e6db74">&#34;84&#39;/0&#39;/0&#39;/0/0&#34;</span> ],
     <span style="color:#a6e22e">outputScriptHex</span>,

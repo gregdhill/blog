@@ -6,11 +6,7 @@
     <description>Recent content in ethereum on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Apr 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/ethereum/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 11 Apr 2020 00:00:00 +0000</lastBuildDate><atom:link href="/tags/ethereum/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ENS &amp; IPFS</title>
       <link>/posts/ethereum/ens-ipfs/</link>
