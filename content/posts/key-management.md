@@ -1,6 +1,6 @@
 # Online Key Management
 
-I was recently looking into key management for the BTC-Parachain and associated client software. Like similar software - namely Proof-of-Stake (PoS) validators or arbitrage keepers - they are designed to run autonomously 24/7 with unrestricted access to private keys for signing. In my effort to understand best-practices I decided to compare approaches across the industry.
+I was recently looking into key management for the [BTC-Parachain](https://gitlab.com/interlay/btc-parachain) and associated client software. Like similar software - namely Proof-of-Stake (PoS) validators or arbitrage keepers - they are designed to run autonomously 24/7 with unrestricted access to private keys for signing. In my effort to understand best-practices I decided to compare approaches across the industry.
 
 ### Bitcoin
 
