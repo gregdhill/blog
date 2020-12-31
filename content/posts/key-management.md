@@ -1,4 +1,9 @@
-# Online Key Management
++++
+title = "Online Key Management"
+date = "2020-12-31"
+author = "Gregory Hill"
+summary = "I was recently looking into key management for the BTC-Parachain and associated client software. Like similar software - namely Proof-of-Stake (PoS) validators or arbitrage keepers - they are designed to run autonomously 24/7 with unrestricted access to private keys for signing. In my effort to understand best-practices I decided to compare approaches across the industry."
++++
 
 I was recently looking into key management for the [BTC-Parachain](https://gitlab.com/interlay/btc-parachain) and associated client software. Like similar software - namely Proof-of-Stake (PoS) validators or arbitrage keepers - they are designed to run autonomously 24/7 with unrestricted access to private keys for signing. In my effort to understand best-practices I decided to compare approaches across the industry.
 
@@ -34,13 +39,13 @@ Secure key management is difficult to get right and many projects simply defer t
 
 Specialized hardware can be used to generate, sign and manage digital keys. Facilitated access can can limit the exposure of keys and alleviate responsibility. **Hardware Wallets (HW)** derive a master seed for hierarchical key generation based on a mnemonic phase. Further interactions with compatible software are typically guarded by a manual approval process. The threat model here assumes that the software is untrusted. **Hardware Security Modules (HSM)** also allow software to delegate signing operations but are commonly designed with access management in mind.
 
-### [**Ledger**](https://www.ledger.com/)
+### [Ledger](https://www.ledger.com/)
 
 There are a few different models, but each device uses the same Blockchain Open Ledger Operating System (BOLOS) and app development toolkit. The marketplace ([Ledger Live](https://www.ledger.com/ledger-live)) hosts many popular applications for various cryptocurrencies - including [Bitcoin](https://github.com/LedgerHQ/app-bitcoin) and [Ethereum](https://github.com/LedgerHQ/app-ethereum). As discussed above, Tendermint even has a custom application which supports autonomous signing for PoS validators. Many of the other (user-oriented) applications do not support similar *autonomous* operations, however it is possible to fork them and load the custom build onto the firmware.
 
 ### [Trezor](https://trezor.io/)
 
-Designed by [SatoshiLabs](https://satoshilabs.com/), Trezor's application architecture differs from that of its competitor. Recognized coins, tokens and FIDO/U2F apps are described in the [core firmware](https://github.com/trezor/trezor-firmware), limited only by the [cryptographic library](https://github.com/trezor/trezor-firmware/tree/master/crypto). There is no apparent ability to disable tx verification for *autonomous* signing which may make this device difficult to use for enterprise systems.
+Designed by [SatoshiLabs](https://satoshilabs.com/), Trezor's application architecture differs from that of its competitor. Recognized coins, tokens and FIDO/U2F apps are described in the [core firmware](https://github.com/trezor/trezor-firmware), limited only by the [cryptographic library](https://github.com/trezor/trezor-firmware/tree/master/crypto). There is no apparent ability to disable tx verification for autonomous signing which may make this device difficult to use for enterprise systems.
 
 On a related note, a recent innovation based on [Shamir's secrets](https://wiki.trezor.io/Shamir_Backup) ([SLIP-0039](https://github.com/satoshilabs/slips/blob/master/slip-0039.md)) provides a safe way to split the master seed into multiple shares such that a minimum number of parts can recover the original secret.
 
