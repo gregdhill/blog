@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
+	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
+	<meta name="author" content="Gregory Hill">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gregory Hill</title>
+	<link href="../../css/style.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="../../img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="../../img/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="../../img/manifest.json">
+	<link rel="mask-icon" href="../../img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="../../img/favicon.ico">
+	<meta name="msapplication-config" content="/img/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+</head><body>
+    <main><div class="post">
+    <div class="post-info">
+        
+    </div>
+
+    <h1 class="post-title">
+        
+    </h1>
+
+    <div class="post-tags"></div>
+
+    <div class="post-body">
+        <h1 id="secure-key-management">Secure Key Management</h1>
+<p>I was recently looking into key management for the BTC-Parachain and associated client software. Like similar software - namely Proof-of-Stake (PoS) validators or arbitrage keepers - they are designed to run autonomously 24/7 with unrestricted access to private keys for signing. In my effort to understand best-practices I decided to compare approaches across the industry.</p>
+<h3 id="bitcoin">Bitcoin</h3>
+<p>There are a number of standards that contribute to secure key management in Bitcoin and related technologies such as Ethereum. The first, known as <a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">BIP32</a>, formalizes Hierarchical Deterministic Wallets; derivation of a tree of key-pairs from a master seed. Another, <a href="https://github.com/bitcoin/bips/blob/master/bip-0038.mediawiki">BIP38</a>, focuses on passphrase protection; both to encrypt pre-existing and generate pre-encrypted keys. Lastly, <a href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki">BIP39</a>, extends BIP32 with a strategy to generate the master seed from a mnemonic phrase. Multisignatures can also be used to improve security by physically separating the private keys required to spend from a wallet. For example, &ldquo;m-of-n&rdquo; style addresses allow &ldquo;m&rdquo; signatures to unlock a payment designated to &ldquo;n&rdquo; participants.</p>
+<p>Proof-of-Work (PoW) mining software has no need for key management since only an address is needed to generate the special coinbase transaction to mint coins. When using software such as <a href="https://github.com/ckolivas/cgminer">CGMiner</a> or <a href="https://github.com/luke-jr/bfgminer">BFGMiner</a> this is typically a configuration detail - mining pools will likely surface joint payout through registration. <a href="https://bitcoin.org/en/bitcoin-core/">Bitcoin Core</a> itself has an integrated wallet which can be encrypted at rest. Upon starting the software, it may prompt the user for a password which decrypts the master key into memory using AES-256-CBC.</p>
+<h3 id="ethereum">Ethereum</h3>
+<p>The <a href="https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition">Web3 Secret Storage Definition</a> defines the structure and encryption of JSON based private key files as used in Ethereum 1. A supplemental improvement proposal (<a href="https://eips.ethereum.org/EIPS/eip-2335">EIP-2335</a>) generalizes the structure for use within Ethereum 2 and beyond.</p>
+<p>Go-Ethereum (geth) supports <a href="https://geth.ethereum.org/docs/dapp/native-accounts">password encryption</a>, signing can be authorized per request or the account manager can hold the decrypted private key in-memory for a certain period of time. The manager can also be configured to delegate signing to a remote service over a secure connection. Additionally, <a href="https://github.com/ethereum/go-ethereum/tree/master/accounts/usbwallet">native hardware support</a> allows users to directly sign transactions via <a href="https://www.ledger.com/">Ledger</a> or <a href="https://trezor.io/">Trezor</a> devices. Two of the most popular Eth2 clients (<a href="https://github.com/sigp/lighthouse">Lighthouse</a> and <a href="https://github.com/prysmaticlabs/prysm">Prysm</a>) also support key-store encryption and external signing.</p>
+<p>Web3Signer is an open-source signing service developed by <a href="https://consensys.net/">ConsenSys</a> which exposes endpoints for clients to securely sign transactions. Locally it can use raw (unencrypted) files, key-store (encrypted) files, <a href="https://www.hashicorp.com/products/vault">HashiCorp Vault</a>, <a href="https://azure.microsoft.com/en-au/services/key-vault/">Azure Key Store</a>, <a href="https://developers.yubico.com/YubiHSM2/">YubiHSM2</a> or the <a href="https://www.f-secure.com/en/consulting/foundry/usb-armory">USB Armory Mk 2</a>. There is also support for <a href="https://filecoin.io/">Filecoin</a>&rsquo;s Lotus client.</p>
+<p>A number of decentralized applications require external participants to contribute to the liveness of the system. For instance, <a href="https://makerdao.com/en/">Maker</a> has a number of incentivized roles for market making, auctioning and arbitrage. The <a href="https://docs.makerdao.com/keepers/simple-arbitrage-keeper">simple-arbitrage-keeper</a> toolkit uses <a href="https://github.com/dapphub/dapptools/tree/master/src/seth">seth</a> to sign transactions which can load key-store wallet files or auto-sign via <a href="https://shop.ledger.com/products/ledger-nano-s">Ledger</a>. Another popular market making client <a href="https://hummingbot.io/">Hummingbot</a> also uses <a href="https://docs.hummingbot.io/operation/adv-command-ref/#setup-ethereum-wallet">encrypted key-file wallets</a> to interact with various decentralized exchanges.</p>
+<h3 id="tendermint">Tendermint</h3>
+<p>Validators in <a href="https://cosmos.network/">Cosmos</a> only require one private key to participate in consensus. <a href="https://tendermint.com/">Tendermint</a> supports an integrated Key Management System (KMS) developed by the staking provider <a href="https://www.iqlusion.io/">Iqlusion</a>. The toolkit has both <a href="https://www.ledger.com/">Ledger</a> and <a href="https://www.yubico.com/products/hardware-security-module/">YubiHSM</a> support, but can also sign using in-memory keys.</p>
+<h3 id="substrate">Substrate</h3>
+<p>Validators in <a href="https://polkadot.network/">Polkadot</a> require three sets of keys: the controller key is semi-online and should hold a small amount of funds, used to start and stop validating; the stash key is almost entirely offline but should hold the majority of funds, this balance is used as stake for the controller; the session key is always online and is used to sign consensus related messages. There are currently no additional protection mechanisms, but <a href="https://substrate.dev/">Substrate</a> does enable automatic key rotation.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Secure key management is difficult to get right and many projects simply defer to the end-user. In an enterprise system there are many additional risk factors which need to be accounted for such as joint access. In such situations it is important to create a policy that identifies recourse should the system be compromised.</p>
+<p><strong>Encryption at rest</strong> is perhaps the most important recommendation to consider when storing keys locally. Without the passphrase, an attacker with physical access to the hard drive should not be able to recover the signing keys. Other important architectural considerations are <strong>key-rotation</strong> to limit the fallout of improper key handling and <strong>multi-party</strong> schemes to limit the exposure of online keys - i.e. using offline keys backed onto external mediums to hold funds and revoke online keys.</p>
+<p>Specialized hardware can be used to generate, sign and manage digital keys. Facilitated access can can limit the exposure of keys and alleviate responsibility. <strong>Hardware Wallets (HW)</strong> derive a master seed for hierarchical key generation based on a mnemonic phase. Further interactions with compatible software are typically guarded by a manual approval process. The threat model here assumes that the software is untrusted. <strong>Hardware Security Modules (HSM)</strong> also allow software to delegate signing operations but are commonly designed with access management in mind.</p>
+<h3 id="ledgerhttpswwwledgercom"><a href="https://www.ledger.com/"><strong>Ledger</strong></a></h3>
+<p>There are a few different models, but each device uses the same Blockchain Open Ledger Operating System (BOLOS) and app development toolkit. The marketplace (<a href="https://www.ledger.com/ledger-live">Ledger Live</a>) hosts many popular applications for various cryptocurrencies - including <a href="https://github.com/LedgerHQ/app-bitcoin">Bitcoin</a> and <a href="https://github.com/LedgerHQ/app-ethereum">Ethereum</a>. As discussed above, Tendermint even has a custom application which supports autonomous signing for PoS validators. Many of the other (user-oriented) applications do not support similar <em>autonomous</em> operations, however it is possible to fork them and load the custom build onto the firmware.</p>
+<h3 id="trezorhttpstrezorio"><a href="https://trezor.io/">Trezor</a></h3>
+<p>Designed by <a href="https://satoshilabs.com/">SatoshiLabs</a>, Trezor&rsquo;s application architecture differs from that of its competitor. Recognized coins, tokens and FIDO/U2F apps are described in the <a href="https://github.com/trezor/trezor-firmware">core firmware</a>, limited only by the <a href="https://github.com/trezor/trezor-firmware/tree/master/crypto">cryptographic library</a>. There is no apparent ability to disable tx verification for <em>autonomous</em> signing which may make this device difficult to use for enterprise systems.</p>
+<p>On a related note, a recent innovation based on <a href="https://wiki.trezor.io/Shamir_Backup">Shamir&rsquo;s secrets</a> (<a href="https://github.com/satoshilabs/slips/blob/master/slip-0039.md">SLIP-0039</a>) provides a safe way to split the master seed into multiple shares such that a minimum number of parts can recover the original secret.</p>
+<h3 id="yubihsmhttpswwwyubicocomproductshardware-security-module"><a href="https://www.yubico.com/products/hardware-security-module/">YubiHSM</a></h3>
+<p>The latest version of this tamper resistant device has extensive cryptographic support. Supporting up to sixteen concurrent connections, the device can even be shared by multiple networked servers. The <a href="https://github.com/Yubico/yubihsm-shell">open-source SDK</a> has already been integrated with a number of popular projects such as Cosmos.</p>
+<h3 id="cloud">Cloud</h3>
+<p>Depending on the service provider, it may also be possible to use a hosted key management solution:</p>
+<ul>
+<li><a href="https://aws.amazon.com/secrets-manager/">AWS Secrets Manager</a></li>
+<li><a href="https://cloud.google.com/kms/">Cloud KMS</a></li>
+<li><a href="https://github.com/Azure/secrets-store-csi-driver-provider-azure">Azure Key Vault</a></li>
+</ul>
+<p>An open-source alternative is <a href="https://github.com/hashicorp/vault">HashiCorp Vault</a> which can generate secrets on-demand for integrated services. Associated clients can then lease or renew these secrets for a period of time, subject to revocation.</p>
+<p>On <a href="https://kubernetes.io/">Kubernetes</a> it is possible to <a href="https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/">encrypt secret data at rest</a>. Third-party tools such as <a href="https://github.com/bitnami-labs/sealed-secrets">SealedSecrets</a> even enable encrypted keys to be committed to a public git repository.</p>
+
+    </div>
+</div></main>
+</body><footer>
+
+    
+        <a class="footer-social" href="https://github.com/gregdhill">
+            <i class="grow fa fa-github fa-2x" aria-hidden="true"></i>
+        </a>
+    
+        <a class="footer-social" href="https://twitter.com/gregorydhill">
+            <i class="grow fa fa-twitter fa-2x" aria-hidden="true"></i>
+        </a>
+    
+        <a class="footer-social" href="https://scholar.google.co.uk/citations?user=OoKiidsAAAAJ&amp;hl=en">
+            <i class="grow fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
+        </a>
+    
+
+</footer></html>
