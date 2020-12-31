@@ -6,7 +6,16 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 05 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 31 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Online Key Management</title>
+      <link>/posts/key-management/</link>
+      <pubDate>Thu, 31 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/key-management/</guid>
+      <description>I was recently looking into key management for the BTC-Parachain and associated client software. Like similar software - namely Proof-of-Stake (PoS) validators or arbitrage keepers - they are designed to run autonomously 24/7 with unrestricted access to private keys for signing. In my effort to understand best-practices I decided to compare approaches across the industry.</description>
+    </item>
+    
     <item>
       <title>BIP47: TL;DR</title>
       <link>/posts/bitcoin/bip47/</link>
@@ -184,16 +193,6 @@ If you&amp;rsquo;re new to Go, follow the getting started docs. You&amp;rsquo;ll
       
       <guid>/posts/cryptoknight/</guid>
       <description>CryptoKnight is a framework I recently released which follows the methodology described in my publication for synthesizing a scalable dataset of cryptographic primitives to feed a unique Convolutional Neural Network. In effect, this allows us to generate and model a substantial amount of data to quickly identify cryptographic algorithms (such as AES, RSA, RC4, or MD5) in reference binary executables. By safely learning this statistical representation, malware analysts can efficiently compare it against crypto-ransomware samples in a controlled environment.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/posts/key-management/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/key-management/</guid>
-      <description>Online Key Management I was recently looking into key management for the BTC-Parachain and associated client software. Like similar software - namely Proof-of-Stake (PoS) validators or arbitrage keepers - they are designed to run autonomously 24/7 with unrestricted access to private keys for signing. In my effort to understand best-practices I decided to compare approaches across the industry.
-Bitcoin There are a number of standards that contribute to secure key management in Bitcoin and related technologies such as Ethereum.</description>
     </item>
     
   </channel>
