@@ -4,16 +4,21 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-12-31T00:00:00+00:00</lastmod>
+    <lastmod>2021-02-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/key-management/</loc>
-    <lastmod>2020-12-31T00:00:00+00:00</lastmod>
+    <loc>/posts/cosmos-sdk-vs-substrate/</loc>
+    <lastmod>2021-02-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/posts/</loc>
+    <lastmod>2021-02-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/key-management/</loc>
     <lastmod>2020-12-31T00:00:00+00:00</lastmod>
   </url>
   
@@ -175,11 +180,6 @@
   <url>
     <loc>/posts/go/kubernetes/</loc>
     <lastmod>2019-04-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/compass/</loc>
-    <lastmod>2019-02-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>

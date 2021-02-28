@@ -17,14 +17,5 @@
 If you&amp;rsquo;re new to Go, follow the getting started docs. You&amp;rsquo;ll also need to configure access to a Kubernetes cluster, or install Minikube - a single local node.</description>
     </item>
     
-    <item>
-      <title>Evolving Infrastructure</title>
-      <link>/posts/compass/</link>
-      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/compass/</guid>
-      <description>We&amp;rsquo;ve undergone a lot of infrastructure changes recently at work. We actually submitted the very first DLT framework into Helm&amp;rsquo;s stable charts over a year ago. This allows anyone with a Kubernetes cluster to deploy a custom blockchain courtesy of Burrow (our contribution to the Hyperledger Greenhouse). We&amp;rsquo;re a great believer in cloud first and open source technologies so not only is Kubernetes a great fit for what we do, but Helm extraordinarily simplifies the whole deployment process through Go templating.</description>
-    </item>
-    
   </channel>
 </rss>
