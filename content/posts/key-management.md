@@ -64,3 +64,5 @@ Depending on the service provider, it may also be possible to use a hosted key m
 An open-source alternative is [HashiCorp Vault](https://github.com/hashicorp/vault) which can generate secrets on-demand for integrated services. Associated clients can then lease or renew these secrets for a period of time, subject to revocation.
 
 On [Kubernetes](https://kubernetes.io/) it is possible to [encrypt secret data at rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/). Third-party tools such as [SealedSecrets](https://github.com/bitnami-labs/sealed-secrets) even enable encrypted keys to be committed to a public git repository.
+
+> This was also published on [Medium](https://gdouglashill.medium.com/online-key-management-919d022c207e).

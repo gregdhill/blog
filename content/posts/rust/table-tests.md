@@ -1,5 +1,5 @@
 +++
-title = "Table Driven Tests"
+title = "Table Driven Tests in Rust"
 date = "2019-10-06"
 author = "Gregory Hill"
 tags = [
@@ -8,7 +8,7 @@ tags = [
 +++
 
 One of my favorite ways to write tests in Go is with a table driven test. If you are unfamiliar
-with the concept check out the [excellent Dave Cheney post](https://dave.cheney.net/2013/06/09/writing-table-driven-tests-in-go).
+with the concept check out the [excellent post by Dave Cheney](https://dave.cheney.net/2013/06/09/writing-table-driven-tests-in-go).
 If you need to unit test a component under a multitude of edge cases, then this is good technique to adopt.
 Anyway, I'm learning Rust in my spare time so I thought I'd best give it a go. Hopefully this will suffice, but if you
 think it could be improved please hit me up on [twitter](https://twitter.com/gregorydhill).
