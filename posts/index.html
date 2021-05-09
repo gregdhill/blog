@@ -4,7 +4,7 @@
 	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
 	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
 	<meta name="author" content="Gregory Hill">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Gregory Hill | Posts</title>
 	<link href="../css/style.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -16,9 +16,23 @@
 	<link rel="shortcut icon" href="../img/favicon.ico">
 	<meta name="msapplication-config" content="/img/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
+	
 </head><body>
     <main><div class="catalogue">
     <h1 class="catalogue-header">Posts</h1>
+    
+    <a href="../posts/scalable-slashing/" class="catalogue-item">
+        <div>
+            
+                <time class="catalogue-time">May 9, 2021</time>
+            
+            <h1 class="catalogue-title">Scalable Stake Slashing</h1>
+    
+            
+                <p>Based on the paper titled Scalable Reward Distribution on the Ethereum Blockchain, we can derive an algorithm for proportionally slashing participants based on their stake. This is useful for nomination in Proof-of-Stake since a misbehaving validator can affect a broad number of participants.</p>
+            
+        </div>
+    </a>
     
     <a href="../posts/cosmos-sdk-vs-substrate/" class="catalogue-item">
         <div>
@@ -140,19 +154,6 @@ My primary setup leverages GitHub pages to host a blog compiled with Hugo - link
             
                 <p>There are over 500,000 lines of code in Bitcoin Core, roughly 70% of which is pure C++. Compile times vary, but if you just want to get a node up and running, docker is the easiest way to go. Here’s something I prepared earlier…
 Courtesy of the official docs, there are only four commands to run which build bitcoind, bitcoin-cli and bitcoin-qt. The dependencies are clearly outlined for different architectures - including OSx, Windows and Unix flavours - but in my Dockerfile I have chosen to extend Ubuntu.</p>
-            
-        </div>
-    </a>
-    
-    <a href="../posts/substrate/introduction/" class="catalogue-item">
-        <div>
-            
-                <time class="catalogue-time">April 8, 2020</time>
-            
-            <h1 class="catalogue-title">Substrate &amp; Ink</h1>
-    
-            
-                <p>To interact with Polkadot, there are three envisioned development trajectories; a parachain implements it’s own runtime logic (think custom sidechain), a parathread is similar but only produces a block when absolutely necessary to update the relay chain, and a smart contract can run atop any chain with the correct execution environment. Substrate enables the former methodology based on a modular architecture with pluggable consensus and Parity maintain an embedded Domain Specific Language (eDSL) atop Substrate for WASM smart contracts.</p>
             
         </div>
     </a>

@@ -6,7 +6,16 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Scalable Stake Slashing</title>
+      <link>/posts/scalable-slashing/</link>
+      <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/scalable-slashing/</guid>
+      <description>Based on the paper titled Scalable Reward Distribution on the Ethereum Blockchain, we can derive an algorithm for proportionally slashing participants based on their stake. This is useful for nomination in Proof-of-Stake since a misbehaving validator can affect a broad number of participants.</description>
+    </item>
+    
     <item>
       <title>Cosmos SDK vs Substrate</title>
       <link>/posts/cosmos-sdk-vs-substrate/</link>

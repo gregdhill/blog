@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Interested in Blockchains, Cryptography and Distributed Systems.">
+	<meta name="keywords" content="computer, security, ethical hacker, researcher, inventor, abertay, dundee, edinburgh, machine learning, mathematics, cryptography, blockchains, reverse engineering, linux, programming, scotland, greg hill">
+	<meta name="author" content="Gregory Hill">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gregory Hill | Scalable Stake Slashing</title>
+	<link href="../../css/style.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="../../img/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="../../img/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="../../img/manifest.json">
+	<link rel="mask-icon" href="../../img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="../../img/favicon.ico">
+	<meta name="msapplication-config" content="/img/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css"
+    integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js"
+    integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O"
+    crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/contrib/auto-render.min.js"
+    integrity="sha384-yACMu8JWxKzSp/C1YV86pzGiQ/l1YUfE8oPuahJQxzehAjEt2GiQuy/BIvl9KyeF" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+</head><body>
+    <main><div class="post">
+    <div class="post-info">
+        
+        May 9, 2021
+        · 350 words
+        · 2 minute read
+        
+    </div>
+
+    <h1 class="post-title">
+        Scalable Stake Slashing
+    </h1>
+
+    <div class="post-tags"></div>
+
+    <div class="post-body">
+        <p>This post is yet <a href="https://solmaz.io/2019/02/24/scalable-reward-changing/">another addendum</a> to the paper titled <a href="http://batog.info/papers/scalable-reward-distribution.pdf">Scalable Reward Distribution on the Ethereum Blockchain</a> by Batog et al. They define a pull-based algorithm for distributing rewards proportionally to a number of participants without expensive iteration (as in push-based distribution). This simplifies the complexity from <code>O(n)</code> (with <code>n</code> participants) to constant time <code>O(1)</code>.</p>
+<p>This algorithm may be applied to another use-case in nominated Proof-of-Stake (PoS). More specifically, if Alice and Bob nominate their stake to Charlie who is subsequently slashed we need to update all stakes to restrict future withdrawals. As there may be a large number of participants, it is not really feasible to iterate over each entry and re-calculate their stake. Fortunately, it is possible to reuse the algorithm described above with minimal changes. We must restrict the amount of stake a participant can withdraw based on their <code>actual_stake</code> as defined:</p>
+<p>$$
+to\_slash_j = stake_{j,n} × slash\_per\_token_n − slash\_tally_{j,n}
+$$</p>
+<p>$$
+actual\_stake_j = stake_{j,n} - to\_slash_j
+$$</p>
+<p>Following the addendum by <a href="https://solmaz.io/">Onur Solmaz</a> which accounts for changing stake sizes, we can reformulate the pseudocode as follows:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PullBasedSlashing</span>:
+    <span style="color:#e6db74">&#34;Constant Time Stake Slashing with Changing Stake Sizes&#34;</span>
+
+    <span style="color:#66d9ef">def</span> __init__(self):
+        self<span style="color:#f92672">.</span>total_stake <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        self<span style="color:#f92672">.</span>slash_per_token <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        self<span style="color:#f92672">.</span>stake <span style="color:#f92672">=</span> {}
+        self<span style="color:#f92672">.</span>slash_tally <span style="color:#f92672">=</span> {}
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">deposit_stake</span>(self, address, amount):
+        <span style="color:#e6db74">&#34;Increase the stake of `address` by `amount`&#34;</span>
+        <span style="color:#66d9ef">if</span> address <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>stake:
+            self<span style="color:#f92672">.</span>stake[address] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+            self<span style="color:#f92672">.</span>slash_tally[address] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+        self<span style="color:#f92672">.</span>stake[address] <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>stake[address] <span style="color:#f92672">+</span> amount
+        self<span style="color:#f92672">.</span>slash_tally[address] <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>slash_tally[address] <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>slash_per_token <span style="color:#f92672">*</span> amount
+        self<span style="color:#f92672">.</span>total_stake <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>total_stake <span style="color:#f92672">+</span> amount
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">slash_stake</span>(self, amount):
+        <span style="color:#e6db74">&#34;Slash `amount` proportionally to active stakes&#34;</span>
+        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>total_stake <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74">&#34;Cannot slash zero total stake&#34;</span>)
+
+        self<span style="color:#f92672">.</span>slash_per_token <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>slash_per_token <span style="color:#f92672">+</span> amount <span style="color:#f92672">/</span> self<span style="color:#f92672">.</span>total_stake
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compute_stake</span>(self, address):
+        <span style="color:#e6db74">&#34;Compute actual stake of `address`&#34;</span>
+        to_slash <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>stake[address] <span style="color:#f92672">*</span> self<span style="color:#f92672">.</span>slash_per_token <span style="color:#f92672">-</span> self<span style="color:#f92672">.</span>slash_tally[address]
+        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>stake[address] <span style="color:#f92672">-</span> to_slash
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">withdraw_stake</span>(self, address, amount):
+        <span style="color:#e6db74">&#34;Decrease the stake of `address` by `amount`&#34;</span>
+
+        actual_stake <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>compute_stake(address)
+        <span style="color:#66d9ef">if</span> amount <span style="color:#f92672">&gt;</span> actual_stake:
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">Exception</span>(<span style="color:#e6db74">&#34;Requested amount greater than staked amount&#34;</span>)
+
+        self<span style="color:#f92672">.</span>stake[address] <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>stake[address] <span style="color:#f92672">-</span> amount
+        self<span style="color:#f92672">.</span>slash_tally[address] <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>slash_tally[address] <span style="color:#f92672">-</span> self<span style="color:#f92672">.</span>slash_per_token <span style="color:#f92672">*</span> amount
+        self<span style="color:#f92672">.</span>total_stake <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>total_stake <span style="color:#f92672">-</span> amount
+
+addr1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x1</span>
+addr2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x2</span>
+
+contract <span style="color:#f92672">=</span> PullBasedSlashing()
+
+contract<span style="color:#f92672">.</span>deposit_stake(addr1, <span style="color:#ae81ff">100</span>)
+contract<span style="color:#f92672">.</span>deposit_stake(addr2, <span style="color:#ae81ff">100</span>)
+
+contract<span style="color:#f92672">.</span>slash_stake(<span style="color:#ae81ff">20</span>)
+
+<span style="color:#66d9ef">print</span>(contract<span style="color:#f92672">.</span>compute_stake(addr1))
+<span style="color:#66d9ef">print</span>(contract<span style="color:#f92672">.</span>compute_stake(addr2))
+
+contract<span style="color:#f92672">.</span>slash_stake(<span style="color:#ae81ff">80</span>)
+contract<span style="color:#f92672">.</span>withdraw_stake(addr1, <span style="color:#ae81ff">50</span>)
+
+<span style="color:#66d9ef">print</span>(contract<span style="color:#f92672">.</span>compute_stake(addr1))
+</code></pre></div>
+    </div>
+</div></main>
+</body><footer>
+
+    
+    <a class="footer-social" href="https://github.com/gregdhill">
+        <i class="grow fa fa-github fa-2x" aria-hidden="true"></i>
+    </a>
+    
+    <a class="footer-social" href="https://twitter.com/gregorydhill">
+        <i class="grow fa fa-twitter fa-2x" aria-hidden="true"></i>
+    </a>
+    
+    <a class="footer-social" href="https://scholar.google.co.uk/citations?user=OoKiidsAAAAJ&amp;hl=en">
+        <i class="grow fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
+    </a>
+    
+
+</footer></html>
