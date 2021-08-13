@@ -16,7 +16,32 @@ Before continuing, boot into the machine's BIOS to enable `UEFI` booting and dis
 4. Create a new partition for Windows, leaving suitable unallocated space for Linux.
 5. Wait for the installation to complete and then disable fast startup.
 
+## Create EFI Partition
+
+The EFI partition created by Windows is 100MiB by default. To increase the size on a fresh install, drop into the command line (`Shift` + `F10`) before the partitioning step.
+
+```shell
+diskpart
+list disk
+select disk 0
+create partition efi size=500
+exit
+```
+
 # Arch Linux
+
+Download [Arch Linux](https://archlinux.org/download/), connect a USB flash drive and find the name of the device:
+
+```shell
+lsblk -f
+```
+
+Install the image to the device:
+
+
+```shell
+dd if=archlinux.img of=/dev/sdX bs=16M && sync
+```
 
 ## Partitioning
 
